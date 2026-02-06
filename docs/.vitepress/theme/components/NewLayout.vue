@@ -72,10 +72,18 @@
         <template #doc-bottom>
             <Copyright />
         </template>
+        <!-- 返回顶部按钮 -->
+        <ClientOnly>
+            <div class="back-to-top" @click="backToTop">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 15l-6-6-6 6"/>
+                </svg>
+            </div>
+        </ClientOnly>
     </Layout>
 </template>
 <script lang="ts" setup>
-import { computed, toRefs,onMounted,ref } from 'vue';
+import { computed, toRefs,onMounted,ref, onUnmounted } from 'vue';
 import { useData, useRouter } from 'vitepress';
 import { usePlayerStore } from '../../store/player';
 import md5 from 'blueimp-md5';
@@ -85,7 +93,33 @@ import Player from './Player.vue';
 
 const { isPause } = toRefs(usePlayerStore());
 const { page, theme, frontmatter, isDark } = useData();
-const { Layout } = DefaultTheme
+const { Layout } = DefaultTheme;
+
+// 返回顶部按钮
+const showBackToTop = ref(false);
+
+// 监听滚动事件
+function handleScroll() {
+    showBackToTop.value = window.scrollY > 300;
+}
+
+// 返回顶部方法
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 组件挂载时添加滚动事件监听
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+});
+
+// 组件卸载时移除滚动事件监听
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+});
 
 </script>
 
@@ -132,6 +166,54 @@ const { Layout } = DefaultTheme
 .page404 {
     width: 224px;
     margin: 50px auto;
+}
+
+/* 返回顶部按钮样式 */
+.back-to-top {
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    background-color: var(--vp-c-brand) !important;
+    color: white !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    z-index: 9999 !important;
+    box-shadow: var(--vp-shadow-2) !important;
+    transition: all 0.3s ease !important;
+    opacity: 0.9 !important;
+    pointer-events: auto !important;
+}
+
+.back-to-top:hover {
+    background-color: var(--vp-c-brand) !important;
+    transform: translateY(-3px) !important;
+    opacity: 1 !important;
+}
+
+.back-to-top svg {
+    width: 20px !important;
+    height: 20px !important;
+    fill: white !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px !important;
+        right: 20px !important;
+        width: 40px !important;
+        height: 40px !important;
+    }
+    
+    .back-to-top svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
 }
 </style>
 

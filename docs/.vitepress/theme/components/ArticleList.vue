@@ -9,10 +9,11 @@
         </div>
         <div class="msg">
           <div class="title"><a :href="withBase(article.relativePath)" class="a">
-              <span class="cats" v-if="article.frontmatter?.categories">
+              <!-- 标签部分，暂时隐藏 -->
+              <!-- <span class="cats" v-if="article.frontmatter?.categories">
                 <span class="cat" v-for="item in article.frontmatter.categories.slice(0, 2)">{{ item }}</span>
                 <span class="cat" v-if="article.frontmatter.categories.length > 2">...</span>
-              </span>
+              </span> -->
               {{ article.frontmatter.title }}</a>
           </div>
           <div class="desc" v-html="article.frontmatter?.description"></div>
@@ -22,7 +23,6 @@
             </ClientOnly>
           </div>
           <div class="actions">
-            <a :href="withBase(article.relativePath)" class="btn btn-detail">查看详情</a>
             <a :href="article.frontmatter?.externalLink || article.frontmatter?.github || article.frontmatter?.view || withBase(article.relativePath)" target="_blank" rel="noopener noreferrer" class="btn btn-external">
               {{ article.frontmatter?.externalLinkText || article.frontmatter?.githubText || article.frontmatter?.viewText || '外链' }}
             </a>
@@ -88,30 +88,29 @@ const props = defineProps<{
       flex: 1;
 
       .title {
-        margin: 0;
-        font-size: 1rem;
-        line-height: 1.5rem;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        -webkit-font-smoothing: antialiased;
-        font-weight: 500;
-        overflow-wrap: normal;
-        word-break: normal;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+  overflow-wrap: normal;
+  word-break: normal;
 
-        .cats {
+  .cats {
 
-          .cat {
-            background-color: var(--vp-c-brand);
-            color: #ffffff;
-            font-size: 12px;
-            padding: 2px 5px;
-            margin-right: 5px;
-            border-radius: 2px;
-          }
-        }
-      }
+    .cat {
+      background-color: var(--vp-c-brand);
+      color: #ffffff;
+      font-size: 12px;
+      padding: 2px 5px;
+      margin-right: 5px;
+      border-radius: 2px;
+    }
+  }
+}
 
       .desc {
         color: var(--vp-c-text-1);
@@ -174,31 +173,30 @@ const props = defineProps<{
     margin-top: 1.25rem;
 
     .title {
-      margin: 0;
-      font-size: 1rem;
-      line-height: 1.5rem;
-      height: 3rem;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      -webkit-font-smoothing: antialiased;
-      font-weight: 500;
-      overflow-wrap: normal;
-      word-break: normal;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  height: 1.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+  overflow-wrap: normal;
+  word-break: normal;
 
-      .cats {
+  .cats {
 
-        .cat {
-          background-color: var(--vp-c-brand);
-          color: #ffffff;
-          font-size: 12px;
-          padding: 2px 5px;
-          margin-right: 5px;
-          border-radius: 2px;
-        }
-      }
+    .cat {
+      background-color: var(--vp-c-brand);
+      color: #ffffff;
+      font-size: 12px;
+      padding: 2px 5px;
+      margin-right: 5px;
+      border-radius: 2px;
     }
+  }
+}
 
     .desc {
       display: none;
@@ -220,6 +218,7 @@ const props = defineProps<{
   display: flex;
   gap: 8px;
   margin-top: 12px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 

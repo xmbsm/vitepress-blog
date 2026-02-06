@@ -15,18 +15,19 @@
           :datetime="dataformat === 0 ? formatTime(dataSource.frontmatter.date) : relativeTime(dataSource.frontmatter.date)">{{
             dataformat === 0 ? formatTime(dataSource.frontmatter.date) : relativeTime(dataSource.frontmatter.date) }}</time>
       </p>
-      <div class="tags" v-if="dataSource.frontmatter?.tags">
+      <!-- 标签部分，暂时隐藏 -->
+      <!-- <div class="tags" v-if="dataSource.frontmatter?.tags">
         <template v-if="type !== 'single'">
           <span class="tag" v-for="item in dataSource.frontmatter.tags.slice(0, 2)"><a class="a"
-              :href="withBase(`/?tag=${item.toString()}`)"> {{
+              :href="withBase(`/?tag=${item.toString()}`)"> {{ 
                 '#' + item }}</a></span>
           <span class="tag" v-if="dataSource.frontmatter.tags.length > 2">...</span>
         </template>
         <template v-else>
-          <span class="tag" v-for="item in dataSource.frontmatter.tags"><a class="a" :href="withBase(`/?tag=${item.toString()}`)"> {{
+          <span class="tag" v-for="item in dataSource.frontmatter.tags"><a class="a" :href="withBase(`/?tag=${item.toString()}`)"> {{ 
             '#' + item }}</a></span>
         </template>
-      </div>
+      </div> -->
     </div>
     <p class="readtime" v-if="type === 'single'"><span class="warning">全文共{{ wordCount }}字，{{ '预计阅读' + readTime + '分钟'
     }}</span></p>
