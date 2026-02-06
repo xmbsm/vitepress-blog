@@ -2,13 +2,13 @@
   <!-- 公众号 -->
   <div class="gzharea">
     <div style="text-align: center;">
-      <p class="title">分享流行的前端产品</p>
+      <p class="title">分享精品素材</p>
       <p style="margin-top: 5px;">技术｜源码｜设计｜参考</p>
     </div>
-    <div><img src="https://cdn.enshimama.com/appbeebee/posts/gzh.png" alt="公众号二维码" /></div>
+    <div><img src="https://sucai.kusheji.com/wechatOA/img/qrcode.png" alt="公众号二维码" /></div>
     <div>
       <p>
-        扫码关注APP比比公众号</p>
+        扫码关注乔同学公众号</p>
       <p style="margin-top: 5px;">
         第一时间传递给你</p>
     </div>

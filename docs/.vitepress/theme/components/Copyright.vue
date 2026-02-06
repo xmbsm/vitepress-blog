@@ -28,7 +28,7 @@ import { useData } from 'vitepress'
 const { site, theme, frontmatter } = useData()
 const website = theme.value?.website?theme.value.website:{}
 const webTitle = site.value?.title?site.value.title:'比比工房'
-const webAuthor = theme.value?.article?.cc?.author?theme.value.article.cc.author:'小鱼哥'
+const webAuthor = theme.value?.article?.cc?.author?theme.value.article.cc.author:'乔同学'
 
 onMounted(() => {
     if(website?.copyadd){
