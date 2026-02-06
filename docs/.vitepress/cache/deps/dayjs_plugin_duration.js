@@ -1,6 +1,6 @@
 import {
   __commonJS
-} from "./chunk-Y2F7D3TJ.js";
+} from "./chunk-BUSYA2B4.js";
 
 // node_modules/dayjs/plugin/duration.js
 var require_duration = __commonJS({
@@ -26,14 +26,11 @@ var require_duration = __commonJS({
       }, g = function() {
         function l2(t2, s2, n2) {
           var i2 = this;
-          if (this.$d = {}, this.$l = n2, void 0 === t2 && (this.$ms = 0, this.parseFromMilliseconds()), s2)
-            return f(t2 * h[m(s2)], this);
-          if ("number" == typeof t2)
-            return this.$ms = t2, this.parseFromMilliseconds(), this;
-          if ("object" == typeof t2)
-            return Object.keys(t2).forEach(function(s3) {
-              i2.$d[m(s3)] = t2[s3];
-            }), this.calMilliseconds(), this;
+          if (this.$d = {}, this.$l = n2, void 0 === t2 && (this.$ms = 0, this.parseFromMilliseconds()), s2) return f(t2 * h[m(s2)], this);
+          if ("number" == typeof t2) return this.$ms = t2, this.parseFromMilliseconds(), this;
+          if ("object" == typeof t2) return Object.keys(t2).forEach(function(s3) {
+            i2.$d[m(s3)] = t2[s3];
+          }), this.calMilliseconds(), this;
           if ("string" == typeof t2) {
             var e2 = t2.match(a);
             if (e2) {

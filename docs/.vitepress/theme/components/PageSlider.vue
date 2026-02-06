@@ -39,29 +39,117 @@
         </div>
     </div> -->
     <!-- 这是一个非常简易的轮播 -->
-    <swiper :style="{
-        '--swiper-navigation-color': '#ffffff',
-        '--swiper-pagination-color': 'var(--vp-c-brand)',
-        height: theme?.website?.bannerHeight + 'px'
-    }" class="mySwiper" :loop="true" :spaceBetween="10" :navigation="true" :modules="modules"
-        v-if="theme?.website?.homeBanner && list.length">
-        <swiper-slide v-for="(item, index) in list" :key="index">
-            <a class="a" :href="item?.link"><img class="image" :src="item?.image" :alt="item?.title" /></a>
-        </swiper-slide>
-    </swiper>
+    <div v-if="theme?.website?.homeBanner && bannerList.length" class="slider-container" :style="{ height: theme?.website?.bannerHeight + 'px' }">
+        <div class="carousel">
+            <!-- 轮播内容 -->
+            <div class="carousel-wrapper" :style="{ transform: `translateX(-${currentIndex * 100}%)`, transition: 'transform 0.5s ease' }">
+                <div class="carousel-slide" v-for="(item, index) in bannerList" :key="index">
+                    <a class="a" :href="item?.link"><img class="image" :src="item?.image" :alt="item?.title" /></a>
+                </div>
+            </div>
+            <!-- 导航按钮 -->
+            <div class="carousel-button next" @click="nextSlide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5L19 12L8 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="carousel-button prev" @click="prevSlide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 5L8 12L19 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <!-- 分页指示器 -->
+            <div class="carousel-pagination">
+                <div 
+                    v-for="(item, index) in bannerList" 
+                    :key="index" 
+                    class="carousel-dot" 
+                    :class="{ active: index === currentIndex }"
+                    @click="goToSlide(index)"
+                ></div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted, watch, nextTick } from 'vue'
 import { useData } from 'vitepress'
-import { Swiper, SwiperSlide } from 'swiper/vue';  //轮播插件。更多高级配置教程见https://swiperjs.com/
-import { Navigation } from 'swiper/modules';
 import Countdown from "../../theme/components/Countdown.vue";
-import 'swiper/css';
-import 'swiper/css/navigation';
 const { theme } = useData();
-const modules = [Navigation]
-const list = ref(theme.value?.banner ? theme.value.banner : [])
+const bannerList = ref(theme.value?.banner || []);
+const currentIndex = ref(0);
+let autoplayTimer: number | null = null;
+
+// 监听banner数据变化
+watch(() => theme.value?.banner, (newBanner) => {
+    if (newBanner) {
+        bannerList.value = newBanner;
+        currentIndex.value = 0;
+        resetAutoplay();
+    }
+}, { deep: true });
+
+// 监听homeBanner状态变化
+watch(() => theme.value?.website?.homeBanner, (newValue) => {
+    if (newValue && bannerList.value.length > 0) {
+        resetAutoplay();
+    } else if (!newValue) {
+        clearAutoplay();
+    }
+});
+
+// 切换到下一张
+function nextSlide() {
+    currentIndex.value = (currentIndex.value + 1) % bannerList.value.length;
+    resetAutoplay();
+}
+
+// 切换到上一张
+function prevSlide() {
+    currentIndex.value = (currentIndex.value - 1 + bannerList.value.length) % bannerList.value.length;
+    resetAutoplay();
+}
+
+// 切换到指定幻灯片
+function goToSlide(index: number) {
+    currentIndex.value = index;
+    resetAutoplay();
+}
+
+// 重置自动播放
+function resetAutoplay() {
+    clearAutoplay();
+    startAutoplay();
+}
+
+// 开始自动播放
+function startAutoplay() {
+    autoplayTimer = window.setInterval(() => {
+        nextSlide();
+    }, 3000);
+}
+
+// 清除自动播放
+function clearAutoplay() {
+    if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+    }
+}
+
+// 组件挂载后初始化
+onMounted(() => {
+    if (bannerList.value.length > 0) {
+        startAutoplay();
+    }
+});
+
+// 组件卸载前清理
+function onUnmounted() {
+    clearAutoplay();
+}
+
 
 const lanternText = ref(['新', '年'])
 const defaultDate = '2024/02/09 20:00'
@@ -77,11 +165,88 @@ const until = getUntilDate()
 </script>
 
 <style scoped>
-.mySwiper {
-    height: 400px;
-    border-radius: 8px;
+.slider-container {
+    width: 100%;
     margin-bottom: 32px;
-    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.carousel-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 导航按钮样式 */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-button.next {
+    right: 15px;
+}
+
+.carousel-button.prev {
+    left: 15px;
+}
+
+/* 分页指示器样式 */
+.carousel-pagination {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+    background-color: white;
+    width: 20px;
+    border-radius: 5px;
 }
 
 .image {

@@ -70,7 +70,7 @@ export default defineConfig<ThemeConfig>({
             },
             {
                 link: '/posts/2024/01/freebie-chinese-font.html',
-                image: 'https://shijuefuhao.oss-cn-hangzhou.aliyuncs.com/wp-content/uploads/2024/02/2024-fm.jpg',
+                image: 'https://shijuefuhao.oss-cn-hangzhou.aliyuncs.com/wp-content/uploads/2023/10/2023-fm.jpg',
                 title: ''
             }
         ],
@@ -156,7 +156,7 @@ export default defineConfig<ThemeConfig>({
         website: {
             copyadd: true, //用户复制页面内容时尾巴自动添加版权声明
             perpage: 12, //列表页每页显示数量
-            homeBanner: false, //显示首页 banner,banner列表在上面 banner中配置
+            homeBanner: true, //显示首页 banner,banner列表在上面 banner中配置
             bannerHeight: 200, //banner高度
             showWelcome: false, //是否显示首页底部右下角弹框，（调试时弹框不显示的话先关闭浏览器再运行，因为有可能开启了缓存）内容请在组件.vitepress/theme/components/Welcome.vue编写
             welcomeusestate: false, //底部弹框是否使用sessionStorage缓存(即不关闭页面仅显示一次)

@@ -21,6 +21,12 @@
               <ArticleMetadata :article="article" />
             </ClientOnly>
           </div>
+          <div class="actions">
+            <a :href="withBase(article.relativePath)" class="btn btn-detail">查看详情</a>
+            <a :href="article.frontmatter?.externalLink || article.frontmatter?.github || article.frontmatter?.view || withBase(article.relativePath)" target="_blank" rel="noopener noreferrer" class="btn btn-external">
+              {{ article.frontmatter?.externalLinkText || article.frontmatter?.githubText || article.frontmatter?.viewText || '外链' }}
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -207,5 +213,59 @@ const props = defineProps<{
   transition-property: box-shadow;
   background-color: var(--vp-c-bg-elv);
   overflow: hidden;
+}
+
+/* 按钮样式 */
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.btn-detail {
+  background-color: var(--vp-c-brand);
+  color: #ffffff;
+}
+
+.btn-detail:hover {
+  background-color: var(--vp-c-brand);
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.btn-external {
+  background-color: transparent;
+  color: var(--vp-c-text-1);
+  border-color: var(--vp-c-divider-light);
+}
+
+.btn-external:hover {
+  background-color: var(--vp-c-bg-alt);
+  border-color: var(--vp-c-text-2);
+  transform: translateY(-1px);
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 768px) {
+  .actions {
+    margin-top: 8px;
+  }
+  
+  .btn {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
 }
 </style>

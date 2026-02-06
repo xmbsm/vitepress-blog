@@ -1,6 +1,6 @@
 import {
   __commonJS
-} from "./chunk-Y2F7D3TJ.js";
+} from "./chunk-BUSYA2B4.js";
 
 // node_modules/dayjs/plugin/relativeTime.js
 var require_relativeTime = __commonJS({
@@ -27,8 +27,7 @@ var require_relativeTime = __commonJS({
               break;
             }
           }
-          if (n2)
-            return a;
+          if (n2) return a;
           var M = s ? l.future : l.past;
           return "function" == typeof M ? M(a) : M.replace("%s", a);
         }, n.to = function(r2, e2) {

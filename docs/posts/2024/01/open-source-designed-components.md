@@ -10,6 +10,8 @@ tags:
  - Tailwind CSS
  - Radix UI
 description:  设计精美的组件，您可以将其复制并粘贴到您的应用程序中。无障碍。可定制。开源。
+externalLink: https://github.com
+externalLinkText: 访问GitHub
 ---
 # shadcn-ui｜开源的漂亮的2023最受欢迎的 UI组件(带设计稿)
 

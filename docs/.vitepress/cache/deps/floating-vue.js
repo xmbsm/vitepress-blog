@@ -24,8 +24,8 @@ import {
   withCtx,
   withKeys,
   withScopeId
-} from "./chunk-3YS4HNIT.js";
-import "./chunk-Y2F7D3TJ.js";
+} from "./chunk-XKDLJUKD.js";
+import "./chunk-BUSYA2B4.js";
 
 // node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
 var sides = ["top", "right", "bottom", "left"];
@@ -95,8 +95,7 @@ function getSideList(side, isStart, rtl) {
   switch (side) {
     case "top":
     case "bottom":
-      if (rtl)
-        return isStart ? rl : lr;
+      if (rtl) return isStart ? rl : lr;
       return isStart ? lr : rl;
     case "left":
     case "right":
