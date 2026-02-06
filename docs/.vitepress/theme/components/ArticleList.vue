@@ -265,12 +265,13 @@ const props = defineProps<{
 .btn-external {
   background-color: transparent;
   color: var(--vp-c-text-1);
-  border-color: var(--vp-c-divider-light);
+  border-color: var(--vp-c-gray-3);
 }
 
 .btn-external:hover {
-  background-color: var(--vp-c-bg-alt);
-  border-color: var(--vp-c-text-2);
+  background-color: var(--vp-c-brand);
+  color: white;
+  border-color: var(--vp-c-brand);
   transform: translateY(-1px);
 }
 
