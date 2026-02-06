@@ -42,6 +42,28 @@ const props = defineProps({
 .postlist {
     border-bottom: 1px dashed var(--vp-c-divider-light);
     padding: 14px 0 14px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+.postlist.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.postlist.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.list {
+    flex: 1;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .post-header {
@@ -116,6 +138,27 @@ const props = defineProps({
 @media screen and (max-width: 768px) {
     .postlist {
         padding: 14px 0 14px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        box-sizing: border-box;
+    }
+
+    .postlist.grid {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .postlist.list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .list {
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .post-header {

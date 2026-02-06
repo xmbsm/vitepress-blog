@@ -47,29 +47,42 @@ const props = defineProps<{
 </script>
 
 <style scoped>
+.articlelist {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .articlelist.list {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  .acontent {
+    width: 100%;
+    box-sizing: border-box;
+  }
 
   .main {
     display: flex;
     flex-direction: row;
     margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
 
     .cover {
       width: 30%;
       max-width: 220px;
       display: flex;
-      /* height: 110px; */
       overflow: hidden;
       position: relative;
       margin-right: 20px;
-      /* margin-top: -30px; */
       border-radius: 8px;
       border: 1px solid var(--vp-c-gray-3);
       overflow: hidden;
       box-shadow: rgba(61, 72, 83, 0.36) 0px 0px 1px, rgba(61, 72, 83, 0.06) 0px 2px 6px;
+      box-sizing: border-box;
 
       .img {
         transition-timing-function: cubic-bezier(.4, 0, 1, 1);
@@ -77,40 +90,41 @@ const props = defineProps<{
         object-fit: cover;
         width: 100%;
         height: auto;
+        box-sizing: border-box;
       }
 
       .img:hover {
-        transform: scaleX(var(1.05)) scaleY(1.05)
+        transform: scaleX(1.05) scaleY(1.05)
       }
     }
 
     .msg {
       flex: 1;
+      min-width: 0;
+      box-sizing: border-box;
 
       .title {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 500;
-  overflow-wrap: normal;
-  word-break: normal;
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        -webkit-font-smoothing: antialiased;
+        font-weight: 500;
+        box-sizing: border-box;
 
-  .cats {
-
-    .cat {
-      background-color: var(--vp-c-brand);
-      color: #ffffff;
-      font-size: 12px;
-      padding: 2px 5px;
-      margin-right: 5px;
-      border-radius: 2px;
-    }
-  }
-}
+        .cats {
+          .cat {
+            background-color: var(--vp-c-brand);
+            color: #ffffff;
+            font-size: 12px;
+            padding: 2px 5px;
+            margin-right: 5px;
+            border-radius: 2px;
+          }
+        }
+      }
 
       .desc {
         color: var(--vp-c-text-1);
@@ -123,6 +137,7 @@ const props = defineProps<{
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
       }
     }
   }
@@ -141,6 +156,8 @@ const props = defineProps<{
   transition-property: box-shadow;
   overflow: hidden;
   box-shadow: var(--vp-shadow-1);
+  width: 100%;
+  box-sizing: border-box;
 
   .cover {
     /* height: 12rem; */
@@ -148,6 +165,7 @@ const props = defineProps<{
     width: 100%;
     overflow: hidden;
     position: relative;
+    box-sizing: border-box;
 
     .img {
       transition-timing-function: cubic-bezier(.4, 0, 1, 1);
@@ -158,6 +176,7 @@ const props = defineProps<{
       position: absolute;
       left: 0;
       top: 0;
+      box-sizing: border-box;
     }
 
     .img:hover {
@@ -171,32 +190,31 @@ const props = defineProps<{
     padding-bottom: 8px;
     width: 100%;
     margin-top: 1.25rem;
+    box-sizing: border-box;
 
     .title {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  height: 1.5rem;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 500;
-  overflow-wrap: normal;
-  word-break: normal;
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      height: 1.5rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      -webkit-font-smoothing: antialiased;
+      font-weight: 500;
+      box-sizing: border-box;
 
-  .cats {
-
-    .cat {
-      background-color: var(--vp-c-brand);
-      color: #ffffff;
-      font-size: 12px;
-      padding: 2px 5px;
-      margin-right: 5px;
-      border-radius: 2px;
+      .cats {
+        .cat {
+          background-color: var(--vp-c-brand);
+          color: #ffffff;
+          font-size: 12px;
+          padding: 2px 5px;
+          margin-right: 5px;
+          border-radius: 2px;
+        }
+      }
     }
-  }
-}
 
     .desc {
       display: none;
@@ -258,13 +276,105 @@ const props = defineProps<{
 
 /* 响应式调整 */
 @media screen and (max-width: 768px) {
+  .articlelist {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .articlelist.list {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .articlelist.list .main {
+    display: flex !important;
+    flex-direction: row !important;
+    margin-top: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .articlelist.list .cover {
+    width: 30% !important;
+    max-width: 150px !important;
+    display: flex !important;
+    overflow: hidden !important;
+    position: relative !important;
+    margin-right: 12px !important;
+    border-radius: 6px !important;
+    border: 1px solid var(--vp-c-gray-3) !important;
+    overflow: hidden !important;
+    box-shadow: rgba(61, 72, 83, 0.36) 0px 0px 1px, rgba(61, 72, 83, 0.06) 0px 2px 6px !important;
+    box-sizing: border-box !important;
+  }
+  
+  .articlelist.list .msg {
+    flex: 1 !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  
   .actions {
     margin-top: 8px;
+    box-sizing: border-box !important;
   }
   
   .btn {
     padding: 3px 10px;
     font-size: 11px;
+    box-sizing: border-box !important;
+  }
+  
+  .articlelist.list .title {
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 500;
+    box-sizing: border-box !important;
+  }
+  
+  .articlelist.list .desc {
+    color: var(--vp-c-text-1);
+    font-size: 12px;
+    margin-top: 8px;
+    opacity: .6;
+    font-weight: normal;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box !important;
+  }
+  
+  .articlelist.grid .title {
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+    height: 1.3rem;
+    box-sizing: border-box !important;
+  }
+  
+  /* 确保移动端图片正确显示 */
+  .articlelist.list .cover .img {
+    transition-timing-function: cubic-bezier(.4, 0, 1, 1) !important;
+    transition-duration: .3s !important;
+    object-fit: cover !important;
+    width: 100% !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+  }
+  
+  .articlelist.list .cover .img:hover {
+    transform: scaleX(1.05) scaleY(1.05) !important;
+  }
+  
+  /* 确保移动端grid布局正确 */
+  .articlelist.grid {
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 }
 </style>
