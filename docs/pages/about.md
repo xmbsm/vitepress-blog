@@ -18,5 +18,3 @@ aside: false
 ### v1.0.0 2024-01-20
 
 - 开源版本发布
-- 文章介绍：https://www.appbeebee.com/posts/2024/01/open-source-vitepress-blog-theme-appbeebee.html
-
