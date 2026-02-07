@@ -148,7 +148,7 @@ export default defineConfig<ThemeConfig>({
         article: {
             cc: {
                 author: '乔同学', //此信息将显示在文章底部和博主卡片中
-                authorLink: 'https://mp.weixin.qq.com/s/iCf-QOnKk2WPjVqL6jJ8WA',
+                authorLink: 'https://free.kusheji.com,
                 license: '署名-相同方式共享 4.0 国际 (CC BY-SA 4.0)',
                 licenseLink: 'http://creativecommons.org/licenses/by-sa/4.0/'
             }
@@ -168,16 +168,16 @@ export default defineConfig<ThemeConfig>({
             cardPosition: 3, //显示在第几个位置
             cardMusic: true, //是否显示播放音乐，音乐列表在上面 music中配置
             cardCoffee: true, //是否显示打赏咖啡，
-            coffeeQrcode: 'https://image.baidu.com/search/down?url=https://fc.sinaimg.cn/large/6364aa43gy1hm0f859sm6j208c08cabm.jpg', //打赏咖啡二维码图片地址。如果是跳转网页地址需自行修改代码
+            coffeeQrcode: 'https://talk.shijuefuhao.com/images/v8/code2.jpg', //打赏咖啡二维码图片地址。如果是跳转网页地址需自行修改代码
             showLantern: false, //是否显示灯笼挂件
             lanternText: ['新', '年'], //灯笼上的字,数组形式
             showFirework: false, //是否显示侧栏烟花特效
             fireworkTitle: '🧨烟花许愿🧨｜②⓪②④新年', //烟花许愿标题
             fireworkWords: ['恭贺新禧', '万事如意', '新年快乐', '恭喜发财', '岁岁平安', '吉祥如意', '心想事成', '万事顺遂', '一帆风顺', '二龙腾飞', '三羊开泰', '四季平安', '五福临门', '六六大顺', '七星高照', '八方来财', '九九同心', '十全十美', '荣华富贵', '金玉满堂', '龙凤呈祥', '喜气洋洋', '鸿运当头', '财源广进', '笑口常开', '幸福安康', '日进斗金', '生意兴隆', '步步高升', '年年有余', '迎春接福', '喜气盈门', '花团锦簇', '前程似锦', '福满人间', '春回大地', '辞旧迎新', '万象更新', '吉祥如意', '万事大吉', '马到成功', '功成名就', '鱼跃龙门', '一飞冲天', '瑞气盈门', '福寿康宁', '时来运转', '鸿运高照', '三阳开泰', '否极泰来', '鸿运亨通', '一帆风顺', '出入平安', '顺风顺水', '龙凤呈祥', '花好月圆', '张灯结彩', '欢天喜地', '合家欢乐', '幸福美满', '和气致祥', '招财进宝', '开门大吉', '迎春接福', '福泽满门', '花开富贵', '竹报平安', '大吉大利', '恭喜发财'], //烟花许愿关键词
             showFooter: true, //是否显示全局底部信息
-            icpRecordCode: '鄂ICP备2022014994号-1',  //网站备案号
-            publicSecurityRecordCode: '鄂公网安备42282202000143号', //公安备案号
-            link: 'https://appbeebee.com/'
+            icpRecordCode: '酷设计',  //网站备案号
+            publicSecurityRecordCode: 'kusheji.com', //公安备案号
+            link: 'https://free.kusheji.com/'
         },
         logo: {
             light: '/logo.png',

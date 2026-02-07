@@ -18,8 +18,6 @@
                 <li class="li"><label class="label">图标</label><span>remixicon</span></li>
                 <li class="li"><label class="label">音乐</label><span>来源网络</span></li>
                 <li class="li"><label class="label">图片</label><span>根据作品体验生成</span></li>
-                <li class="li"><label class="label">主题</label><span>比比原创</span></li>
-                <li class="li"><label class="label">内容</label><span>比比原创</span></li>
             </ul>
         </div>
     </div>
