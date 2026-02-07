@@ -148,7 +148,7 @@ export default defineConfig<ThemeConfig>({
         article: {
             cc: {
                 author: '乔同学', //此信息将显示在文章底部和博主卡片中
-                authorLink: 'https://free.kusheji.com,
+                authorLink: 'https://free.kusheji.com',
                 license: '署名-相同方式共享 4.0 国际 (CC BY-SA 4.0)',
                 licenseLink: 'http://creativecommons.org/licenses/by-sa/4.0/'
             }
