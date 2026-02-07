@@ -8,7 +8,7 @@ categories:
 tags:
  - 符号字体
  - logo字体
-description: Moba Font
+description: Moba 字体是一款创新的标志字体，旨在满足现代品牌需求。
 externalLink: https://qtx.lanzoul.com/iYS9g37mk01e
 externalLinkText: 直接下载
 ---

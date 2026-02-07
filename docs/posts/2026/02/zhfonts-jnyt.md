@@ -7,7 +7,7 @@ categories:
  - 中文字体
 tags:
  - 圆体
-description: 荆南圆体
+description: 字体风格活泼醒目，适用于广告、海报、标题等多种场景，能够为你的设计增添独特的视觉效果。
 externalLink: https://qtx.lanzoul.com/iPYs338byq8b
 externalLinkText: 直接下载
 ---

@@ -7,7 +7,7 @@ categories:
  - 中文字体
 tags:
  - 圆体
-description: 南西新圆体
+description: 南西新圆体是一款基于霞鹜新晰黑优化改造的免费可商用圆体字库，在保持原字体结构严谨性的基础上，对笔画转折处进行全面的圆角化处理。
 externalLink: https://qtx.lanzoul.com/iKMSm391nkuh
 externalLinkText: 直接下载
 ---

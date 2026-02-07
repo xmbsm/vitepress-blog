@@ -7,7 +7,7 @@ categories:
  - 中文字体
 tags:
  - 圆体
-description: 致一圆体
+description: 致一圆体是一系列以 TrueType 格式封装、依照 Unicode 编码的 OpenType 字体，该字体基于旧印刷字形的「霞鶩晰黑」修改而来。
 externalLink: https://qtx.lanzoul.com/iNkTT38bzgze
 externalLinkText: 直接下载
 ---
