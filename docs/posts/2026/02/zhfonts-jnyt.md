@@ -1,7 +1,7 @@
 ---
 post: true
 title: 荆南圆体
-date: 2024-02-07
+date: 2026-02-07
 cover: https://wkphoto.bj.bcebos.com/0d338744ebf81a4cb65b8c9ec72a6059252da678.jpg
 categories:
  - 中文字体

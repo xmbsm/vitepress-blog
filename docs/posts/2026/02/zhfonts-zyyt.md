@@ -1,7 +1,7 @@
 ---
 post: true
 title: 致一圆体
-date: 2024-02-07
+date: 2026-02-07
 cover: https://wkphoto.bj.bcebos.com/574e9258d109b3deddfb843fdcbf6c81800a4c24.jpg
 categories:
  - 中文字体

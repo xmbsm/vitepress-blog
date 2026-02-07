@@ -1,7 +1,7 @@
 ---
 post: true
 title: 南西新圆体
-date: 2024-02-07
+date: 2026-02-07
 cover: https://wkphoto.bj.bcebos.com/f31fbe096b63f62489ff59549744ebf81b4ca3c3.jpg
 categories:
  - 中文字体
