@@ -24,7 +24,7 @@ import {
   withCtx,
   withKeys,
   withScopeId
-} from "./chunk-XKDLJUKD.js";
+} from "./chunk-SNNOYR6U.js";
 import "./chunk-BUSYA2B4.js";
 
 // node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
@@ -91,7 +91,7 @@ function getSideList(side, isStart, rtl) {
   const lr = ["left", "right"];
   const rl = ["right", "left"];
   const tb = ["top", "bottom"];
-  const bt = ["bottom", "top"];
+  const bt2 = ["bottom", "top"];
   switch (side) {
     case "top":
     case "bottom":
@@ -99,7 +99,7 @@ function getSideList(side, isStart, rtl) {
       return isStart ? lr : rl;
     case "left":
     case "right":
-      return isStart ? tb : bt;
+      return isStart ? tb : bt2;
     default:
       return [];
   }
@@ -216,7 +216,7 @@ var computePosition = async (reference, floating, config) => {
     strategy
   });
   let {
-    x,
+    x: x2,
     y: y2
   } = computeCoordsFromPlacement(rects, placement, rtl);
   let statefulPlacement = placement;
@@ -233,7 +233,7 @@ var computePosition = async (reference, floating, config) => {
       data,
       reset
     } = await fn({
-      x,
+      x: x2,
       y: y2,
       initialPlacement: placement,
       placement: statefulPlacement,
@@ -246,7 +246,7 @@ var computePosition = async (reference, floating, config) => {
         floating
       }
     });
-    x = nextX != null ? nextX : x;
+    x2 = nextX != null ? nextX : x2;
     y2 = nextY != null ? nextY : y2;
     middlewareData = {
       ...middlewareData,
@@ -269,7 +269,7 @@ var computePosition = async (reference, floating, config) => {
           }) : reset.rects;
         }
         ({
-          x,
+          x: x2,
           y: y2
         } = computeCoordsFromPlacement(rects, statefulPlacement, rtl));
       }
@@ -277,7 +277,7 @@ var computePosition = async (reference, floating, config) => {
     }
   }
   return {
-    x,
+    x: x2,
     y: y2,
     placement: statefulPlacement,
     strategy,
@@ -290,7 +290,7 @@ async function detectOverflow(state, options) {
     options = {};
   }
   const {
-    x,
+    x: x2,
     y: y2,
     platform: platform2,
     rects,
@@ -315,7 +315,7 @@ async function detectOverflow(state, options) {
   }));
   const rect = elementContext === "floating" ? {
     ...rects.floating,
-    x,
+    x: x2,
     y: y2
   } : rects.reference;
   const offsetParent = await (platform2.getOffsetParent == null ? void 0 : platform2.getOffsetParent(elements.floating));
@@ -344,7 +344,7 @@ var arrow = (options) => ({
   options,
   async fn(state) {
     const {
-      x,
+      x: x2,
       y: y2,
       placement,
       rects,
@@ -361,7 +361,7 @@ var arrow = (options) => ({
     }
     const paddingObject = getPaddingObject(padding);
     const coords = {
-      x,
+      x: x2,
       y: y2
     };
     const axis = getAlignmentAxis(placement);
@@ -465,21 +465,21 @@ var autoPlacement = function(options) {
           }
         };
       }
-      const placementsSortedByMostSpace = allOverflows.map((d) => {
-        const alignment2 = getAlignment(d.placement);
-        return [d.placement, alignment2 && crossAxis ? (
+      const placementsSortedByMostSpace = allOverflows.map((d2) => {
+        const alignment2 = getAlignment(d2.placement);
+        return [d2.placement, alignment2 && crossAxis ? (
           // Check along the mainAxis and main crossAxis side.
-          d.overflows.slice(0, 2).reduce((acc, v) => acc + v, 0)
+          d2.overflows.slice(0, 2).reduce((acc, v) => acc + v, 0)
         ) : (
           // Check only the mainAxis.
-          d.overflows[0]
-        ), d.overflows];
+          d2.overflows[0]
+        ), d2.overflows];
       }).sort((a, b2) => a[1] - b2[1]);
-      const placementsThatFitOnEachSide = placementsSortedByMostSpace.filter((d) => d[2].slice(
+      const placementsThatFitOnEachSide = placementsSortedByMostSpace.filter((d2) => d2[2].slice(
         0,
         // Aligned placements should not check their opposite crossAxis
         // side.
-        getAlignment(d[0]) ? 2 : 3
+        getAlignment(d2[0]) ? 2 : 3
       ).every((v) => v <= 0));
       const resetPlacement = ((_placementsThatFitOnE = placementsThatFitOnEachSide[0]) == null ? void 0 : _placementsThatFitOnE[0]) || placementsSortedByMostSpace[0][0];
       if (resetPlacement !== placement) {
@@ -563,12 +563,12 @@ var flip = function(options) {
             }
           };
         }
-        let resetPlacement = (_overflowsData$filter = overflowsData.filter((d) => d.overflows[0] <= 0).sort((a, b2) => a.overflows[1] - b2.overflows[1])[0]) == null ? void 0 : _overflowsData$filter.placement;
+        let resetPlacement = (_overflowsData$filter = overflowsData.filter((d2) => d2.overflows[0] <= 0).sort((a, b2) => a.overflows[1] - b2.overflows[1])[0]) == null ? void 0 : _overflowsData$filter.placement;
         if (!resetPlacement) {
           switch (fallbackStrategy) {
             case "bestFit": {
               var _overflowsData$map$so;
-              const placement2 = (_overflowsData$map$so = overflowsData.map((d) => [d.placement, d.overflows.filter((overflow2) => overflow2 > 0).reduce((acc, overflow2) => acc + overflow2, 0)]).sort((a, b2) => a[1] - b2[1])[0]) == null ? void 0 : _overflowsData$map$so[0];
+              const placement2 = (_overflowsData$map$so = overflowsData.map((d2) => [d2.placement, d2.overflows.filter((overflow2) => overflow2 > 0).reduce((acc, overflow2) => acc + overflow2, 0)]).sort((a, b2) => a[1] - b2[1])[0]) == null ? void 0 : _overflowsData$map$so[0];
               if (placement2) {
                 resetPlacement = placement2;
               }
@@ -639,7 +639,7 @@ var offset = function(options) {
     async fn(state) {
       var _middlewareData$offse, _middlewareData$arrow;
       const {
-        x,
+        x: x2,
         y: y2,
         placement,
         middlewareData
@@ -649,7 +649,7 @@ var offset = function(options) {
         return {};
       }
       return {
-        x: x + diffCoords.x,
+        x: x2 + diffCoords.x,
         y: y2 + diffCoords.y,
         data: {
           ...diffCoords,
@@ -668,7 +668,7 @@ var shift = function(options) {
     options,
     async fn(state) {
       const {
-        x,
+        x: x2,
         y: y2,
         placement
       } = state;
@@ -678,11 +678,11 @@ var shift = function(options) {
         limiter = {
           fn: (_ref) => {
             let {
-              x: x2,
+              x: x3,
               y: y3
             } = _ref;
             return {
-              x: x2,
+              x: x3,
               y: y3
             };
           }
@@ -690,7 +690,7 @@ var shift = function(options) {
         ...detectOverflowOptions
       } = evaluate(options, state);
       const coords = {
-        x,
+        x: x2,
         y: y2
       };
       const overflow = await detectOverflow(state, detectOverflowOptions);
@@ -720,7 +720,7 @@ var shift = function(options) {
       return {
         ...limitedCoords,
         data: {
-          x: limitedCoords.x - x,
+          x: limitedCoords.x - x2,
           y: limitedCoords.y - y2
         }
       };
@@ -908,16 +908,16 @@ function getScale(element) {
     height,
     fallback
   } = getCssDimensions(domElement);
-  let x = (fallback ? round(rect.width) : rect.width) / width;
+  let x2 = (fallback ? round(rect.width) : rect.width) / width;
   let y2 = (fallback ? round(rect.height) : rect.height) / height;
-  if (!x || !Number.isFinite(x)) {
-    x = 1;
+  if (!x2 || !Number.isFinite(x2)) {
+    x2 = 1;
   }
   if (!y2 || !Number.isFinite(y2)) {
     y2 = 1;
   }
   return {
-    x,
+    x: x2,
     y: y2
   };
 }
@@ -943,7 +943,7 @@ function getBoundingClientRect(element, includeScale, isFixedStrategy, offsetPar
   }
   const win = domElement ? getWindow(domElement) : window;
   const addVisualOffsets = !isLayoutViewport() && isFixedStrategy;
-  let x = (clientRect.left + (addVisualOffsets ? ((_win$visualViewport = win.visualViewport) == null ? void 0 : _win$visualViewport.offsetLeft) || 0 : 0)) / scale.x;
+  let x2 = (clientRect.left + (addVisualOffsets ? ((_win$visualViewport = win.visualViewport) == null ? void 0 : _win$visualViewport.offsetLeft) || 0 : 0)) / scale.x;
   let y2 = (clientRect.top + (addVisualOffsets ? ((_win$visualViewport2 = win.visualViewport) == null ? void 0 : _win$visualViewport2.offsetTop) || 0 : 0)) / scale.y;
   let width = clientRect.width / scale.x;
   let height = clientRect.height / scale.y;
@@ -957,11 +957,11 @@ function getBoundingClientRect(element, includeScale, isFixedStrategy, offsetPar
       const css = getComputedStyle(currentIFrame);
       iframeRect.x += (currentIFrame.clientLeft + parseFloat(css.paddingLeft)) * iframeScale.x;
       iframeRect.y += (currentIFrame.clientTop + parseFloat(css.paddingTop)) * iframeScale.y;
-      x *= iframeScale.x;
+      x2 *= iframeScale.x;
       y2 *= iframeScale.y;
       width *= iframeScale.x;
       height *= iframeScale.y;
-      x += iframeRect.x;
+      x2 += iframeRect.x;
       y2 += iframeRect.y;
       currentIFrame = getWindow(currentIFrame).frameElement;
     }
@@ -970,10 +970,10 @@ function getBoundingClientRect(element, includeScale, isFixedStrategy, offsetPar
     width,
     height,
     top: y2,
-    right: x + width,
+    right: x2 + width,
     bottom: y2 + height,
-    left: x,
-    x,
+    left: x2,
+    x: x2,
     y: y2
   };
 }
@@ -1042,15 +1042,15 @@ function getDocumentRect(element) {
   const body = element.ownerDocument.body;
   const width = max2(html.scrollWidth, html.clientWidth, body.scrollWidth, body.clientWidth);
   const height = max2(html.scrollHeight, html.clientHeight, body.scrollHeight, body.clientHeight);
-  let x = -scroll.scrollLeft + getWindowScrollBarX(element);
+  let x2 = -scroll.scrollLeft + getWindowScrollBarX(element);
   const y2 = -scroll.scrollTop;
   if (getComputedStyle$1(body).direction === "rtl") {
-    x += max2(html.clientWidth, body.clientWidth) - width;
+    x2 += max2(html.clientWidth, body.clientWidth) - width;
   }
   return {
     width,
     height,
-    x,
+    x: x2,
     y: y2
   };
 }
@@ -1096,21 +1096,21 @@ function getViewportRect(element, strategy) {
   const visualViewport = win.visualViewport;
   let width = html.clientWidth;
   let height = html.clientHeight;
-  let x = 0;
+  let x2 = 0;
   let y2 = 0;
   if (visualViewport) {
     width = visualViewport.width;
     height = visualViewport.height;
     const layoutViewport = isLayoutViewport();
     if (layoutViewport || !layoutViewport && strategy === "fixed") {
-      x = visualViewport.offsetLeft;
+      x2 = visualViewport.offsetLeft;
       y2 = visualViewport.offsetTop;
     }
   }
   return {
     width,
     height,
-    x,
+    x: x2,
     y: y2
   };
 }
@@ -1124,12 +1124,12 @@ function getInnerBoundingClientRect(element, strategy) {
   };
   const width = element.clientWidth * scale.x;
   const height = element.clientHeight * scale.y;
-  const x = left * scale.x;
+  const x2 = left * scale.x;
   const y2 = top * scale.y;
   return {
     width,
     height,
-    x,
+    x: x2,
     y: y2
   };
 }
@@ -1300,11 +1300,11 @@ var computePosition2 = (reference, floating, options) => {
 };
 
 // node_modules/floating-vue/dist/floating-vue.mjs
-function $e(e, t) {
+function ye(e, t) {
   for (const o in t)
-    Object.prototype.hasOwnProperty.call(t, o) && (typeof t[o] == "object" && e[o] ? $e(e[o], t[o]) : e[o] = t[o]);
+    Object.prototype.hasOwnProperty.call(t, o) && (typeof t[o] == "object" && e[o] ? ye(e[o], t[o]) : e[o] = t[o]);
 }
-var u = {
+var h2 = {
   // Disable popper components
   disabled: false,
   // Default position offset along main axis (px)
@@ -1335,6 +1335,10 @@ var u = {
   arrowPadding: 0,
   // Compute arrow overflow (useful to hide it)
   arrowOverflow: true,
+  /**
+   * By default, compute autohide on 'click'.
+   */
+  autoHideOnMousedown: false,
   // Themes
   themes: {
     tooltip: {
@@ -1380,25 +1384,25 @@ var u = {
   }
 };
 function S(e, t) {
-  let o = u.themes[e] || {}, i;
+  let o = h2.themes[e] || {}, i;
   do
-    i = o[t], typeof i > "u" ? o.$extend ? o = u.themes[o.$extend] || {} : (o = null, i = u[t]) : o = null;
+    i = o[t], typeof i > "u" ? o.$extend ? o = h2.themes[o.$extend] || {} : (o = null, i = h2[t]) : o = null;
   while (o);
   return i;
 }
-function Je(e) {
+function Ze(e) {
   const t = [e];
-  let o = u.themes[e] || {};
+  let o = h2.themes[e] || {};
   do
-    o.$extend && !o.$resetCss ? (t.push(o.$extend), o = u.themes[o.$extend] || {}) : o = null;
+    o.$extend && !o.$resetCss ? (t.push(o.$extend), o = h2.themes[o.$extend] || {}) : o = null;
   while (o);
   return t.map((i) => `v-popper--theme-${i}`);
 }
-function ne(e) {
+function re(e) {
   const t = [e];
-  let o = u.themes[e] || {};
+  let o = h2.themes[e] || {};
   do
-    o.$extend ? (t.push(o.$extend), o = u.themes[o.$extend] || {}) : o = null;
+    o.$extend ? (t.push(o.$extend), o = h2.themes[o.$extend] || {}) : o = null;
   while (o);
   return t;
 }
@@ -1415,42 +1419,42 @@ if (typeof window < "u") {
   } catch {
   }
 }
-var ve = false;
-typeof window < "u" && typeof navigator < "u" && (ve = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
-var ye = ["auto", "top", "bottom", "left", "right"].reduce((e, t) => e.concat([
+var _e = false;
+typeof window < "u" && typeof navigator < "u" && (_e = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
+var Te = ["auto", "top", "bottom", "left", "right"].reduce((e, t) => e.concat([
   t,
   `${t}-start`,
   `${t}-end`
 ]), []);
-var re = {
+var pe = {
   hover: "mouseenter",
   focus: "focus",
   click: "click",
   touch: "touchstart",
   pointer: "pointerdown"
 };
-var pe = {
+var ae = {
   hover: "mouseleave",
   focus: "blur",
   click: "click",
   touch: "touchend",
   pointer: "pointerup"
 };
-function ae(e, t) {
+function de(e, t) {
   const o = e.indexOf(t);
   o !== -1 && e.splice(o, 1);
 }
-function W() {
+function G() {
   return new Promise((e) => requestAnimationFrame(() => {
     requestAnimationFrame(e);
   }));
 }
-var h2 = [];
+var d = [];
 var g = null;
-var de = {};
-function le(e) {
-  let t = de[e];
-  return t || (t = de[e] = []), t;
+var le = {};
+function he(e) {
+  let t = le[e];
+  return t || (t = le[e] = []), t;
 }
 var Y = function() {
 };
@@ -1460,18 +1464,18 @@ function n(e) {
     return S(t.theme, e);
   };
 }
-var G = "__floating-vue__popper";
-var J = () => defineComponent({
+var q = "__floating-vue__popper";
+var Q = () => defineComponent({
   name: "VPopper",
   provide() {
     return {
-      [G]: {
+      [q]: {
         parentPopper: this
       }
     };
   },
   inject: {
-    [G]: { default: null }
+    [q]: { default: null }
   },
   props: {
     theme: {
@@ -1513,7 +1517,7 @@ var J = () => defineComponent({
     placement: {
       type: String,
       default: n("placement"),
-      validator: (e) => ye.includes(e)
+      validator: (e) => Te.includes(e)
     },
     delay: {
       type: [String, Number, Object],
@@ -1686,7 +1690,8 @@ var J = () => defineComponent({
       lastAutoHide: true,
       pendingHide: false,
       containsGlobalTarget: false,
-      isDisposed: true
+      isDisposed: true,
+      mouseDownContains: false
     };
   },
   computed: {
@@ -1717,7 +1722,7 @@ var J = () => defineComponent({
     },
     parentPopper() {
       var e;
-      return (e = this[G]) == null ? void 0 : e.parentPopper;
+      return (e = this[q]) == null ? void 0 : e.parentPopper;
     },
     hasPopperShowTriggerHover() {
       var e, t;
@@ -1732,10 +1737,11 @@ var J = () => defineComponent({
     async container() {
       this.isShown && (this.$_ensureTeleport(), await this.$_computePosition());
     },
-    ...[
-      "triggers",
-      "positioningDisabled"
-    ].reduce((e, t) => (e[t] = "$_refreshListeners", e), {}),
+    triggers: {
+      handler: "$_refreshListeners",
+      deep: true
+    },
+    positioningDisabled: "$_refreshListeners",
     ...[
       "placement",
       "distance",
@@ -1838,11 +1844,11 @@ var J = () => defineComponent({
         e.middleware.push({
           name: "autoSize",
           fn: ({ rects: s, placement: r, middlewareData: p }) => {
-            var l;
-            if ((l = p.autoSize) != null && l.skip)
+            var u;
+            if ((u = p.autoSize) != null && u.skip)
               return {};
-            let a, d;
-            return r.startsWith("top") || r.startsWith("bottom") ? a = s.reference.width : d = s.reference.height, this.$_innerNode.style[i === "min" ? "minWidth" : i === "max" ? "maxWidth" : "width"] = a != null ? `${a}px` : null, this.$_innerNode.style[i === "min" ? "minHeight" : i === "max" ? "maxHeight" : "height"] = d != null ? `${d}px` : null, {
+            let a, l;
+            return r.startsWith("top") || r.startsWith("bottom") ? a = s.reference.width : l = s.reference.height, this.$_innerNode.style[i === "min" ? "minWidth" : i === "max" ? "maxWidth" : "width"] = a != null ? `${a}px` : null, this.$_innerNode.style[i === "min" ? "minHeight" : i === "max" ? "maxHeight" : "height"] = l != null ? `${l}px` : null, {
               data: {
                 skip: true
               },
@@ -1891,7 +1897,7 @@ var J = () => defineComponent({
       return parseInt(t && t[e] || t || 0);
     },
     async $_applyShow(e = false) {
-      clearTimeout(this.$_disposeTimer), clearTimeout(this.$_scheduleTimer), this.skipTransition = e, !this.isShown && (this.$_ensureTeleport(), await W(), await this.$_computePosition(), await this.$_applyShowEffect(), this.positioningDisabled || this.$_registerEventListeners([
+      clearTimeout(this.$_disposeTimer), clearTimeout(this.$_scheduleTimer), this.skipTransition = e, !this.isShown && (this.$_ensureTeleport(), await G(), await this.$_computePosition(), await this.$_applyShowEffect(), this.positioningDisabled || this.$_registerEventListeners([
         ...getOverflowAncestors(this.$_referenceNode),
         ...getOverflowAncestors(this.$_popperNode)
       ], "scroll", () => {
@@ -1912,13 +1918,13 @@ var J = () => defineComponent({
       const e = this.showGroup;
       if (e) {
         let t;
-        for (let o = 0; o < h2.length; o++)
-          t = h2[o], t.showGroup !== e && (t.hide(), t.$emit("close-group"));
+        for (let o = 0; o < d.length; o++)
+          t = d[o], t.showGroup !== e && (t.hide(), t.$emit("close-group"));
       }
-      h2.push(this), document.body.classList.add("v-popper--some-open");
-      for (const t of ne(this.theme))
-        le(t).push(this), document.body.classList.add(`v-popper--some-open--${t}`);
-      this.$emit("apply-show"), this.classes.showFrom = true, this.classes.showTo = false, this.classes.hideFrom = false, this.classes.hideTo = false, await W(), this.classes.showFrom = false, this.classes.showTo = true, this.noAutoFocus || this.$_popperNode.focus();
+      d.push(this), document.body.classList.add("v-popper--some-open");
+      for (const t of re(this.theme))
+        he(t).push(this), document.body.classList.add(`v-popper--some-open--${t}`);
+      this.$emit("apply-show"), this.classes.showFrom = true, this.classes.showTo = false, this.classes.hideFrom = false, this.classes.hideTo = false, await G(), this.classes.showFrom = false, this.classes.showTo = true, this.noAutoFocus || this.$_popperNode.focus();
     },
     async $_applyHide(e = false) {
       if (this.shownChildren.size > 0) {
@@ -1927,10 +1933,10 @@ var J = () => defineComponent({
       }
       if (clearTimeout(this.$_scheduleTimer), !this.isShown)
         return;
-      this.skipTransition = e, ae(h2, this), h2.length === 0 && document.body.classList.remove("v-popper--some-open");
-      for (const o of ne(this.theme)) {
-        const i = le(o);
-        ae(i, this), i.length === 0 && document.body.classList.remove(`v-popper--some-open--${o}`);
+      this.skipTransition = e, de(d, this), d.length === 0 && document.body.classList.remove("v-popper--some-open");
+      for (const o of re(this.theme)) {
+        const i = he(o);
+        de(i, this), i.length === 0 && document.body.classList.remove(`v-popper--some-open--${o}`);
       }
       g === this && (g = null), this.isShown = false, this.$_applyAttrsToTarget({
         "aria-describedby": void 0,
@@ -1939,7 +1945,7 @@ var J = () => defineComponent({
       const t = this.disposeTimeout;
       t !== null && (this.$_disposeTimer = setTimeout(() => {
         this.$_popperNode && (this.$_detachPopperNode(), this.isMounted = false);
-      }, t)), this.$_removeEventListeners("scroll"), this.$emit("apply-hide"), this.classes.showFrom = false, this.classes.showTo = false, this.classes.hideFrom = true, this.classes.hideTo = false, await W(), this.classes.hideFrom = false, this.classes.hideTo = true;
+      }, t)), this.$_removeEventListeners("scroll"), this.$emit("apply-hide"), this.classes.showFrom = false, this.classes.showTo = false, this.classes.hideFrom = true, this.classes.hideTo = false, await G(), this.classes.hideFrom = false, this.classes.hideTo = true;
     },
     $_autoShowHide() {
       this.shown ? this.show() : this.hide();
@@ -1956,11 +1962,11 @@ var J = () => defineComponent({
       const e = (o) => {
         this.isShown && !this.$_hideInProgress || (o.usedByTooltip = true, !this.$_preventShow && this.show({ event: o }));
       };
-      this.$_registerTriggerListeners(this.$_targetNodes, re, this.triggers, this.showTriggers, e), this.$_registerTriggerListeners([this.$_popperNode], re, this.popperTriggers, this.popperShowTriggers, e);
+      this.$_registerTriggerListeners(this.$_targetNodes, pe, this.triggers, this.showTriggers, e), this.$_registerTriggerListeners([this.$_popperNode], pe, this.popperTriggers, this.popperShowTriggers, e);
       const t = (o) => {
         o.usedByTooltip || this.hide({ event: o });
       };
-      this.$_registerTriggerListeners(this.$_targetNodes, pe, this.triggers, this.hideTriggers, t), this.$_registerTriggerListeners([this.$_popperNode], pe, this.popperTriggers, this.popperHideTriggers, t);
+      this.$_registerTriggerListeners(this.$_targetNodes, ae, this.triggers, this.hideTriggers, t), this.$_registerTriggerListeners([this.$_popperNode], ae, this.popperTriggers, this.popperHideTriggers, t);
     },
     $_registerEventListeners(e, t, o) {
       this.$_events.push({ targetNodes: e, eventType: t, handler: o }), e.forEach((i) => i.addEventListener(t, o, $ ? {
@@ -2026,18 +2032,40 @@ var J = () => defineComponent({
     return this.$slots.default(this.slotData);
   }
 });
-typeof document < "u" && typeof window < "u" && (ve ? document.addEventListener("touchstart", he, $ ? {
-  passive: true,
-  capture: true
-} : true) : window.addEventListener("mousedown", he, true), window.addEventListener("resize", Ze));
-function he(e, t = false) {
+if (typeof document < "u" && typeof window < "u") {
+  if (_e) {
+    const e = $ ? {
+      passive: true,
+      capture: true
+    } : true;
+    document.addEventListener("touchstart", (t) => ue(t, true), e), document.addEventListener("touchend", (t) => fe(t, true), e);
+  } else
+    window.addEventListener("mousedown", (e) => ue(e, false), true), window.addEventListener("click", (e) => fe(e, false), true);
+  window.addEventListener("resize", tt);
+}
+function ue(e, t) {
+  if (h2.autoHideOnMousedown)
+    Pe(e, t);
+  else
+    for (let o = 0; o < d.length; o++) {
+      const i = d[o];
+      try {
+        i.mouseDownContains = i.popperNode().contains(e.target);
+      } catch {
+      }
+    }
+}
+function fe(e, t) {
+  h2.autoHideOnMousedown || Pe(e, t);
+}
+function Pe(e, t) {
   const o = {};
-  for (let i = h2.length - 1; i >= 0; i--) {
-    const s = h2[i];
+  for (let i = d.length - 1; i >= 0; i--) {
+    const s = d[i];
     try {
-      const r = s.containsGlobalTarget = s.popperNode().contains(e.target);
+      const r = s.containsGlobalTarget = s.mouseDownContains || s.popperNode().contains(e.target);
       s.pendingHide = false, requestAnimationFrame(() => {
-        if (s.pendingHide = false, !o[s.randomId] && ue(s, r, e)) {
+        if (s.pendingHide = false, !o[s.randomId] && ce(s, r, e)) {
           if (s.$_handleGlobalClose(e, t), !e.closeAllPopover && e.closePopover && r) {
             let a = s.parentPopper;
             for (; a; )
@@ -2045,7 +2073,7 @@ function he(e, t = false) {
             return;
           }
           let p = s.parentPopper;
-          for (; p && ue(p, p.containsGlobalTarget, e); ) {
+          for (; p && ce(p, p.containsGlobalTarget, e); ) {
             p.$_handleGlobalClose(e, t);
             p = p.parentPopper;
           }
@@ -2055,23 +2083,23 @@ function he(e, t = false) {
     }
   }
 }
-function ue(e, t, o) {
-  return o.closeAllPopover || o.closePopover && t || Qe(e, o) && !t;
+function ce(e, t, o) {
+  return o.closeAllPopover || o.closePopover && t || et(e, o) && !t;
 }
-function Qe(e, t) {
+function et(e, t) {
   if (typeof e.autoHide == "function") {
     const o = e.autoHide(t);
     return e.lastAutoHide = o, o;
   }
   return e.autoHide;
 }
-function Ze() {
-  for (let e = 0; e < h2.length; e++)
-    h2[e].$_computePosition();
+function tt() {
+  for (let e = 0; e < d.length; e++)
+    d[e].$_computePosition();
 }
-function zt() {
-  for (let e = 0; e < h2.length; e++)
-    h2[e].hide();
+function Nt() {
+  for (let e = 0; e < d.length; e++)
+    d[e].hide();
 }
 var c = 0;
 var m = 0;
@@ -2083,19 +2111,19 @@ typeof window < "u" && window.addEventListener("mousemove", (e) => {
   passive: true
 } : void 0);
 function C(e, t, o, i, s, r, p, a) {
-  const d = ((p - s) * (t - r) - (a - r) * (e - s)) / ((a - r) * (o - e) - (p - s) * (i - t)), l = ((o - e) * (t - r) - (i - t) * (e - s)) / ((a - r) * (o - e) - (p - s) * (i - t));
-  return d >= 0 && d <= 1 && l >= 0 && l <= 1;
+  const l = ((p - s) * (t - r) - (a - r) * (e - s)) / ((a - r) * (o - e) - (p - s) * (i - t)), u = ((o - e) * (t - r) - (i - t) * (e - s)) / ((a - r) * (o - e) - (p - s) * (i - t));
+  return l >= 0 && l <= 1 && u >= 0 && u <= 1;
 }
-var et = {
-  extends: J()
+var ot = {
+  extends: Q()
 };
-var M = (e, t) => {
+var B = (e, t) => {
   const o = e.__vccOpts || e;
   for (const [i, s] of t)
     o[i] = s;
   return o;
 };
-function tt(e, t, o, i, s, r) {
+function it(e, t, o, i, s, r) {
   return openBlock(), createElementBlock("div", {
     ref: "reference",
     class: normalizeClass(["v-popper", {
@@ -2105,8 +2133,8 @@ function tt(e, t, o, i, s, r) {
     renderSlot(e.$slots, "default", normalizeProps(guardReactiveProps(e.slotData)))
   ], 2);
 }
-var ot = M(et, [["render", tt]]);
-function it() {
+var st = B(ot, [["render", it]]);
+function nt() {
   var e = window.navigator.userAgent, t = e.indexOf("MSIE ");
   if (t > 0)
     return parseInt(e.substring(t + 5, e.indexOf(".", t)), 10);
@@ -2119,10 +2147,10 @@ function it() {
   return s > 0 ? parseInt(e.substring(s + 5, e.indexOf(".", s)), 10) : -1;
 }
 var z;
-function U() {
-  U.init || (U.init = true, z = it() !== -1);
+function X() {
+  X.init || (X.init = true, z = nt() !== -1);
 }
-var B = {
+var E = {
   name: "ResizeObserver",
   props: {
     emitOnMount: {
@@ -2142,7 +2170,7 @@ var B = {
     "notify"
   ],
   mounted() {
-    U(), nextTick(() => {
+    X(), nextTick(() => {
       this._w = this.$el.offsetWidth, this._h = this.$el.offsetHeight, this.emitOnMount && this.emitSize();
     });
     const e = document.createElement("object");
@@ -2169,31 +2197,31 @@ var B = {
     }
   }
 };
-var st = withScopeId("data-v-b329ee4c");
+var rt = withScopeId("data-v-b329ee4c");
 pushScopeId("data-v-b329ee4c");
-var nt = {
+var pt = {
   class: "resize-observer",
   tabindex: "-1"
 };
 popScopeId();
-var rt = st((e, t, o, i, s, r) => (openBlock(), createBlock("div", nt)));
-B.render = rt;
-B.__scopeId = "data-v-b329ee4c";
-B.__file = "src/components/ResizeObserver.vue";
-var Q = (e = "theme") => ({
+var at = rt((e, t, o, i, s, r) => (openBlock(), createBlock("div", pt)));
+E.render = at;
+E.__scopeId = "data-v-b329ee4c";
+E.__file = "src/components/ResizeObserver.vue";
+var Z = (e = "theme") => ({
   computed: {
     themeClass() {
-      return Je(this[e]);
+      return Ze(this[e]);
     }
   }
 });
-var pt = defineComponent({
+var dt = defineComponent({
   name: "VPopperContent",
   components: {
-    ResizeObserver: B
+    ResizeObserver: E
   },
   mixins: [
-    Q()
+    Z()
   ],
   props: {
     popperId: String,
@@ -2216,18 +2244,18 @@ var pt = defineComponent({
     }
   }
 });
-var at = ["id", "aria-hidden", "tabindex", "data-popper-placement"];
-var dt = {
+var lt = ["id", "aria-hidden", "tabindex", "data-popper-placement"];
+var ht = {
   ref: "inner",
   class: "v-popper__inner"
 };
-var lt = createBaseVNode("div", { class: "v-popper__arrow-outer" }, null, -1);
-var ht = createBaseVNode("div", { class: "v-popper__arrow-inner" }, null, -1);
-var ut = [
-  lt,
-  ht
+var ut = createBaseVNode("div", { class: "v-popper__arrow-outer" }, null, -1);
+var ft = createBaseVNode("div", { class: "v-popper__arrow-inner" }, null, -1);
+var ct = [
+  ut,
+  ft
 ];
-function ft(e, t, o, i, s, r) {
+function mt(e, t, o, i, s, r) {
   const p = resolveComponent("ResizeObserver");
   return openBlock(), createElementBlock("div", {
     id: e.popperId,
@@ -2266,7 +2294,7 @@ function ft(e, t, o, i, s, r) {
         transformOrigin: e.result.transformOrigin
       } : void 0)
     }, [
-      createBaseVNode("div", dt, [
+      createBaseVNode("div", ht, [
         e.mounted ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
           createBaseVNode("div", null, [
             renderSlot(e.$slots, "default")
@@ -2284,12 +2312,12 @@ function ft(e, t, o, i, s, r) {
           left: e.toPx(e.result.arrow.x),
           top: e.toPx(e.result.arrow.y)
         } : void 0)
-      }, ut, 4)
+      }, ct, 4)
     ], 4)
-  ], 46, at);
+  ], 46, lt);
 }
-var Z = M(pt, [["render", ft]]);
-var ee = {
+var ee = B(dt, [["render", mt]]);
+var te = {
   methods: {
     show(...e) {
       return this.$refs.popper.show(...e);
@@ -2305,18 +2333,18 @@ var ee = {
     }
   }
 };
-var X = function() {
+var K = function() {
 };
-typeof window < "u" && (X = window.Element);
-var ct = defineComponent({
+typeof window < "u" && (K = window.Element);
+var gt = defineComponent({
   name: "VPopperWrapper",
   components: {
-    Popper: ot,
-    PopperContent: Z
+    Popper: st,
+    PopperContent: ee
   },
   mixins: [
-    ee,
-    Q("finalTheme")
+    te,
+    Z("finalTheme")
   ],
   props: {
     theme: {
@@ -2388,11 +2416,11 @@ var ct = defineComponent({
       default: void 0
     },
     container: {
-      type: [String, Object, X, Boolean],
+      type: [String, Object, K, Boolean],
       default: void 0
     },
     boundary: {
-      type: [String, X],
+      type: [String, K],
       default: void 0
     },
     strategy: {
@@ -2504,7 +2532,7 @@ var ct = defineComponent({
     }
   }
 });
-function mt(e, t, o, i, s, r) {
+function wt(e, t, o, i, s, r) {
   const p = resolveComponent("PopperContent"), a = resolveComponent("Popper");
   return openBlock(), createBlock(a, mergeProps({ ref: "popper" }, e.$props, {
     theme: e.finalTheme,
@@ -2515,7 +2543,7 @@ function mt(e, t, o, i, s, r) {
     ],
     onShow: t[0] || (t[0] = () => e.$emit("show")),
     onHide: t[1] || (t[1] = () => e.$emit("hide")),
-    "onUpdate:shown": t[2] || (t[2] = (d) => e.$emit("update:shown", d)),
+    "onUpdate:shown": t[2] || (t[2] = (l) => e.$emit("update:shown", l)),
     onApplyShow: t[3] || (t[3] = () => e.$emit("apply-show")),
     onApplyHide: t[4] || (t[4] = () => e.$emit("apply-hide")),
     onCloseGroup: t[5] || (t[5] = () => e.$emit("close-group")),
@@ -2524,40 +2552,40 @@ function mt(e, t, o, i, s, r) {
     onResize: t[8] || (t[8] = () => e.$emit("resize"))
   }), {
     default: withCtx(({
-      popperId: d,
-      isShown: l,
-      shouldMountContent: k,
-      skipTransition: L,
+      popperId: l,
+      isShown: u,
+      shouldMountContent: L,
+      skipTransition: D,
       autoHide: I,
-      show: D,
+      show: F,
       hide: v,
-      handleResize: F,
-      onResize: R,
-      classes: j,
-      result: Me
+      handleResize: R,
+      onResize: j,
+      classes: V,
+      result: Ee
     }) => [
       renderSlot(e.$slots, "default", {
-        shown: l,
-        show: D,
+        shown: u,
+        show: F,
         hide: v
       }),
       createVNode(p, {
         ref: "popperContent",
-        "popper-id": d,
+        "popper-id": l,
         theme: e.finalTheme,
-        shown: l,
-        mounted: k,
-        "skip-transition": L,
+        shown: u,
+        mounted: L,
+        "skip-transition": D,
         "auto-hide": I,
-        "handle-resize": F,
-        classes: j,
-        result: Me,
+        "handle-resize": R,
+        classes: V,
+        result: Ee,
         onHide: v,
-        onResize: R
+        onResize: j
       }, {
         default: withCtx(() => [
           renderSlot(e.$slots, "popper", {
-            shown: l,
+            shown: u,
             hide: v
           })
         ]),
@@ -2567,30 +2595,30 @@ function mt(e, t, o, i, s, r) {
     _: 3
   }, 16, ["theme", "target-nodes", "popper-node", "class"]);
 }
-var E = M(ct, [["render", mt]]);
-var _e = {
-  ...E,
+var k = B(gt, [["render", wt]]);
+var Se = {
+  ...k,
   name: "VDropdown",
   vPopperTheme: "dropdown"
 };
-var Te = {
-  ...E,
+var be = {
+  ...k,
   name: "VMenu",
   vPopperTheme: "menu"
 };
-var Pe = {
-  ...E,
+var Ce = {
+  ...k,
   name: "VTooltip",
   vPopperTheme: "tooltip"
 };
-var gt = defineComponent({
+var $t = defineComponent({
   name: "VTooltipDirective",
   components: {
-    Popper: J(),
-    PopperContent: Z
+    Popper: Q(),
+    PopperContent: ee
   },
   mixins: [
-    ee
+    te
   ],
   inheritAttrs: false,
   props: {
@@ -2664,9 +2692,9 @@ var gt = defineComponent({
     }
   }
 });
-var wt = ["innerHTML"];
-var $t = ["textContent"];
-function vt(e, t, o, i, s, r) {
+var vt = ["innerHTML"];
+var yt = ["textContent"];
+function _t(e, t, o, i, s, r) {
   const p = resolveComponent("PopperContent"), a = resolveComponent("Popper");
   return openBlock(), createBlock(a, mergeProps({ ref: "popper" }, e.$attrs, {
     theme: e.theme,
@@ -2676,42 +2704,42 @@ function vt(e, t, o, i, s, r) {
     onApplyHide: e.onHide
   }), {
     default: withCtx(({
-      popperId: d,
-      isShown: l,
-      shouldMountContent: k,
-      skipTransition: L,
+      popperId: l,
+      isShown: u,
+      shouldMountContent: L,
+      skipTransition: D,
       autoHide: I,
-      hide: D,
+      hide: F,
       handleResize: v,
-      onResize: F,
-      classes: R,
-      result: j
+      onResize: R,
+      classes: j,
+      result: V
     }) => [
       createVNode(p, {
         ref: "popperContent",
         class: normalizeClass({
           "v-popper--tooltip-loading": e.loading
         }),
-        "popper-id": d,
+        "popper-id": l,
         theme: e.theme,
-        shown: l,
-        mounted: k,
-        "skip-transition": L,
+        shown: u,
+        mounted: L,
+        "skip-transition": D,
         "auto-hide": I,
         "handle-resize": v,
-        classes: R,
-        result: j,
-        onHide: D,
-        onResize: F
+        classes: j,
+        result: V,
+        onHide: F,
+        onResize: R
       }, {
         default: withCtx(() => [
           e.html ? (openBlock(), createElementBlock("div", {
             key: 0,
             innerHTML: e.finalContent
-          }, null, 8, wt)) : (openBlock(), createElementBlock("div", {
+          }, null, 8, vt)) : (openBlock(), createElementBlock("div", {
             key: 1,
             textContent: toDisplayString(e.finalContent)
-          }, null, 8, $t))
+          }, null, 8, yt))
         ]),
         _: 2
       }, 1032, ["class", "popper-id", "theme", "shown", "mounted", "skip-transition", "auto-hide", "handle-resize", "classes", "result", "onHide", "onResize"])
@@ -2719,27 +2747,27 @@ function vt(e, t, o, i, s, r) {
     _: 1
   }, 16, ["theme", "target-nodes", "popper-node", "onApplyShow", "onApplyHide"]);
 }
-var Se = M(gt, [["render", vt]]);
-var be = "v-popper--has-tooltip";
-function yt(e, t) {
+var ze = B($t, [["render", _t]]);
+var Ae = "v-popper--has-tooltip";
+function Tt(e, t) {
   let o = e.placement;
   if (!o && t)
-    for (const i of ye)
+    for (const i of Te)
       t[i] && (o = i);
   return o || (o = S(e.theme || "tooltip", "placement")), o;
 }
-function Ce(e, t, o) {
+function Ne(e, t, o) {
   let i;
   const s = typeof t;
-  return s === "string" ? i = { content: t } : t && s === "object" ? i = t : i = { content: false }, i.placement = yt(i, o), i.targetNodes = () => [e], i.referenceNode = () => e, i;
+  return s === "string" ? i = { content: t } : t && s === "object" ? i = t : i = { content: false }, i.placement = Tt(i, o), i.targetNodes = () => [e], i.referenceNode = () => e, i;
 }
-var q;
+var x;
 var b;
-var _t = 0;
-function Tt() {
-  if (q)
+var Pt = 0;
+function St() {
+  if (x)
     return;
-  b = ref([]), q = createApp({
+  b = ref([]), x = createApp({
     name: "VTooltipDirectiveApp",
     setup() {
       return {
@@ -2747,7 +2775,7 @@ function Tt() {
       };
     },
     render() {
-      return this.directives.map((t) => h(Se, {
+      return this.directives.map((t) => h(ze, {
         ...t.options,
         shown: t.shown || t.options.shown,
         key: t.id
@@ -2758,16 +2786,16 @@ function Tt() {
     }
   });
   const e = document.createElement("div");
-  document.body.appendChild(e), q.mount(e);
+  document.body.appendChild(e), x.mount(e);
 }
-function Pt(e, t, o) {
-  Tt();
-  const i = ref(Ce(e, t, o)), s = ref(false), r = {
-    id: _t++,
+function bt(e, t, o) {
+  St();
+  const i = ref(Ne(e, t, o)), s = ref(false), r = {
+    id: Pt++,
     options: i,
     shown: s
   };
-  return b.value.push(r), e.classList && e.classList.add(be), e.$_popper = {
+  return b.value.push(r), e.classList && e.classList.add(Ae), e.$_popper = {
     options: i,
     item: r,
     show() {
@@ -2778,117 +2806,117 @@ function Pt(e, t, o) {
     }
   };
 }
-function ze(e) {
+function He(e) {
   if (e.$_popper) {
     const t = b.value.indexOf(e.$_popper.item);
     t !== -1 && b.value.splice(t, 1), delete e.$_popper, delete e.$_popperOldShown, delete e.$_popperMountTarget;
   }
-  e.classList && e.classList.remove(be);
+  e.classList && e.classList.remove(Ae);
 }
-function fe(e, { value: t, modifiers: o }) {
-  const i = Ce(e, t, o);
+function me(e, { value: t, modifiers: o }) {
+  const i = Ne(e, t, o);
   if (!i.content || S(i.theme || "tooltip", "disabled"))
-    ze(e);
+    He(e);
   else {
     let s;
-    e.$_popper ? (s = e.$_popper, s.options.value = i) : s = Pt(e, t, o), typeof t.shown < "u" && t.shown !== e.$_popperOldShown && (e.$_popperOldShown = t.shown, t.shown ? s.show() : s.hide());
+    e.$_popper ? (s = e.$_popper, s.options.value = i) : s = bt(e, t, o), typeof t.shown < "u" && t.shown !== e.$_popperOldShown && (e.$_popperOldShown = t.shown, t.shown ? s.show() : s.hide());
   }
 }
-var te = {
-  beforeMount: fe,
-  updated: fe,
+var oe = {
+  beforeMount: me,
+  updated: me,
   beforeUnmount(e) {
-    ze(e);
+    He(e);
   }
 };
-function ce(e) {
-  e.addEventListener("mousedown", Ae), e.addEventListener("touchstart", Ne, $ ? {
+function ge(e) {
+  e.addEventListener("mousedown", H), e.addEventListener("click", H), e.addEventListener("touchstart", Oe, $ ? {
     passive: true
   } : false);
 }
-function me(e) {
-  e.removeEventListener("mousedown", Ae), e.removeEventListener("touchstart", Ne), e.removeEventListener("touchend", He), e.removeEventListener("touchcancel", Oe);
+function we(e) {
+  e.removeEventListener("mousedown", H), e.removeEventListener("click", H), e.removeEventListener("touchstart", Oe), e.removeEventListener("touchend", Me), e.removeEventListener("touchcancel", Be);
 }
-function Ae(e) {
+function H(e) {
   const t = e.currentTarget;
   e.closePopover = !t.$_vclosepopover_touch, e.closeAllPopover = t.$_closePopoverModifiers && !!t.$_closePopoverModifiers.all;
 }
-function Ne(e) {
+function Oe(e) {
   if (e.changedTouches.length === 1) {
     const t = e.currentTarget;
     t.$_vclosepopover_touch = true;
     const o = e.changedTouches[0];
-    t.$_vclosepopover_touchPoint = o, t.addEventListener("touchend", He), t.addEventListener("touchcancel", Oe);
+    t.$_vclosepopover_touchPoint = o, t.addEventListener("touchend", Me), t.addEventListener("touchcancel", Be);
   }
 }
-function He(e) {
+function Me(e) {
   const t = e.currentTarget;
   if (t.$_vclosepopover_touch = false, e.changedTouches.length === 1) {
     const o = e.changedTouches[0], i = t.$_vclosepopover_touchPoint;
     e.closePopover = Math.abs(o.screenY - i.screenY) < 20 && Math.abs(o.screenX - i.screenX) < 20, e.closeAllPopover = t.$_closePopoverModifiers && !!t.$_closePopoverModifiers.all;
   }
 }
-function Oe(e) {
+function Be(e) {
   const t = e.currentTarget;
   t.$_vclosepopover_touch = false;
 }
-var oe = {
+var ie = {
   beforeMount(e, { value: t, modifiers: o }) {
-    e.$_closePopoverModifiers = o, (typeof t > "u" || t) && ce(e);
+    e.$_closePopoverModifiers = o, (typeof t > "u" || t) && ge(e);
   },
   updated(e, { value: t, oldValue: o, modifiers: i }) {
-    e.$_closePopoverModifiers = i, t !== o && (typeof t > "u" || t ? ce(e) : me(e));
+    e.$_closePopoverModifiers = i, t !== o && (typeof t > "u" || t ? ge(e) : we(e));
   },
   beforeUnmount(e) {
-    me(e);
+    we(e);
   }
 };
-var At = u;
-var Nt = te;
-var Ht = te;
+var Ht = h2;
 var Ot = oe;
 var Mt = oe;
-var Bt = _e;
-var Et = Te;
-var kt = J;
-var Lt = Z;
+var Bt = ie;
+var Et = ie;
+var kt = Se;
+var Lt = be;
+var Dt = Q;
 var It = ee;
-var Dt = E;
-var Ft = Q;
-var Rt = Pe;
-var jt = Se;
-function St(e, t = {}) {
-  e.$_vTooltipInstalled || (e.$_vTooltipInstalled = true, $e(u, t), e.directive("tooltip", te), e.directive("close-popper", oe), e.component("VTooltip", Pe), e.component("VDropdown", _e), e.component("VMenu", Te));
+var Ft = te;
+var Rt = k;
+var jt = Z;
+var Vt = Ce;
+var Wt = ze;
+function Ct(e, t = {}) {
+  e.$_vTooltipInstalled || (e.$_vTooltipInstalled = true, ye(h2, t), e.directive("tooltip", oe), e.directive("close-popper", ie), e.component("VTooltip", Ce), e.component("VDropdown", Se), e.component("VMenu", be));
 }
-var Vt = {
+var Gt = {
   // eslint-disable-next-line no-undef
-  version: "5.2.0",
-  install: St,
-  options: u
+  version: "5.2.2",
+  install: Ct,
+  options: h2
 };
 export {
-  Bt as Dropdown,
-  pe as HIDE_EVENT_MAP,
-  Et as Menu,
-  kt as Popper,
-  Lt as PopperContent,
-  It as PopperMethods,
-  Dt as PopperWrapper,
-  re as SHOW_EVENT_MAP,
-  Ft as ThemeClass,
-  Rt as Tooltip,
-  jt as TooltipDirective,
-  Ot as VClosePopper,
-  Nt as VTooltip,
-  Pt as createTooltip,
-  Vt as default,
-  ze as destroyTooltip,
-  zt as hideAllPoppers,
-  St as install,
-  At as options,
-  ye as placements,
-  Ze as recomputeAllPoppers,
-  Mt as vClosePopper,
-  Ht as vTooltip
+  kt as Dropdown,
+  ae as HIDE_EVENT_MAP,
+  Lt as Menu,
+  Dt as Popper,
+  It as PopperContent,
+  Ft as PopperMethods,
+  Rt as PopperWrapper,
+  pe as SHOW_EVENT_MAP,
+  jt as ThemeClass,
+  Vt as Tooltip,
+  Wt as TooltipDirective,
+  Bt as VClosePopper,
+  Ot as VTooltip,
+  bt as createTooltip,
+  Gt as default,
+  He as destroyTooltip,
+  Nt as hideAllPoppers,
+  Ct as install,
+  Ht as options,
+  Te as placements,
+  tt as recomputeAllPoppers,
+  Et as vClosePopper,
+  Mt as vTooltip
 };
 //# sourceMappingURL=floating-vue.js.map

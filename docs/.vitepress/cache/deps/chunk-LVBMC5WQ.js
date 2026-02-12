@@ -2,14 +2,9 @@
 function isObject(obj) {
   return obj !== null && typeof obj === "object" && "constructor" in obj && obj.constructor === Object;
 }
-function extend(target, src) {
-  if (target === void 0) {
-    target = {};
-  }
-  if (src === void 0) {
-    src = {};
-  }
-  Object.keys(src).forEach((key) => {
+function extend(target = {}, src = {}) {
+  const noExtend = ["__proto__", "constructor", "prototype"];
+  Object.keys(src).filter((key) => noExtend.indexOf(key) < 0).forEach((key) => {
     if (typeof target[key] === "undefined") target[key] = src[key];
     else if (isObject(src[key]) && isObject(target[key]) && Object.keys(src[key]).length > 0) {
       extend(target[key], src[key]);
@@ -148,10 +143,7 @@ function getWindow() {
 }
 
 // node_modules/swiper/shared/utils.mjs
-function classesToTokens(classes) {
-  if (classes === void 0) {
-    classes = "";
-  }
+function classesToTokens(classes = "") {
   return classes.trim().split(" ").filter((c) => !!c.trim());
 }
 function deleteProps(obj) {
@@ -167,10 +159,7 @@ function deleteProps(obj) {
     }
   });
 }
-function nextTick(callback, delay) {
-  if (delay === void 0) {
-    delay = 0;
-  }
+function nextTick(callback, delay = 0) {
   return setTimeout(callback, delay);
 }
 function now() {
@@ -190,10 +179,7 @@ function getComputedStyle(el) {
   }
   return style;
 }
-function getTranslate(el, axis) {
-  if (axis === void 0) {
-    axis = "x";
-  }
+function getTranslate(el, axis = "x") {
   const window2 = getWindow();
   let matrix;
   let curTransform;
@@ -230,11 +216,11 @@ function isNode(node) {
   }
   return node && (node.nodeType === 1 || node.nodeType === 11);
 }
-function extend2() {
-  const to = Object(arguments.length <= 0 ? void 0 : arguments[0]);
+function extend2(...args) {
+  const to = Object(args[0]);
   const noExtend = ["__proto__", "constructor", "prototype"];
-  for (let i = 1; i < arguments.length; i += 1) {
-    const nextSource = i < 0 || arguments.length <= i ? void 0 : arguments[i];
+  for (let i = 1; i < args.length; i += 1) {
+    const nextSource = args[i];
     if (nextSource !== void 0 && nextSource !== null && !isNode(nextSource)) {
       const keysArray = Object.keys(Object(nextSource)).filter((key) => noExtend.indexOf(key) < 0);
       for (let nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex += 1) {
@@ -266,12 +252,11 @@ function extend2() {
 function setCSSProperty(el, varName, varValue) {
   el.style.setProperty(varName, varValue);
 }
-function animateCSSModeScroll(_ref) {
-  let {
-    swiper,
-    targetPosition,
-    side
-  } = _ref;
+function animateCSSModeScroll({
+  swiper,
+  targetPosition,
+  side
+}) {
   const window2 = getWindow();
   const startPosition = -swiper.translate;
   let startTime = null;
@@ -316,11 +301,38 @@ function animateCSSModeScroll(_ref) {
 function getSlideTransformEl(slideEl) {
   return slideEl.querySelector(".swiper-slide-transform") || slideEl.shadowRoot && slideEl.shadowRoot.querySelector(".swiper-slide-transform") || slideEl;
 }
-function elementChildren(element, selector) {
-  if (selector === void 0) {
-    selector = "";
+function elementChildren(element, selector = "") {
+  const window2 = getWindow();
+  const children = [...element.children];
+  if (window2.HTMLSlotElement && element instanceof HTMLSlotElement) {
+    children.push(...element.assignedElements());
   }
-  return [...element.children].filter((el) => el.matches(selector));
+  if (!selector) {
+    return children;
+  }
+  return children.filter((el) => el.matches(selector));
+}
+function elementIsChildOfSlot(el, slot) {
+  const elementsQueue = [slot];
+  while (elementsQueue.length > 0) {
+    const elementToCheck = elementsQueue.shift();
+    if (el === elementToCheck) {
+      return true;
+    }
+    elementsQueue.push(...elementToCheck.children, ...elementToCheck.shadowRoot ? elementToCheck.shadowRoot.children : [], ...elementToCheck.assignedElements ? elementToCheck.assignedElements() : []);
+  }
+}
+function elementIsChildOf(el, parent) {
+  const window2 = getWindow();
+  let isChild = parent.contains(el);
+  if (!isChild && window2.HTMLSlotElement && parent instanceof HTMLSlotElement) {
+    const children = [...parent.assignedElements()];
+    isChild = children.includes(el);
+    if (!isChild) {
+      isChild = elementIsChildOfSlot(el, parent);
+    }
+  }
+  return isChild;
 }
 function showWarning(text) {
   try {
@@ -329,10 +341,7 @@ function showWarning(text) {
   } catch (err) {
   }
 }
-function createElement(tag, classes) {
-  if (classes === void 0) {
-    classes = [];
-  }
+function createElement(tag, classes = []) {
   const el = document.createElement(tag);
   el.classList.add(...Array.isArray(classes) ? classes : classesToTokens(classes));
   return el;
@@ -419,6 +428,26 @@ function elementOuterSize(el, size, includeMargins) {
   }
   return el.offsetWidth;
 }
+function makeElementsArray(el) {
+  return (Array.isArray(el) ? el : [el]).filter((e) => !!e);
+}
+function getRotateFix(swiper) {
+  return (v) => {
+    if (Math.abs(v) > 0 && swiper.browser && swiper.browser.need3dFix && Math.abs(v) % 90 === 0) {
+      return v + 1e-3;
+    }
+    return v;
+  };
+}
+function setInnerHTML(el, html = "") {
+  if (typeof trustedTypes !== "undefined") {
+    el.innerHTML = trustedTypes.createPolicy("html", {
+      createHTML: (s) => s
+    }).createHTML(html);
+  } else {
+    el.innerHTML = html;
+  }
+}
 
 export {
   getDocument,
@@ -434,6 +463,7 @@ export {
   animateCSSModeScroll,
   getSlideTransformEl,
   elementChildren,
+  elementIsChildOf,
   showWarning,
   createElement,
   elementOffset,
@@ -443,6 +473,9 @@ export {
   elementIndex,
   elementParents,
   elementTransitionEnd,
-  elementOuterSize
+  elementOuterSize,
+  makeElementsArray,
+  getRotateFix,
+  setInnerHTML
 };
-//# sourceMappingURL=chunk-EOT2BNAU.js.map
+//# sourceMappingURL=chunk-LVBMC5WQ.js.map

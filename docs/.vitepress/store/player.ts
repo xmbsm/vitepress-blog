@@ -1,274 +1,331 @@
 //此播放器代码参考：https://juejin.cn/post/7172081641836249118
 import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
 import type { Song } from '../theme/types';
 import {getRandomInt} from '../theme/functions'
 import { toast, type ToastOptions } from 'vue3-toastify';
-export const usePlayerStore = defineStore({
-    id: 'Player',
-    state: () => ({
-        audio: new Audio(),   // Audio实例
-        loopType: 0, // 循环模式 0 列表循环 1 单曲循环 2随机播放
-        playList: [] as Song[], // 播放列表
-        showPlayList: false, // 播放列表显隐
-        id: 0,  // 当前歌曲id
-        url: '',    // 歌曲url
-        // songUrl: {} as SongUrl,
-        song: {} as Song,
-        isPlaying: false, // 是否播放中
-        isPause: true, // 是否暂停
-        isFold: false, // 是否靠边
-        sliderInput: false, // 是否正在拖动进度条
-        ended: false, // 是否播放结束
-        muted: false, // 是否静音
-        currentTime: 0, // 当前播放时间
-        duration: 0, // 总播放时长
-        currentLyric: null, // 解析后歌词数据
-        playerShow: false, // 控制播放器显隐
-    }),
-    getters: {
-        playListCount: (state) => { // 播放列表歌曲总数
-            return state.playList.length;
-        },
-        thisIndex: (state) => { // 当前播放歌曲索引
-            return state.playList.findIndex((song) => song.id === state.id);
-        },
-        nextSong(state): Song { // 切换下一首
-            const { thisIndex, playListCount } = this;
-            if (thisIndex === playListCount - 1) {  // 最后一首
-                return state.playList[0];
-            } else {    // 切换下一首
-                const nextIndex: number = thisIndex + 1;
-                return state.playList[nextIndex];
-            }
-        },
-        prevSong(state): Song { // 返回上一首
-            const { thisIndex } = this;
-            if (thisIndex === 0) {  // 第一首
-                return state.playList[state.playList.length - 1];
-            } else {    // 返回上一首
-                const prevIndex: number = thisIndex - 1;
-                return state.playList[prevIndex];
-            }
+export const usePlayerStore = defineStore('Player', () => {
+    // State
+    const audio = new Audio();   // Audio实例
+    const loopType = ref(0); // 循环模式 0 列表循环 1 单曲循环 2随机播放
+    const playList = ref<Song[]>([]); // 播放列表
+    const showPlayList = ref(false); // 播放列表显隐
+    const id = ref(0);  // 当前歌曲id
+    const url = ref('');    // 歌曲url
+    const song = ref<Song>({} as Song);
+    const isPlaying = ref(false); // 是否播放中
+    const isPause = ref(true); // 是否暂停
+    const isFold = ref(false); // 是否靠边
+    const sliderInput = ref(false); // 是否正在拖动进度条
+    const ended = ref(false); // 是否播放结束
+    const muted = ref(false); // 是否静音
+    const currentTime = ref(0); // 当前播放时间
+    const duration = ref(0); // 总播放时长
+    const currentLyric = ref(null); // 解析后歌词数据
+    const playerShow = ref(false); // 控制播放器显隐
+
+    // Getters
+    const playListCount = computed(() => {
+        return playList.value.length;
+    });
+
+    const thisIndex = computed(() => {
+        return playList.value.findIndex((song) => song.id === id.value);
+    });
+
+    const nextSong = computed((): Song => {
+        if (thisIndex.value === playListCount.value - 1) {
+            return playList.value[0];
+        } else {
+            return playList.value[thisIndex.value + 1];
         }
-    },
-    actions: {
-        foldPlayer() {
-            this.isFold = !this.isFold
-        },
-        // 播放列表里面添加音乐
-        pushPlayList(replace: boolean, ...list: Song[]) {
-            if (replace) {
-                this.playList = list;
-                return;
+    });
+
+    const prevSong = computed((): Song => {
+        if (thisIndex.value === 0) {
+            return playList.value[playListCount.value - 1];
+        } else {
+            return playList.value[thisIndex.value - 1];
+        }
+    });
+
+    // Actions
+    function foldPlayer() {
+        isFold.value = !isFold.value;
+    }
+
+    function pushPlayList(replace: boolean, ...list: Song[]) {
+        if (replace) {
+            playList.value = list;
+            return;
+        }
+        list.forEach((song) => {
+            if (playList.value.filter((s) => s.id == song.id).length <= 0) {
+                playList.value.push(song);
             }
-            list.forEach((song) => {    // 筛除重复歌曲
-                if (this.playList.filter((s) => s.id == song.id).length <= 0) {
-                    this.playList.push(song);
-                }
-            })
-        },
-        // 删除播放列表中某歌曲
-        deleteSong(id: number) {
-            this.playList.splice(
-                this.playList.findIndex((s) => s.id == id),
-                1
-            )
-        },
-        // 清空播放列表
-        clearPlayList() {
-            // this.songUrl = {} as SongUrl;
-            this.url = '';
-            this.id = 0;
-            this.song = {} as Song;
-            this.isPlaying = false;
-            this.isPause = false;
-            this.sliderInput = false;
-            this.ended = false;
-            this.muted = false;
-            this.currentTime = 0;
-            this.playList = [] as Song[];
-            this.showPlayList = false;
-            const audio = this.audio;
-            audio.stop();
-            let transTimer = null
-            if (transTimer) clearTimeout(transTimer)
-            transTimer = setTimeout(() => {
-                this.duration = 0;
-            }, 500);
-        },
-        // 播放
-        async play(song: object) {
-            if (song.id == this.id) return;
-            this.ended = false;
-            this.isPause = false;
-            this.isPlaying = false;
-            // const data = await getSongUrl(id);
-            // 筛掉会员歌曲和无版权歌曲 freeTrialInfo字段为试听时间
-            if (song.url) {
-                const audio = this.audio;
-                this.id = song.id;
-                this.song = song;
-                // this.songDetail();
-                let transTimer = null
-                if (transTimer) clearTimeout(transTimer)
-                transTimer = setTimeout(() => {
-                    audio.title = this.song.title;   // 歌名
-                    audio.src = song.url;
-                    audio.play();
-                    this.isPlaying = true;
-                    this.interval()
-                    // this.songUrl = {};
-                    this.url = this.song.url;
-                }, 500)
-            } else {
-                this.deleteSong(this.id);
-                this.next();
-            }
-        },
-        // 播放结束
-        playEnd() {
-            this.isPause = true;
-            switch (this.loopType) {
-                case 0:
-                    this.next();
-                    break;
-                case 1:
-                    this.rePlay();
-                    break;
-                case 2:
-                    this.randomPlay();
-                    break;
-            }
-        },
-        // 重新播放
-        rePlay() {
-            let transTimer = null
-            if (transTimer) clearTimeout(transTimer)
-            transTimer = setTimeout(() => {
-                this.currentTime = 0;
-                this.ended = false;
-                this.isPause = false;
-                this.isPlaying = true;
-                const audio = this.audio;
-                // audio.seek(0);
-                audio.play();
-            }, 1500)
-        },
-        // 下一曲
-        next() {
-            if (this.loopType === 2) {
-                this.randomPlay();
-            } else {
-                toast("播放结束", {
-                    autoClose: 2000,
-                    "type": "success",
-                    "hideProgressBar": true,
-                  } as ToastOptions);
-                    this.id = 0
-                    this.isPause = true
-                    this.song = {} as Song;
-            }
-        },
-        // 上一曲
-        prev() {
-            if (this.id === this.prevSong.id) {
-                toast("没有上一首", {
-                    autoClose: 2000,
-                    "type": "warning",
-                    "hideProgressBar": true,
-                  } as ToastOptions);
-            } else {
-                this.play(this.prevSong);
-            }
-        },
-        // 随机播放
-        randomPlay() {
-            this.play(
-                this.playList[getRandomInt(this.playList.length)],
-            )
-        },
-        // 播放、暂停
-        togglePlay() {
-            if (!this.song.id) {
-                this.randomPlay()
-            }
-            this.isPlaying = !this.isPlaying;
-            const audio = this.audio;
-            if (!this.isPlaying) {
-                audio.pause();
-                this.isPause = true;
-            } else {
-                audio.play();
-                this.isPause = false;
-            }
-        },
-        setPlay() {
-            if (!this.song.id) return;
-            const audio = this.audio;
-            this.isPlaying = true;
-            audio.play();
-            this.isPause = false;
-        },
-        setPause() {
-            if (!this.song.id) return;
-            const audio = this.audio;
-            this.isPlaying = false;
+        });
+    }
+
+    function deleteSong(songId: number) {
+        playList.value.splice(
+            playList.value.findIndex((s) => s.id == songId),
+            1
+        );
+    }
+
+    function clearPlayList() {
+        url.value = '';
+        id.value = 0;
+        song.value = {} as Song;
+        isPlaying.value = false;
+        isPause.value = false;
+        sliderInput.value = false;
+        ended.value = false;
+        muted.value = false;
+        currentTime.value = 0;
+        playList.value = [];
+        showPlayList.value = false;
+        
+        try {
             audio.pause();
-            this.isPause = true;
-        },
-        // 切换循环类型
-        toggleLoop() {
-            if (this.loopType == 2) {
-                this.loopType = 0;
-            } else {
-                this.loopType++;
-            }
-        },
-        // 快进
-        forward(val: number) {
-            const audio = this.audio;
-            // audio.seek(this.currentTime + val);
-        },
-        // 后退
-        backup(val: number) {
-            const audio = this.audio;
-            if (this.currentTime < 5) {
-                // audio.seek(0)
-            } else {
-                // audio.seek(this.currentTime - val);
-            }
-        },
-        // 修改播放时间
-        onSliderChange(val: number) {
-            const audio = this.audio;
-            // audio.seek(val);
-        },
-        // 定时器
-        interval() {
-            if (this.isPlaying && !this.sliderInput) {
-                const audio = this.audio;
-                audio.addEventListener("timeupdate", () => {
-                    this.currentTime = audio.currentTime;
+            audio.src = '';
+        } catch (e) {
+            console.error('Error stopping audio:', e);
+        }
+        
+        let transTimer: NodeJS.Timeout | null = null;
+        if (transTimer) clearTimeout(transTimer);
+        transTimer = setTimeout(() => {
+            duration.value = 0;
+        }, 500);
+    }
+
+    async function play(songObj: any) {
+        if (songObj.id == id.value) return;
+        ended.value = false;
+        isPause.value = false;
+        isPlaying.value = false;
+        
+        if (songObj.url) {
+            id.value = songObj.id;
+            song.value = songObj;
+            
+            let transTimer: NodeJS.Timeout | null = null;
+            if (transTimer) clearTimeout(transTimer);
+            transTimer = setTimeout(() => {
+                audio.title = song.value.title;
+                audio.src = songObj.url;
+                audio.play().catch((error) => {
+                    console.error('Error playing audio:', error);
                 });
-                audio.addEventListener('canplay', () => {
-                    this.duration = audio.duration;
-                });
-                audio.addEventListener(
-                    "ended",
-                    () => {
-                        this.next()
-                    }
-                );
-            }
-        },
-        // 控制播放器显隐
-        setPlayerShow(val: number) {
-            // val 0:显示 1:隐藏
-            if (val === 0) {
-                this.playerShow = true;
-            } else {
-                this.playerShow = false;
-            }
+                isPlaying.value = true;
+                interval();
+                url.value = song.value.url;
+            }, 500);
+        } else {
+            deleteSong(id.value);
+            next();
         }
     }
-})
+
+    function playEnd() {
+        isPause.value = true;
+        switch (loopType.value) {
+            case 0:
+                next();
+                break;
+            case 1:
+                rePlay();
+                break;
+            case 2:
+                randomPlay();
+                break;
+        }
+    }
+
+    function rePlay() {
+        let transTimer: NodeJS.Timeout | null = null;
+        if (transTimer) clearTimeout(transTimer);
+        transTimer = setTimeout(() => {
+            currentTime.value = 0;
+            ended.value = false;
+            isPause.value = false;
+            isPlaying.value = true;
+            
+            try {
+                audio.currentTime = 0;
+                audio.play().catch((error) => {
+                    console.error('Error replaying audio:', error);
+                });
+            } catch (e) {
+                console.error('Error in rePlay:', e);
+            }
+        }, 1500);
+    }
+
+    function next() {
+        if (loopType.value === 2) {
+            randomPlay();
+        } else {
+            toast("播放结束", {
+                autoClose: 2000,
+                "type": "success",
+                "hideProgressBar": true,
+              } as ToastOptions);
+                id.value = 0;
+                isPause.value = true;
+                song.value = {} as Song;
+        }
+    }
+
+    function prev() {
+        if (id.value === prevSong.value.id) {
+            toast("没有上一首", {
+                autoClose: 2000,
+                "type": "warning",
+                "hideProgressBar": true,
+              } as ToastOptions);
+        } else {
+            play(prevSong.value);
+        }
+    }
+
+    function randomPlay() {
+        if (playList.value.length > 0) {
+            play(playList.value[getRandomInt(playList.value.length)]);
+        }
+    }
+
+    function togglePlay() {
+        if (!song.value.id) {
+            randomPlay();
+            return;
+        }
+        
+        isPlaying.value = !isPlaying.value;
+        
+        if (!isPlaying.value) {
+            audio.pause();
+            isPause.value = true;
+        } else {
+            audio.play().catch((error) => {
+                console.error('Error toggling play:', error);
+            });
+            isPause.value = false;
+        }
+    }
+
+    function setPlay() {
+        if (!song.value.id) return;
+        isPlaying.value = true;
+        audio.play().catch((error) => {
+            console.error('Error setting play:', error);
+        });
+        isPause.value = false;
+    }
+
+    function setPause() {
+        if (!song.value.id) return;
+        isPlaying.value = false;
+        audio.pause();
+        isPause.value = true;
+    }
+
+    function toggleLoop() {
+        if (loopType.value == 2) {
+            loopType.value = 0;
+        } else {
+            loopType.value++;
+        }
+    }
+
+    function forward(val: number) {
+        // audio.seek(currentTime.value + val);
+    }
+
+    function backup(val: number) {
+        if (currentTime.value < 5) {
+            // audio.seek(0)
+        } else {
+            // audio.seek(currentTime.value - val);
+        }
+    }
+
+    function onSliderChange(val: number) {
+        // audio.seek(val);
+    }
+
+    function interval() {
+        if (isPlaying.value && !sliderInput.value) {
+            audio.addEventListener("timeupdate", () => {
+                currentTime.value = audio.currentTime;
+            });
+            audio.addEventListener('canplay', () => {
+                duration.value = audio.duration;
+            });
+            audio.addEventListener(
+                "ended",
+                () => {
+                    next();
+                }
+            );
+        }
+    }
+
+    function setPlayerShow(val: number) {
+        // val 0:显示 1:隐藏
+        if (val === 0) {
+            playerShow.value = true;
+        } else {
+            playerShow.value = false;
+        }
+    }
+
+    return {
+        // State
+        audio,
+        loopType,
+        playList,
+        showPlayList,
+        id,
+        url,
+        song,
+        isPlaying,
+        isPause,
+        isFold,
+        sliderInput,
+        ended,
+        muted,
+        currentTime,
+        duration,
+        currentLyric,
+        playerShow,
+        
+        // Getters
+        playListCount,
+        thisIndex,
+        nextSong,
+        prevSong,
+        
+        // Actions
+        foldPlayer,
+        pushPlayList,
+        deleteSong,
+        clearPlayList,
+        play,
+        playEnd,
+        rePlay,
+        next,
+        prev,
+        randomPlay,
+        togglePlay,
+        setPlay,
+        setPause,
+        toggleLoop,
+        forward,
+        backup,
+        onSliderChange,
+        interval,
+        setPlayerShow
+    };
+});

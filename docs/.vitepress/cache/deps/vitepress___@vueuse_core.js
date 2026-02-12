@@ -35,7 +35,7 @@ import {
   unref,
   watch,
   watchEffect
-} from "./chunk-XKDLJUKD.js";
+} from "./chunk-SNNOYR6U.js";
 import "./chunk-BUSYA2B4.js";
 
 // node_modules/@vueuse/shared/index.mjs
