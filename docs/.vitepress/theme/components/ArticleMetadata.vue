@@ -22,12 +22,12 @@
               :href="withBase(`/?tag=${item.toString()}`)"> {{ 
                 '#' + item }}</a></span>
           <span class="tag" v-if="dataSource.frontmatter.tags.length > 2">...</span>
-        </template> -->
+        </template>
         <template v-else>
           <span class="tag" v-for="item in dataSource.frontmatter.tags"><a class="a" :href="withBase(`/?tag=${item.toString()}`)"> {{ 
             '#' + item }}</a></span>
         </template>
-      </div>
+      </div> -->
     </div>
     <p class="readtime" v-if="type === 'single'"><span class="warning">全文共{{ wordCount }}字，{{ '预计阅读' + readTime + '分钟'
     }}</span></p>
