@@ -202,7 +202,7 @@ onMounted(() => {
 }
 
 .articlemeta.list {
-  padding-top: 12px;
+  padding-top: 8px;
 
   .meta {
     display: flex;
