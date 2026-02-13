@@ -288,9 +288,9 @@ onMounted(() => {
   .articlemeta.grid,
   .articlemeta.list {
     .meta {
-      display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-between;
 
     .tag {
@@ -301,3 +301,5 @@ onMounted(() => {
   }
 }
 </style>
+
+
