@@ -100,7 +100,7 @@ onMounted(() => {
 
 <style scoped>
 .articlemeta {
-  padding-top: 12px;
+  padding-top: 8px;
 
   .h1 {
     font-size: 1.87rem;
@@ -202,7 +202,7 @@ onMounted(() => {
 }
 
 .articlemeta.list {
-  padding-top: 8px;
+  padding-top: 12px;
 
   .meta {
     display: flex;
