@@ -66,31 +66,6 @@ description:  基于 vitepress 打造的适合图文资源分享的博客主题
     wxwords: '',
     }" />
 
-## 安装
-
-克隆项目或者直接前往 github仓库页面下载 zip包
-
-```bash
-git clone https://github.com/shiheme/appbeebee.git
-```
-
-转到项目目录，安装依赖
-
-```bash
-cd appbeebee
-```
-
-通过 yarn
-
-```bash
-yarn add 
-```
-
-通过 npm
-
-```bash
-npm install
-```
 
 
 <script lang="ts" setup>
