@@ -60,6 +60,40 @@
     width: 100%;
 }
 
+/* 当没有侧边栏时，让container内容自适应到右边 */
+.home .VPDoc .container {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.home .VPDoc .content {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
+/* 隐藏首页的aside容器，去除空白 */
+.home .aside {
+    display: none !important;
+}
+
+/* 确保左侧内容区域在没有侧边栏时能够完全填充宽度 */
+.home .VPDoc.has-aside {
+    display: block !important;
+}
+
+.home .VPDoc.has-aside .content-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
+.home .VPDoc.has-aside .content {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
 .bgimg {
     background-size: cover;
     background-position: 50% 50%;
