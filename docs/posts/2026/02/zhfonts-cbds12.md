@@ -24,6 +24,6 @@ externalLinkText: 直接下载
     linkpan:'https://qtx.lanzoul.com/i4PFO376jt9e',
     coveross: '',
     beecode: '',
-    viewtit: '立即下载',
+    viewtit: '官方下载',
     wxwords: '',
     }" />
