@@ -18,12 +18,12 @@ externalLinkText: 直接下载
 
 <ArticleLink via="post" :work="{
     title: '长坂点宋16',
-    view: 'https://github.com/yzdnn/ChangBanDianSong-16',
+    view: 'https://qtx.lanzoul.com/iTQjO3772nyh',
     github: '',
     via: 'https://github.com/yzdnn/ChangBanDianSong-16',
-    linkpan:'https://qtx.lanzoul.com/iTQjO3772nyh',
+    linkpan:'https://github.com/yzdnn/ChangBanDianSong-16',
     coveross: '',
     beecode: '',
-    viewtit: '官方下载',
+    viewtit: '立即下载',
     wxwords: '',
     }" />
