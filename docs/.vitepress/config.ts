@@ -19,14 +19,14 @@ export default defineConfig<ThemeConfig>({
     title: '素材小站',
     base: '/',
     head,
-    description: 'github开源作品，开源小程序作品，vueJS项目作品，vue3+ts+vite构建项目教学',
+    description: '不定期分享设计素材、AIGC开源项目、对开发有帮助的设计源文件等',
     ignoreDeadLinks: true,
     themeConfig: {
-        beecodeurl: 'https://www.appbeebee.com/', //这里是内页ArticleLink组件用到的跳转第三方网址，一般用不到，仅仅用于二次开发
+        beecodeurl: 'https://free.kusheji.com/', //这里是内页ArticleLink组件用到的跳转第三方网址，一般用不到，仅仅用于二次开发
         sidebar: [{}], //这里如果删掉，左侧栏的内容全部不显示。页面布局会变成通栏
         nav: [
-            { text: '免费字体', link: 'https://free.kusheji.com' },
-            { text: '免费素材', link: 'https://free.kusheji.com' }
+            { text: '主站', link: 'https://kusheji.com' },
+            { text: '网址导航', link: 'https://dh.kusheji.com' }
         ],
         music: [ //音乐列表，音乐播放器参数在.vitepress/store/player.ts。封面和歌词不支持可自行按照文章教程修改
             // {
