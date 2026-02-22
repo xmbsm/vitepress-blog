@@ -8,6 +8,8 @@ export const head: HeadConfig[] = [
   ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' }],
   ['meta', { property: 'og:image', content: '/logo.png' }],
   ['meta', { name: 'referrer', content: 'no-referrer' }],
+
+  // 百度统计
   [
     'script',
     {},
@@ -19,39 +21,45 @@ export const head: HeadConfig[] = [
       s.parentNode.insertBefore(hm, s);
     })();`
     ],
-  [
-    "script",
-    {
-      crossorigin: "anonymous",
-      async: "",
-      src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1279518235550313",
-    },
-  ],
-  [
-    'script',
-    { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-QRQ5599P9G' }
-  ],
-  [
-    'script',
-    {},
-    `window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-QRQ5599P9G');`
-  ],
-  [
-    "script",
-    {
-      nonce: "X3-MeXfNjwsxlQdQcRqhtQ",
-      async: "",
-      src: "https://fundingchoicesmessages.google.com/i/pub-1279518235550313?ers=1",
-    },
-  ],
-  [
-    'script',
-    {},
-    `(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();`
-  ],
+
+// Google AdSense 广告
+//  [
+//    "script",
+//    {
+//     crossorigin: "anonymous",
+//     async: "",
+//     src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1279518235550313",
+//   },
+// ],
+
+// Google Analytics 4 (GA4) 统计
+// [
+//  'script',
+//  { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-QRQ5599P9G' }
+//],
+//[
+// 'script',
+//  {},
+//  `window.dataLayer = window.dataLayer || [];
+//   function gtag(){dataLayer.push(arguments);}
+//  gtag('js', new Date());
+//  gtag('config', 'G-QRQ5599P9G');`
+// ],
+
+// Google 资金选择（广告隐私提示）
+//  [
+//    "script",
+//    {
+//      nonce: "X3-MeXfNjwsxlQdQcRqhtQ",
+//      async: "",
+//      src: "https://fundingchoicesmessages.google.com/i/pub-1279518235550313?ers=1",
+//    },
+//  ],
+//  [
+//    'script',
+//    {},
+//    `(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();`
+//  ],
   [
     "link",
     { rel: "stylesheet", href: "/static/css/fancybox.css" },   //全局控制图片放大样式
