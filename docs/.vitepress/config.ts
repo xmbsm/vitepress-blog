@@ -16,7 +16,7 @@ export default defineConfig<ThemeConfig>({
             })
         }
     },
-    title: '不定期分享设计素材、AIGC开源项目、对开发有帮助的设计源文件等',
+    title: '素材小站',
     base: '/',
     head,
     description: '不定期分享设计素材、AIGC开源项目、对开发有帮助的设计源文件等',

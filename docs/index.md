@@ -1,6 +1,6 @@
 ---
 index: true
-title: 素材小站
+title: 首页
 aside: true
 sidebar: true
 ---
