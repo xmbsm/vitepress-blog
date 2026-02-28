@@ -67,6 +67,7 @@ export default defineConfig<ThemeConfig>({
                 link: 'https://sucai.kusheji.com/',
                 image: 'https://wkphoto.bj.bcebos.com/48540923dd54564e4243126ea3de9c82d1584f47.jpg',
                 title: ''
+                target: '_blank' // 新增：新窗口打开
             },
             {
                 link: 'https://free.kusheji.com/',
