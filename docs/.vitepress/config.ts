@@ -64,13 +64,13 @@ export default defineConfig<ThemeConfig>({
         ],
         banner: [ //主页轮播，不需要就注释掉
             {
-                link: '/posts/2024/01/freebie-chinese-font.html',
-                image: 'https://shijuefuhao.oss-cn-hangzhou.aliyuncs.com/wp-content/uploads/2024/02/2024-fm.jpg',
+                link: 'https://sucai.kusheji.com/',
+                image: 'https://wkphoto.bj.bcebos.com/48540923dd54564e4243126ea3de9c82d1584f47.jpg',
                 title: ''
             },
             {
-                link: '/posts/2024/01/freebie-chinese-font.html',
-                image: 'https://shijuefuhao.oss-cn-hangzhou.aliyuncs.com/wp-content/uploads/2023/10/2023-fm.jpg',
+                link: 'https://free.kusheji.com/',
+                image: 'https://wkphoto.bj.bcebos.com/fcfaaf51f3deb48f33235789e01f3a292df5781b.jpg',
                 title: ''
             }
         ],
