@@ -189,7 +189,7 @@ const until = getUntilDate()
 .carousel-slide {
     flex: 0 0 100%;
     height: 100%;
-    display: flex;
+    /* display:flex; */
     align-items: center;
     justify-content: center;
 }
