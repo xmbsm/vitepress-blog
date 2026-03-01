@@ -19,7 +19,7 @@ export default defineConfig<ThemeConfig>({
     title: '素材小站',
     base: '/',
     head,
-    description: '不定期分享设计素材、AIGC开源项目、对开发有帮助的设计源文件等',
+    description: '不定期分享设计素材、可商用字体，AIGC开源项目等',
     ignoreDeadLinks: true,
     themeConfig: {
         beecodeurl: 'https://free.kusheji.com/', //这里是内页ArticleLink组件用到的跳转第三方网址，一般用不到，仅仅用于二次开发

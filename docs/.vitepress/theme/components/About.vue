@@ -2,10 +2,10 @@
     <!-- 关于页面 -->
     <div class="about">
         <div class="desc">
-            <p>这是一个非常素雅的免费型分享博客，基于 vitepress 开发。</p>
+            <p>这是一个非常素雅的免费型分享博客，完全免费。</p>
 
             <p>主要整理分享开源字体作品和付费设计素材。</p>
-            <p>不定期分享设计素材、AIGC开源项目、对开发有帮助的设计源文件等</p>
+            <p>不定期分享设计素材、可商用字体，AIGC开源项目等</p>
 
             <p>所有作品版权归原作者所有。</p>
             <p>本站不对作品的完整性、可用性和时效性负责。</p>
@@ -14,10 +14,10 @@
             <h4 class="h4">-- 信息 --</h4>
             <ul class="ul">
                 <li class="li"><label class="label">博主</label><span>乔同学</span></li>
-                <li class="li"><label class="label">程序</label><span>Vitepress</span></li>
+         <!--   <li class="li"><label class="label">程序</label><span>Vitepress</span></li>
                 <li class="li"><label class="label">图标</label><span>remixicon</span></li>
                 <li class="li"><label class="label">音乐</label><span>来源网络</span></li>
-                <li class="li"><label class="label">图片</label><span>根据作品体验生成</span></li>
+                <li class="li"><label class="label">图片</label><span>根据作品体验生成</span></li>  -->
             </ul>
         </div>
     </div>
