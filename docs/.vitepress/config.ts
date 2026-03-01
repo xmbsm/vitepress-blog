@@ -70,7 +70,7 @@ export default defineConfig<ThemeConfig>({
             },
             {
                 link: 'https://free.kusheji.com/',
-                image: 'https://wkphoto.bj.bcebos.com/fcfaaf51f3deb48f33235789e01f3a292df5781b.jpg',
+                image: 'https://wkphoto.bj.bcebos.com/09fa513d269759ee632b909ca2fb43166d22df6a.jpg',
                 title: ''
             }
         ],
