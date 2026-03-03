@@ -24,6 +24,8 @@ externalLinkText: 直接下载
 
 思源黑体属于无衬线黑体，支持繁体中文、简体中文、日文及韩文，并且各有7种字体粗细（ExtraLight、Light、Normal、Regular、Medium、Bold 和 Heavy）。完全支持繁体中文、简体中文、日文和韩文，还包括来自我们颇受欢迎的 Source Sans 字体家族的拉丁文、希腊文和西里尔文字形。据悉，思源黑体字体家族的每种字体粗细总共有 65535 个字形（OpenType 格式支持的最大上限），而整个字体家族的字形个数接近 50 万。
 
+![思源黑体](https://wkphoto.bj.bcebos.com/342ac65c10385343af4d4c768313b07ecb8088e3.jpg)
+
 <ArticleLink via="post" :work="{
     title: '思源黑体',
     view: 'https://qtx.lanzoul.com/ig1gO3jokbwf',
@@ -35,5 +37,3 @@ externalLinkText: 直接下载
     viewtit: '立即下载',
     wxwords: '',
     }" />
-
-![思源黑体](https://wkphoto.bj.bcebos.com/342ac65c10385343af4d4c768313b07ecb8088e3.jpg)
