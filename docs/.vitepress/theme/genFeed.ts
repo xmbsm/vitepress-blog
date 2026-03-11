@@ -4,12 +4,12 @@ import { writeFileSync } from 'fs'
 import { Feed } from 'feed'
 import { createContentLoader, type SiteConfig } from 'vitepress'
 
-const baseUrl = `https://appbeebee.com`
+const baseUrl = `https://kusheji.com`
 
 export async function genFeed(config: SiteConfig) {
   const feed = new Feed({
-    title: 'APP比比',
-    description: '前端技术分享博客',
+    title: '酷设计',
+    description: '免费分享博客',
     id: baseUrl,
     link: baseUrl,
     language: 'zh',
