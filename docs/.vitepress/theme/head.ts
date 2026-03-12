@@ -10,30 +10,30 @@ export const head: HeadConfig[] = [
   ['meta', { name: 'referrer', content: 'no-referrer' }],
 
   // 百度统计
-//  [
-//    'script',
-//    {},
-//    `var _hmt = _hmt || [];
-//    (function() {
-//      var hm = document.createElement("script");
-//      hm.src = "https://hm.baidu.com/hm.js?db01b999bcfe4df5611fe1033870db9c";
-//      var s = document.getElementsByTagName("script")[0]; 
-//      s.parentNode.insertBefore(hm, s);
-//    })();`
-//    ],
+    [
+    'script',
+    {},
+    `var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?db01b999bcfe4df5611fe1033870db9c";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();`
+    ],
 
  // 百度统计
-[
-  'script',
-  {},
-  `var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?db01b999bcfe4df5611fe1033870db9c";
-    var s = document.getElementsByTagName("script")[0]; 
-    s.parentNode.insertBefore(hm, s);
-  })();`
-],
+//   [
+//  'script',
+//  {},
+//  `var _hmt = _hmt || [];
+//  (function() {
+//    var hm = document.createElement("script");
+//    hm.src = "https://hm.baidu.com/hm.js?db01b999bcfe4df5611fe1033870db9c";
+//    var s = document.getElementsByTagName("script")[0]; 
+//    s.parentNode.insertBefore(hm, s);
+//   })();`
+//   ],
 
 
 // Google AdSense 广告
