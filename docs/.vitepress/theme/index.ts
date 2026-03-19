@@ -6,6 +6,7 @@ import Archives from './components/Archives.vue'
 import About from './components/About.vue'
 import Feed from './components/Feed.vue'
 import Tags from './components/Tags.vue'
+import Brands from './components/Brands.vue'
 import ArticleMetadata from './components/ArticleMetadata.vue'
 import ArticleBread from './components/ArticleBread.vue'
 import ArticleLink from './components/ArticleLink.vue'
@@ -44,6 +45,7 @@ export default {
         app.component('Firework', Firework)
         app.component('Lantern', Lantern)
         app.component('Tags', Tags)
+        app.component('Brands', Brands)
         app.component('Archives', Archives)
         app.component('About', About)
         app.component('Feed', Feed)

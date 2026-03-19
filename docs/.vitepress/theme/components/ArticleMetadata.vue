@@ -15,18 +15,25 @@
           :datetime="dataformat === 0 ? formatTime(dataSource.frontmatter.date) : relativeTime(dataSource.frontmatter.date)">{{
             dataformat === 0 ? formatTime(dataSource.frontmatter.date) : relativeTime(dataSource.frontmatter.date) }}</time>
       </p>
-      <!-- 标签部分，暂时隐藏 -->
-      <div class="tags" v-if="dataSource.frontmatter?.tags">
-        <template v-if="type !== 'single'">
-          <span class="tag" v-for="item in dataSource.frontmatter.tags.slice(0, 2)"><a class="a"
-              :href="withBase(`/?tag=${item.toString()}`)"> {{ 
-                '#' + item }}</a></span>
-          <span class="tag" v-if="dataSource.frontmatter.tags.length > 2">...</span>
-        </template>
-        <template v-else>
-          <span class="tag" v-for="item in dataSource.frontmatter.tags"><a class="a" :href="withBase(`/?tag=${item.toString()}`)"> {{ 
-            '#' + item }}</a></span>
-        </template>
+      <div class="tag-container">
+        <!-- 标签部分，暂时隐藏 -->
+        <div class="tags" v-if="dataSource.frontmatter?.tags">
+          <template v-if="type !== 'single'">
+            <span class="tag" v-for="item in dataSource.frontmatter.tags.slice(0, 2)"><a class="a"
+                :href="withBase(`/?tag=${item.toString()}`)"> {{ 
+                  '#' + item }}</a></span>
+            <span class="tag" v-if="dataSource.frontmatter.tags.length > 2">...</span>
+          </template>
+          <template v-else>
+            <span class="tag" v-for="item in dataSource.frontmatter.tags"><a class="a" :href="withBase(`/?tag=${item.toString()}`)"> {{ 
+              '#' + item }}</a></span>
+          </template>
+        </div>
+        <!-- 品牌部分 -->
+      <div class="brands" v-if="type === 'single' && (dataSource.frontmatter?.brands || dataSource.frontmatter?.brand)">
+        <span class="brand" v-for="item in (dataSource.frontmatter.brands || (Array.isArray(dataSource.frontmatter.brand) ? dataSource.frontmatter.brand : [dataSource.frontmatter.brand]))"><a class="a" :href="withBase(`/?brand=${item.toString()}`)"> {{ 
+              item }}</a></span>
+      </div>
       </div>
     </div>
     <p class="readtime" v-if="type === 'single'"><span class="warning">全文共{{ wordCount }}字，{{ '预计阅读' + readTime + '分钟'
@@ -112,7 +119,7 @@ onMounted(() => {
   .meta {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
 
@@ -141,29 +148,58 @@ onMounted(() => {
       }
     }
 
-    .tags {
+    .tag-container {
       display: flex;
       flex-direction: row;
+      align-items: center;
       flex-wrap: wrap;
+      justify-content: flex-end;
 
+      .tags {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
 
-      .tag {
-        margin-left: 10px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        padding: 0 8px;
-        display: inline-block;
-        background-color: rgba(123, 123, 123, .05);
-        color: var(--vp-c-text-1);
-        font-size: 12px;
-        border-radius: 2px;
-        /* .a {
-          opacity: .6;
-        } */
+        .tag {
+          margin-left: 10px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          padding: 0 8px;
+          display: inline-block;
+          background-color: rgba(123, 123, 123, .05);
+          color: var(--vp-c-text-1);
+          font-size: 12px;
+          border-radius: 2px;
+          /* .a {
+            opacity: .6;
+          } */
+        }
+
+        .tag:first-child {
+          margin-left: 0px;
+        }
       }
 
-      .tag:first-child {
-        margin-left: 0px;
+      .brands {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .brand {
+          margin-left: 10px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          padding: 0 8px;
+          display: inline-block;
+          background-color: rgba(71, 170, 255, .1);
+          color: var(--vp-c-brand);
+          font-size: 12px;
+          border-radius: 2px;
+        }
+
+        .brand:first-child {
+          margin-left: 10px;
+        }
       }
     }
   }
@@ -177,27 +213,50 @@ onMounted(() => {
     justify-content: space-between;
     flex-wrap: nowrap;
 
-    .tags {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+    .tag-container {
+      .tags {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
 
-      .tag {
-        margin-top: 5px;
-        margin-bottom: 5px;
-        display: -webkit-box;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical !important
+        .tag {
+          margin-top: 5px;
+          margin-bottom: 5px;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical !important
+        }
+      }
+
+      .brands {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .brand {
+          margin-top: 5px;
+          margin-bottom: 5px;
+          display: -webkit-box;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical !important
+        }
       }
     }
   }
 }
 
 .postlist .list .articlemeta.grid {
-  .tags {
+  .tag-container {
+    .tags {
       flex-wrap: nowrap;
+    }
+    .brands {
+      flex-wrap: nowrap;
+    }
   }
 }
 
@@ -208,7 +267,7 @@ onMounted(() => {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 
     .date {
       font-size: 13px;
@@ -234,22 +293,44 @@ onMounted(() => {
       }
     }
 
-    /* .tags {
+    .tag-container {
       display: flex;
       flex-direction: row;
+      align-items: center;
       flex-wrap: nowrap;
-      margin-left: 10px;
 
-      .tag {
-        margin-left: 10px;
-        padding: 0 8px;
-        display: inline-block;
-        background-color: rgba(123, 123, 123, .05);
-        color: var(--vp-c-text-1);
-        font-size: 12px;
-        border-radius: 2px;
+      .tags {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        .tag {
+          margin-left: 10px;
+          padding: 0 8px;
+          display: inline-block;
+          background-color: rgba(123, 123, 123, .05);
+          color: var(--vp-c-text-1);
+          font-size: 12px;
+          border-radius: 2px;
+        }
       }
-    } */
+
+      .brands {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        .brand {
+          margin-left: 10px;
+          padding: 0 8px;
+          display: inline-block;
+          background-color: rgba(71, 170, 255, .1);
+          color: var(--vp-c-brand);
+          font-size: 12px;
+          border-radius: 2px;
+        }
+      }
+    }
   }
 }
 
@@ -292,10 +373,21 @@ onMounted(() => {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 
-    .tag {
-      margin-left: 0px!important;
-      margin-right: 10px;
+    .tag-container {
+      width: 100%;
+      justify-content: flex-start;
+      margin-top: 10px;
+
+      .tag {
+        margin-left: 0px!important;
+        margin-right: 10px;
+      }
+
+      .brand {
+        margin-left: 10px!important;
+      }
     }
     }
   }

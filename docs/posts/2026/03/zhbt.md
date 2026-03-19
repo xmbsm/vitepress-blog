@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 特里王
 description: 朝华标题明朝（朝華標題明朝）系列字体，是由特里王制作发布的全新免费商用复古印刷老字体，作为汇文系列的查漏补缺之作，旨在进一步丰富复古印刷字体的品类，为设计师提供更完整的复古排版选择。
 externalLink: https://qtx.lanzoul.com/i2Zub3ku6mhe
 externalLinkText: 直接下载

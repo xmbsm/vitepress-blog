@@ -1,4 +1,17 @@
 import {
+  computed,
+  h,
+  inject,
+  nextTick,
+  onBeforeUnmount,
+  onBeforeUpdate,
+  onMounted,
+  onUpdated,
+  provide,
+  ref,
+  watch
+} from "./chunk-SNNOYR6U.js";
+import {
   animateCSSModeScroll,
   createElement,
   deleteProps,
@@ -20,19 +33,6 @@ import {
   setInnerHTML,
   showWarning
 } from "./chunk-LVBMC5WQ.js";
-import {
-  computed,
-  h,
-  inject,
-  nextTick,
-  onBeforeUnmount,
-  onBeforeUpdate,
-  onMounted,
-  onUpdated,
-  provide,
-  ref,
-  watch
-} from "./chunk-SNNOYR6U.js";
 import "./chunk-BUSYA2B4.js";
 
 // node_modules/swiper/shared/swiper-core.mjs

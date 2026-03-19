@@ -12,6 +12,14 @@
       </li>
       <li class="li pc">
         <VDropdown :distance="6" :placement="'bottom'">
+          <button class="brands a"><svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="currentColor"></path></svg>品牌</button>
+          <template #popper>
+            <Brands />
+          </template>
+        </VDropdown>
+      </li>
+      <li class="li pc">
+        <VDropdown :distance="6" :placement="'bottom'">
           <button class="archives a"><svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 10H21V20.0044C21 20.5543 20.5551 21 20.0066 21H3.9934C3.44476 21 3 20.5552 3 20.0044V10ZM9 12V14H15V12H9ZM2 3.99981C2 3.44763 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44372 22 3.99981V8H2V3.99981Z" fill="currentColor"></path></svg>存档</button>
           <template #popper>
             <Archives />
@@ -21,6 +29,10 @@
       <li class="li h5" @click="choose('tags')"
         :class="{ on: (page.relativePath == 'pages/tags.md' && selected === '') || selected === 'tags' }">
         <a class="a" :href="withBase(`/pages/tags`)"><svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.9042 2.10025L20.8037 3.51446L22.2179 13.414L13.0255 22.6063C12.635 22.9969 12.0019 22.9969 11.6113 22.6063L1.71184 12.7069C1.32131 12.3163 1.32131 11.6832 1.71184 11.2926L10.9042 2.10025ZM13.7327 10.5855C14.5137 11.3666 15.78 11.3666 16.5611 10.5855C17.3421 9.80448 17.3421 8.53815 16.5611 7.7571C15.78 6.97606 14.5137 6.97606 13.7327 7.7571C12.9516 8.53815 12.9516 9.80448 13.7327 10.5855Z" fill="currentColor"></path></svg>标签</a>
+      </li>
+      <li class="li h5" @click="choose('brands')"
+        :class="{ on: (page.relativePath == 'pages/brands.md' && selected === '') || selected === 'brands' }">
+        <a class="a" :href="withBase(`/pages/brands`)"><svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="currentColor"></path></svg>品牌</a>
       </li>
       <li class="li h5" @click="choose('archives')"
         :class="{ on: (page.relativePath == 'pages/archives.md' && selected === '') || selected === 'archives' }"><a
@@ -72,6 +84,7 @@ import { computed, ref } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { initCats } from '../functions'
 import { data as themeposts } from '../posts.data'
+import Brands from './Brands.vue'
 let url = window.location.href.split('?')[1]
 let params = new URLSearchParams(url)
 const { page } = useData()

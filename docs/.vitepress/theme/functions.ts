@@ -132,6 +132,31 @@ export function initArchives(post: Post[]) {
     return data
 }
 
+// 获取所有品牌
+export function initBrands(post: Post[]) {
+    const data: any = {}
+    for (let index = 0; index < post.length; index++) {
+        const element = post[index]
+        let brands = []
+        if (element?.frontmatter?.brands) {
+            brands = element.frontmatter.brands
+        } else if (element?.frontmatter?.brand) {
+            brands = Array.isArray(element.frontmatter.brand) ? element.frontmatter.brand : [element.frontmatter.brand]
+        }
+        if (brands && brands.length > 0) {
+            brands.forEach((item:any) => {
+                if (data[item]) {
+                    data[item].push(element)
+                } else {
+                    data[item] = []
+                    data[item].push(element)
+                }
+            })
+        }
+    }
+    return data
+}
+
 //
 const pattern
     = /[a-zA-Z0-9_\u0392-\u03C9\u00C0-\u00FF\u0600-\u06FF\u0400-\u04FF]+|[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3040-\u309F\uAC00-\uD7AF]+/g

@@ -25,10 +25,12 @@ const activeTag = ref('')
 const activeCategory = ref('')
 const activeYear = ref('')
 const activeMonth = ref('')
+const activeBrand = ref('')
 const selectTag = computed(() => (activeTag.value))
 const selectCategory = computed(() => (activeCategory.value))
 const selectYear = computed(() => (activeYear.value))
 const selectMonth = computed(() => (activeMonth.value))
+const selectBrand = computed(() => (activeBrand.value))
 const bread = ref('全部内容')
 const breadrxt = computed(() => (bread.value))
 const posts = computed(() => {
@@ -40,6 +42,11 @@ const posts = computed(() => {
     return themeposts.filter((article: any) =>
       article?.frontmatter?.tags && article?.frontmatter?.tags.includes(selectTag.value)
     )
+  } else if (selectBrand.value) {
+    return themeposts.filter((article: any) => {
+      const brands = article?.frontmatter?.brands || (article?.frontmatter?.brand ? (Array.isArray(article.frontmatter.brand) ? article.frontmatter.brand : [article.frontmatter.brand]) : [])
+      return brands.includes(selectBrand.value)
+    })
   } else if (selectYear.value && selectMonth.value) {
     return themeposts.filter((article: any) =>
       article?.frontmatter?.date && new Date(article?.frontmatter?.date).getFullYear() + '' == selectYear.value && new Date(article?.frontmatter?.date).getMonth() + 1 + '月' == selectMonth.value
@@ -82,12 +89,15 @@ router.onBeforeRouteChange = (to) => {
   activeCategory.value = params?.category || ''
   activeYear.value = params?.year || ''
   activeMonth.value = params?.month || ''
+  activeBrand.value = params?.brand || ''
   currentpage.value = Number(params?.page) || 1
   if(params?.tag) {
     console.log('new')
     bread.value  = '标签：'+params.tag
   } else if(params?.category) {
     bread.value  = '分类：'+params.category
+  } else if(params?.brand) {
+    bread.value  = '品牌：'+params.brand
   } else if(params?.year&&params?.month) {
     bread.value  = '存档：'+params.year+'/'+params.month
   } else if(params?.year) {
@@ -106,12 +116,15 @@ watch(
       activeCategory.value = url.searchParams.get('category') || ''
       activeYear.value = url.searchParams.get('year') || ''
       activeMonth.value = url.searchParams.get('month') || ''
+      activeBrand.value = url.searchParams.get('brand') || ''
       currentpage.value = Number(url.searchParams.get('page')) || 1
 
       if(url.searchParams.get('tag')) {
     bread.value  = '标签：'+url.searchParams.get('tag')
   } else if(url.searchParams.get('category')) {
     bread.value  = '分类：'+url.searchParams.get('category')
+  } else if(url.searchParams.get('brand')) {
+    bread.value  = '品牌：'+url.searchParams.get('brand')
   } else if(url.searchParams.get('year')&&url.searchParams.get('month')) {
     bread.value  = '存档：'+url.searchParams.get('year')+'/'+url.searchParams.get('month')
   } else if(url.searchParams.get('year')) {
