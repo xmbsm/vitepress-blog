@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 书法体
+brand: 
+ - 智勇字库 
 description: 智勇大同体是设计师贾智勇历时700余天匠心打造的一款免费商用中文字体，字库完整收录6763个常用汉字。
 externalLink: https://qtx.lanzoul.com/iiPjG3jfcgta
 externalLinkText: 直接下载

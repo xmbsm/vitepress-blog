@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 字体家 
 description: 字体家AI北京长城体是一款由字体家AI神笔造字生成的艺术字体。北京长城作为中华文明的象征，长城始建于两千多年前，旨在抵御外敌。
 externalLink: https://qtx.lanzoul.com/iUjSB3jbez1e
 externalLinkText: 直接下载

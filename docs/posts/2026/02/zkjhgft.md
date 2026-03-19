@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 书法体
+brand: 
+ - 字库星球 
 description: 字库江湖古风体是甜奈网络与字库星球携手联合首发，推出一款为餐饮品牌量身打造的拙字，适用于餐饮行业。
 externalLink: https://qtx.lanzoul.com/iUrsk2k3r3de
 externalLinkText: 直接下载

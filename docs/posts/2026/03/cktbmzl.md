@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 书法体
+brand: 
+ - 庆科字体
 description: 班马字类是一款源自南宋古籍《班马字类》复刻的书法字体，以保留古籍刻本与手写的双重质感为核心特征，充满浓厚的古典文化气息。
 externalLink: https://qtx.lanzoul.com/iOKv93jtusej
 externalLinkText: 直接下载
