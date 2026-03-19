@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 手写体
+brand: 
+ - 智勇字库 
 description: 手书体是酷友Joker9发布的一款免费手写中文字体，此次共做了基本汉字6763个，提供给大家免费商用。字体风格为手写风格，可以用于slogan、banner、海报、商标等设计里面。
 externalLink: https://qtx.lanzoul.com/ieneE3jt91gd
 externalLinkText: 直接下载

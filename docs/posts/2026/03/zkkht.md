@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 黑体
+brand: 
+ - 站酷字库 
 description: 站酷酷黑体验版在站酷十周年之际横空出世。字形笔画粗犷有力，用宽扁型的字面构建出厚重的字体形态，笔画细节上的修饰既增强了字体的设计感，又让字体多了一些小小的精致。
 externalLink: https://qtx.lanzoul.com/iorg33jrc3qb
 externalLinkText: 直接下载

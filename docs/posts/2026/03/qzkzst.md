@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 宋体
+brand: 
+ - 全字库 
 description: 全字库正宋体是一款早期中国台湾为标准字元编码方案制定的宋体，作为全字库提供的免费可商用字体，兼具规范性与实用性，是避免 “撞字” 的优质替代选择。
 externalLink: https://qtx.lanzoul.com/iDycS3jpj99a
 externalLinkText: 直接下载

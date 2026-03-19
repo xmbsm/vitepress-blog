@@ -7,6 +7,8 @@ categories:
  - 英文字体
 tags:
  - 手写体
+brand: 
+ - 智勇字库 
 description: ZhiyongWrite（智勇手书英文体）此款英文字体风格为手写风格，提供给大家免费商用。适于作为英文正文字体使用。可与之前的免费字体手书体，搭配使用。
 externalLink: https://qtx.lanzoul.com/iBXmm3jpmkgb
 externalLinkText: 直接下载

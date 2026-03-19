@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 特里王 
 description: 迫真打字油印体​是设计师特里特里创作的一款免费商用字体，旨在逼真模拟打字机油印时代“因字盘缺字而手写补字”的混排状态。字体采用杂交设计，常用字使用朝华打字机（细明朝体）。
 externalLink: https://qtx.lanzoul.com/iJjfr3ku5cmd
 externalLinkText: 直接下载

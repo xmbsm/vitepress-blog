@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 楷体
+brand: 
+ - 全字库 
 description: 全字库正楷体是一款早期中国台湾为标准字元编码方案开发的楷体，作为全字库提供的免费可商用字体，兼具规范性、高覆盖度与实用价值，是避免 “撞字” 的优质替代选择。
 externalLink: https://qtx.lanzoul.com/ipi2i3jpj6mf
 externalLinkText: 直接下载

@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 黑体
+brand: 
+ - 站酷字库 
 description: 站酷仓耳渔阳体是仓耳字库在2020新冠疫情期间为造福社会奉上的一份礼物，也是站酷冠名的首款拥有家族字体的公益字库。
 externalLink: https://qtx.lanzoul.com/iguT33jqw7eh
 externalLinkText: 直接下载

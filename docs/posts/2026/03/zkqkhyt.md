@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 站酷字库 
 description: 站酷庆科黄油体是一款字型创新、线条圆润的字体，它以细节化的笔画处理解决了传统字体的阅读痛点，同时以免费授权的开放姿态，成为兼具创新与实用的优质选择。
 externalLink: https://qtx.lanzoul.com/iESZk3jqw9hc
 externalLinkText: 直接下载

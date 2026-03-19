@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 乐米字库 
 description: 乐米元气团团体是乐米品牌打造的一款免费商用字体，圆滚滚的超有活力，像小太阳一样元气满满，做健身、美食、生活方式类内容超搭，自带 “快乐 buff”，看着就心情好。
 externalLink: https://qtx.lanzoul.com/iqG9y3jj3v5g
 externalLinkText: 直接下载

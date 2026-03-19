@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 乐米字库  
 description: 乐米小雨体是乐米品牌开发的一款免费商用字体，自带清新氛围感，从外观来看，它采用手写质感的笔画设计，线条没有生硬棱角，整体轻柔舒展，撇捺收尾处带着类似雨滴轻曳的微弯弧度，仿佛把细密雨丝的松弛感融入字形。
 externalLink: https://qtx.lanzoul.com/inIJM3jjdtgf
 externalLinkText: 直接下载

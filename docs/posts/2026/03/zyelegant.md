@@ -7,6 +7,8 @@ categories:
  - 英文字体
 tags:
  - 手写体
+brand: 
+ - 智勇字库 
 description: Zhiyong Elegant 是酷友Joker9发布的一款免费手写英文字体，另外作者也发布了，手书体，智勇大同体等免费可商用字体。
 externalLink: https://qtx.lanzoul.com/iJsOc3jt9rcf
 externalLinkText: 直接下载

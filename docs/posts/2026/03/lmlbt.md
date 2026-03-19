@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 手写体
+brand: 
+ - 乐米字库  
 description: 乐米蜡笔体是乐米品牌打造的免费商用字体，决定做一件很‘轴’的事：把写了二十几年的字，亲手变成字体 按下导出.ttf的瞬间，像交出了一部分自己。
 externalLink: https://qtx.lanzoul.com/iFawH3jjdtaj
 externalLinkText: 直接下载

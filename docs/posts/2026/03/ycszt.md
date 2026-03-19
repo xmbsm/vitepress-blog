@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 特里王 
 description: 油茶馓子体​ 是由设计师特里特里创作的一款基于传统手写誊写油印工艺风格的字体，设计理念源于蜡纸刻写时代工匠的手写仿宋体，字体笔画纤细自然，结构松散而不失协调。
 externalLink: https://qtx.lanzoul.com/i36Yc3ku5qlg
 externalLinkText: 直接下载

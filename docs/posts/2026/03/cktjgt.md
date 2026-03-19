@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 黑体
+brand: 
+ - 庆科字体 
 description: 创客贴金刚体是为支援抗击疫情而创作的字体，之前只在创客贴 ckt.cn 上架了这款字体，现在庆科字体将字体安装包开放下载，并可以免费商用！
 externalLink: https://qtx.lanzoul.com/iEB0j3jtv43a
 externalLinkText: 直接下载

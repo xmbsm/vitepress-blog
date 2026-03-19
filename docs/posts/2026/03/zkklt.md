@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 站酷字库 
 description: 站酷快乐体 2016 修订版是由刘兵克学员与工作室团队共同打造的一款免费商用中文字体，它以活泼可爱的手写质感与完善的字库配置，成为兼具亲和力与实用价值的中文字体选择，同时以免费授权全社会使用的开放姿态，为创意设计提供了无负担的应用方案。
 externalLink: https://qtx.lanzoul.com/ierQb3jraeed
 externalLinkText: 直接下载

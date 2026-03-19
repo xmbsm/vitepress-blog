@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 像素体
+brand: 
+ - 乐米字库  
 description: 乐米像素体是乐米品牌打造的免费商用字体，它完全以规整的方块像素单元为基础拼接而成，还原了早期八位机游戏界面、复古电子屏文字的经典视觉，每一个字符都像由细碎像素块 “拼贴” 而成，复古电子氛围直接拉满
 externalLink: https://qtx.lanzoul.com/iPYkE3jjdtdc
 externalLinkText: 直接下载

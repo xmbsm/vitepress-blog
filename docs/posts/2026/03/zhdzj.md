@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 特里王 
 description: 朝华打字机是由设计师特里特里创作的一款专为模拟传统打字机油印效果的免费商用字体，基于民国时期中文打字机采用的细明朝体改造而来。
 externalLink: https://qtx.lanzoul.com/i2MRX3ku3ggj
 externalLinkText: 直接下载

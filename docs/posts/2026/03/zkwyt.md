@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 黑体
+brand: 
+ - 站酷字库 
 description: 站酷文艺体是字体设计师刘兵克继 “站酷快乐体” 之后，带领工作室伙伴与字体设计直播课学员共同创作的第二套站酷免费商用字体。
 externalLink: https://qtx.lanzoul.com/iW3Gy3jr19yj
 externalLinkText: 直接下载

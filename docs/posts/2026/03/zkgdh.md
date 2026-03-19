@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 黑体
+brand: 
+ - 站酷字库 
 description: 站酷高端黑是站酷网于 2014 年圣诞推出的首款可免费商用中文字体，后于 2015 年 1 月 13 日发布修订版。这款字体由 “汉字百人舞计划” 出品，历时八个月、总耗时上万小时完成，是国内首个大型众包公益字体项目。
 externalLink: https://qtx.lanzoul.com/ikp0R3jr9e7a
 externalLinkText: 直接下载

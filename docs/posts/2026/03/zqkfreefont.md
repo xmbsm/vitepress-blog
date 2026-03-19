@@ -7,6 +7,8 @@ categories:
  - 英文字体
 tags:
  - 创意字体
+brand: 
+ - 庆科字体 
 description: ZQKFreefont 是庆科字体推出的一款免费商用无衬线字体，以粗重的几何化笔画与高辨识度为核心特征，整体风格现代且充满活力。
 externalLink: https://qtx.lanzoul.com/iCljL3jtd7uh
 externalLinkText: 直接下载

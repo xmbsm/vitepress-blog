@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand: 
+ - 站酷字库 
 description: 站酷小薇LOGO体是由主创设计师小马哥领衔团队打造的一款兼具古典与前卫气质的中文字体，整体风格道风仙气、灵秀直率，自带剑客般的利落与谦和，是标志与标题设计的优质选择。
 externalLink: https://qtx.lanzoul.com/ijAB53jray3c
 externalLinkText: 直接下载

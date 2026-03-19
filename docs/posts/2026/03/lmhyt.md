@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 圆体
+brand: 
+ - 乐米字库  
 description: 乐米惠圆体源是一款兼顾颜值与实用性的免费商用字体。圆润柔和的笔画设计，让字形兼具亲和力与辨识度，易读性极佳。适用于海报、包装、网页、APP 等多种商业场景。
 externalLink: https://qtx.lanzoul.com/iAwr43jjdtcb
 externalLinkText: 直接下载

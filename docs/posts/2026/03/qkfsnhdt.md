@@ -7,6 +7,8 @@ categories:
  - 英文字体
 tags:
  - 创意字体
+brand: 
+ - 庆科字体 
 description: 庆科FS霓虹灯英文体，是郑庆科2012年做的一套英文字体。
 externalLink: https://qtx.lanzoul.com/iXpbn3jtcvch
 externalLinkText: 直接下载

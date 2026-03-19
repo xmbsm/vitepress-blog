@@ -7,6 +7,8 @@ categories:
  - 英文字体
 tags:
  - 创意字体
+brand: 
+ - 庆科字体 
 description: ZQK Scribbled 是一款潦草手写风格的英文字体，支持个人、企业全场景免费商用。它以自由散漫的手写质感为核心，笔画带有自然的抖动与连笔效果。
 externalLink: https://qtx.lanzoul.com/iy2Ps3ju0vfe
 externalLinkText: 直接下载

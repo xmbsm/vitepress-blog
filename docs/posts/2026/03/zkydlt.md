@@ -7,6 +7,8 @@ categories:
  - 英文字体
 tags:
  - 手写体
+brand: 
+ - 站酷字库 
 description: ZCOOL Addict Italic 站酷意大利体是由大猫Addict设计，站酷冠名的首款公益西文字库， 是可免费商用的西文字，2016年5月发布第一版。
 externalLink: https://qtx.lanzoul.com/iAS3s3jqvuhc
 externalLinkText: 直接下载
