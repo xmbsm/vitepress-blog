@@ -72,15 +72,17 @@
         <template #doc-bottom>
             <Copyright />
         </template>
-        <!-- 返回顶部按钮 -->
-        <ClientOnly>
-            <div class="back-to-top" @click="backToTop">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 15l-6-6-6 6"/>
-                </svg>
-            </div>
-        </ClientOnly>
+        
     </Layout>
+
+    <!-- 返回顶部按钮 -->
+    <div 
+        id="back-to-top" 
+        :style="backToTopStyle"
+        @click="scrollToTop"
+    >
+        <div class="arrow"></div>
+    </div>
 </template>
 <script lang="ts" setup>
 import { computed, toRefs,onMounted,ref, onUnmounted } from 'vue';
@@ -90,37 +92,57 @@ import md5 from 'blueimp-md5';
 import DefaultTheme from 'vitepress/theme'
 import Copyright from './Copyright.vue'
 import Player from './Player.vue';
+import BackToTop from './BackToTop.vue';
 
 const { isPause } = toRefs(usePlayerStore());
 const { page, theme, frontmatter, isDark } = useData();
 const { Layout } = DefaultTheme;
 
-// 返回顶部按钮
-const showBackToTop = ref(false);
+// 滚动状态
+const isScrolled = ref(false);
 
-// 监听滚动事件
-function handleScroll() {
-    showBackToTop.value = window.scrollY > 300;
-}
-
-// 返回顶部方法
-function backToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// 组件挂载时添加滚动事件监听
+// 滚动事件处理
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
 });
 
-// 组件卸载时移除滚动事件监听
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
 });
 
+function handleScroll() {
+    isScrolled.value = window.scrollY > 500;
+}
+
+// 返回顶部方法
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // 滚动状态会通过handleScroll函数自动更新
+}
+
+// 响应式样式
+const backToTopStyle = computed(() => ({
+    position: 'fixed',
+    bottom: '30px',
+    right: '30px',
+    width: '48px',
+    height: '48px',
+    borderRadius: '50%',
+    backgroundColor: '#ffffff',
+    color: 'black',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    zIndex: '999999',
+    boxShadow: 'none',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    opacity: isScrolled.value ? '1' : '0',
+    pointerEvents: isScrolled.value ? 'auto' : 'none',
+    transform: isScrolled.value ? 'translateY(0)' : 'translateY(20px)',
+    transition: 'all 0.3s ease'
+}));
 </script>
 
 <style scoped>
@@ -168,52 +190,26 @@ onUnmounted(() => {
     margin: 50px auto;
 }
 
-/* 返回顶部按钮样式 */
-.back-to-top {
-    position: fixed !important;
-    bottom: 30px !important;
-    right: 30px !important;
-    width: 48px !important;
-    height: 48px !important;
-    border-radius: 50% !important;
-    background-color: var(--vp-c-brand) !important;
-    color: white !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-    z-index: 9999 !important;
-    box-shadow: var(--vp-shadow-2) !important;
-    transition: all 0.3s ease !important;
-    opacity: 0.9 !important;
-    pointer-events: auto !important;
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 9px solid black;
+    transition: all 0.3s ease;
 }
 
-.back-to-top:hover {
-    background-color: var(--vp-c-brand) !important;
-    transform: translateY(-3px) !important;
-    opacity: 1 !important;
+#back-to-top:hover {
+    background-color: #000000 !important;
+    transition: all 0.3s ease;
 }
 
-.back-to-top svg {
-    width: 20px !important;
-    height: 20px !important;
-    fill: white !important;
+#back-to-top:hover .arrow {
+    border-bottom: 9px solid white;
+    transition: all 0.3s ease;
 }
 
-/* 响应式调整 */
-@media (max-width: 768px) {
-    .back-to-top {
-        bottom: 20px !important;
-        right: 20px !important;
-        width: 40px !important;
-        height: 40px !important;
-    }
-    
-    .back-to-top svg {
-        width: 18px !important;
-        height: 18px !important;
-    }
-}
 </style>
+
+
 

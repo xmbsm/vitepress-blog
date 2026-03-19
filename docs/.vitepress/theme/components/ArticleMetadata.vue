@@ -373,16 +373,32 @@ onMounted(() => {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow: hidden;
+
+    .date {
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
 
     .tag-container {
-      width: 100%;
-      justify-content: flex-start;
-      margin-top: 10px;
+      flex: 1;
+      justify-content: flex-end;
+      margin-top: 0;
+      overflow: hidden;
 
-      .tag {
-        margin-left: 0px!important;
-        margin-right: 10px;
+      .tags {
+        overflow: hidden;
+        white-space: nowrap;
+
+        .tag {
+          margin-left: 10px!important;
+          margin-right: 0;
+        }
+
+        .tag:first-child {
+          margin-left: 0!important;
+        }
       }
 
       .brand {

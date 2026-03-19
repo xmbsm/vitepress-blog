@@ -80,3 +80,4 @@ export const head: HeadConfig[] = [
   ],
   ["script", { src: "/static/js/fancybox.umd.js" }],  //全局控制图片放大交互
 ];
+
