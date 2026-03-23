@@ -28,7 +28,7 @@ externalLinkText: 直接下载
 
 <ArticleLink via="post" :work="{
     title: '字由芳华体',
-    view: 'https://qtx.lanzoul.com/idjuF3law6le,
+    view: 'https://qtx.lanzoul.com/idjuF3law6le',
     github: '',
     via: 'https://www.zcool.com.cn/work/ZNDMzNzI1NjQ=.html',
     linkpan:'https://www.zcool.com.cn/work/ZNDMzNzI1NjQ=.html',
