@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 宋体
+brand: 
+ - Adobe
 description: 思源宋体 (Source Han Serif) 是 Adobe Type 发布的最新泛 CJK 字体，它是对应于思源黑体的宋体字体；我们发布这两种字体是为了响应统一设计的需求，以服务于东亚 15 亿人口。
 externalLink: https://pan.baidu.com/s/1HbVPupEiTYhF-PUkkgnWRQ?pwd=95gc
 externalLinkText: 直接下载

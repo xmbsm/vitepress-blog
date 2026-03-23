@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 黑体
+brand: 
+ - Adobe
 description: 思源黑体中的“思源”一词来自于成语“饮水思源”，是 Adobe 与 Google 历时三年时间，于 2014 年 7 月发布推出的一款开源字体。
 externalLink: https://qtx.lanzoul.com/ig1gO3jokbwf
 externalLinkText: 直接下载
