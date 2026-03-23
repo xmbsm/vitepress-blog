@@ -26,7 +26,7 @@ externalLinkText: 直接下载
 
 <ArticleLink via="post" :work="{
     title: '字由文艺黑',
-    view: 'https://qtx.lanzoul.com/iXxrx3law6oh,
+    view: 'https://qtx.lanzoul.com/iXxrx3law6oh',
     github: '',
     via: 'https://www.zcool.com.cn/work/ZNDMzNzU2MDA=.html',
     linkpan:'https://www.zcool.com.cn/work/ZNDMzNzU2MDA=.html',

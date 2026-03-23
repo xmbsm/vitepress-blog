@@ -30,7 +30,7 @@ externalLinkText: 直接下载
 
 <ArticleLink via="post" :work="{
     title: '点字浅夏体',
-    view: 'https://qtx.lanzoul.com/ilQFz3lavuxe,
+    view: 'https://qtx.lanzoul.com/ilQFz3lavuxe',
     github: '',
     via: 'https://mp.weixin.qq.com/s/ghs3NwCKX5SzGHOn-fbTAw',
     linkpan:'https://mp.weixin.qq.com/s/ghs3NwCKX5SzGHOn-fbTAw',
