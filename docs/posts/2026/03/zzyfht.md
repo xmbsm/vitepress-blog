@@ -7,7 +7,7 @@ categories:
  - 中文字体
 tags:
  - 黑体
-brand: 
+brand:
  - 字由
 description: 字由芳华体是字由品牌推出的一款创意字体，以“有趣”为核心设计理念，兼具视觉张力与实用价值，为各类设计场景注入鲜活灵感。 
 externalLink: https://qtx.lanzoul.com/idjuF3law6le
