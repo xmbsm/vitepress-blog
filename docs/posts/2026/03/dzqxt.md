@@ -7,7 +7,7 @@ categories:
  - 中文字体
 tags:
  - 手写体
-brand:
+brand: 
  - 字由
 description: 点字浅夏体是一款充满手写温度的卡通手写风字体，以活泼灵动的字形设计传递夏日般的轻松趣味。
 externalLink: https://qtx.lanzoul.com/ilQFz3lavuxe
@@ -39,3 +39,15 @@ externalLinkText: 直接下载
     viewtit: '立即下载',
     wxwords: '',
     }" />
+
+<ArticleLink via="post" :work="{
+    title: '油茶馓子体',
+    view: 'https://qtx.lanzoul.com/i36Yc3ku5qlg',
+    github: '',
+    via: 'https://zhuanlan.zhihu.com/p/2016544991133073839',
+    linkpan:'https://zhuanlan.zhihu.com/p/2016544991133073839',
+    coveross: '',
+    beecode: '',
+    viewtit: '立即下载',
+    wxwords: '',
+    }" />    
