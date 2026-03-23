@@ -8,7 +8,7 @@ categories:
 tags:
  - 黑体
 brand: 
- - 字由
+ - 字由 
 description: 字由文艺黑是字由品牌推出的创意黑体字体，以现代简约风格为核心，将图形设计法则巧妙融入黑体设计。
 externalLink: https://qtx.lanzoul.com/iXxrx3law6oh
 externalLinkText: 直接下载
