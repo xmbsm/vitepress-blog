@@ -34,8 +34,6 @@ externalLinkText: 直接下载
 
 ![荆南缘默体](https://wkphoto.bj.bcebos.com/cdbf6c81800a19d81982465d23fa828ba71e46e1.jpg)
 
-![荆南缘默体](https://wkphoto.bj.bcebos.com/7e3e6709c93d70cf8cc56755e8dcd100baa12baf.jpg)
-
 ![荆南缘默体](https://wkphoto.bj.bcebos.com/6d81800a19d8bc3e1789c492928ba61ea9d345e1.jpg)
 
 <ArticleLink via="post" :work="{
