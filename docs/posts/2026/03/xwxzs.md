@@ -1,6 +1,6 @@
 ---
 post: true
-title: 霞鹜新致宋霞鹜新致宋
+title: 霞鹜新致宋
 date: 2026-03-31
 cover: https://wkphoto.bj.bcebos.com/35a85edf8db1cb13ee86e14bcd54564e93584bff.jpg
 categories:
