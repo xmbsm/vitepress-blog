@@ -5,6 +5,13 @@ export const toolsdata: Tools[] = [
   {
     title: '设计',
     items: [
+        {
+        icon: 'https://wkphoto.bj.bcebos.com/908fa0ec08fa513db9addb872d6d55fbb2fbd960.jpg',
+        title: '矢量LOGO素材库',
+        desc: '去除图片背景，透明背景',
+        link: 'https://logo.kusheji.com/',
+        linktxt: 'logo.kusheji.com',
+      },
       {
         icon: 'https://image.baidu.com/search/down?url=https://fc.sinaimg.cn/large/6364aa43gy1hl1ksv896vj2040040gld.jpg',
         title: 'fococlipping',
