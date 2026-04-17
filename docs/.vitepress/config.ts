@@ -16,10 +16,10 @@ export default defineConfig<ThemeConfig>({
             })
         }
     },
-    title: '素材小站',
+    title: '免费可商用中英文字体下载',
     base: '/',
     head,
-    description: '不定期分享设计素材、可商用字体、AIGC开源项目等',
+    description: '最新最全的可免费商用中文字体下载网站！无版权免费字体下载！',
     ignoreDeadLinks: true,
     themeConfig: {
         beecodeurl: 'https://free.kusheji.com/', //这里是内页ArticleLink组件用到的跳转第三方网址，一般用不到，仅仅用于二次开发
