@@ -16,7 +16,7 @@ export default defineConfig<ThemeConfig>({
             })
         }
     },
-    title: '免费可商用中英文字体下载',
+    title: '小酷字体',
     base: '/',
     head,
     description: '最新最全的可免费商用中文字体下载网站！无版权免费字体下载！',
