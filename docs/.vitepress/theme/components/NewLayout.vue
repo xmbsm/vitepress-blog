@@ -33,11 +33,6 @@
             </ClientOnly>
 
         </template>
-        <template #nav-bar-title>
-            <!-- 使用index.md的title字段作为logo旁的文字 -->
-            <span v-if="frontmatter?.index">{{ frontmatter?.title }}</span>
-            <span v-else>{{ site?.title }}</span>
-        </template>
         <template #nav-bar-title-after>
             <!-- 在标题后添加 -->
         </template>
@@ -100,7 +95,7 @@ import Player from './Player.vue';
 import BackToTop from './BackToTop.vue';
 
 const { isPause } = toRefs(usePlayerStore());
-const { page, theme, frontmatter, isDark, site } = useData();
+const { page, theme, frontmatter, isDark } = useData();
 const { Layout } = DefaultTheme;
 
 // 滚动状态
