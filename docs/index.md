@@ -1,6 +1,6 @@
 ---
 index: true
-title: 小酷字体
+title: 首页
 aside: true
 sidebar: true
 ---
