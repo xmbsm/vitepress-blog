@@ -8,7 +8,7 @@ export const toolsdata: Tools[] = [
         {
         icon: 'https://wkphoto.bj.bcebos.com/908fa0ec08fa513db9addb872d6d55fbb2fbd960.jpg',
         title: '矢量LOGO素材库',
-        desc: '去除图片背景，透明背景',
+        desc: '矢量logo大全，免费下载',
         link: 'https://logo.kusheji.com/',
         linktxt: 'logo.kusheji.com',
       },

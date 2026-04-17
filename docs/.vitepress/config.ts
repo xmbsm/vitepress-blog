@@ -19,7 +19,7 @@ export default defineConfig<ThemeConfig>({
     title: '小酷字体',
     base: '/',
     head,
-    description: '最新最全的可免费商用中文字体下载网站！无版权免费字体下载！',
+    description: '最新最全的可免费商用中文字体下载网站，无版权免费字体下载！',
     ignoreDeadLinks: true,
     themeConfig: {
         beecodeurl: 'https://free.kusheji.com/', //这里是内页ArticleLink组件用到的跳转第三方网址，一般用不到，仅仅用于二次开发
