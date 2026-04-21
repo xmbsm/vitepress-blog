@@ -10,17 +10,19 @@ export const head: HeadConfig[] = [
   ['meta', { name: 'referrer', content: 'no-referrer' }],
 
   // 百度统计
-    [
+  [
     'script',
     {},
-    `var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?db01b999bcfe4df5611fe1033870db9c";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();`
-    ],
+    `if (typeof window !== 'undefined') {
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?be0c041df7c9856964d365953f24eaca";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    }`
+  ],
 
  // 百度统计
 //   [
