@@ -3,18 +3,53 @@
     <div class="wrap">
         <div class="tags">
             <span class="tag" v-for="(item, key) in data">
-                <a class="a" :href="withBase(`/?tag=${key.toString()}`)"> {{ '#' + key }}<strong class="VPBadge tip strong mini">{{
+                <a class="a" :href="withBase(`/?tag=${key.toString()}`)" @click="closeDropdown"> {{ '#' + key }}<strong class="VPBadge tip strong mini">{{
                     data[key].length }}</strong></a>
             </span>
         </div>
     </div>
 </template>
+
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 import { initTags } from '../functions'
 import { data as themeposts } from '../posts.data'
 const data = computed(() => initTags(themeposts))
+
+// 关闭下拉菜单的函数
+function closeDropdown(event: Event) {
+  // 查找当前点击元素的父级，找到对应的触发按钮
+  let element = event.target as HTMLElement
+  // 向上查找，直到找到包含标签、品牌或存档的容器
+  while (element && !element.classList.contains('wrap')) {
+    element = element.parentElement as HTMLElement
+  }
+  
+  // 根据当前组件类型，关闭对应的下拉菜单
+  if (element) {
+    if (element.querySelector('.tags')) {
+      // 这是标签组件，关闭标签下拉菜单
+      const tagsButton = document.querySelector('.tags.a')
+      if (tagsButton) {
+        tagsButton.click()
+      }
+    } else if (element.querySelector('.brands')) {
+      // 这是品牌组件，关闭品牌下拉菜单
+      const brandsButton = document.querySelector('.brands.a')
+      if (brandsButton) {
+        brandsButton.click()
+      }
+    } else if (element.querySelector('.archives')) {
+      // 这是存档组件，关闭存档下拉菜单
+      const archivesButton = document.querySelector('.archives.a')
+      if (archivesButton) {
+        archivesButton.click()
+      }
+    }
+  }
+  // 不阻止默认事件，让页面正常导航
+}
 </script>
 
 <style scoped>

@@ -14,24 +14,31 @@
         <time class="time"
           :datetime="dataformat === 0 ? formatTime(dataSource.frontmatter.date) : relativeTime(dataSource.frontmatter.date)">{{
             dataformat === 0 ? formatTime(dataSource.frontmatter.date) : relativeTime(dataSource.frontmatter.date) }}</time>
+        <span class="views">
+                  <svg class="svg" t="1776776715683" viewBox="0 0 1440 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8183" width="16" height="16">
+                    <path d="M1433.334241 494.091869a761.91989 761.91989 0 0 0-1426.58681 0l-6.747431 17.993149 6.747431 17.993149a761.91989 761.91989 0 0 0 1426.58681 0l6.747431-17.993149zM719.995853 923.048538a664.756886 664.756886 0 0 1-612.306857-411.143452 661.518119 661.518119 0 0 1 1224.613714 0 665.026783 665.026783 0 0 1-612.306857 411.143452z" p-id="8184"></path>
+                    <path d="M719.995853 245.606482a266.118672 266.118672 0 1 0 266.118672 266.118673A266.478535 266.478535 0 0 0 719.995853 245.606482z m0 431.835574a165.53697 165.53697 0 1 1 165.53697-165.53697 165.626936 165.626936 0 0 1-165.53697 165.357039z" p-id="8185"></path>
+                  </svg>
+                  {{ viewsCount }}
+                </span>
       </p>
       <div class="tag-container">
         <!-- 标签部分，暂时隐藏 -->
         <div class="tags" v-if="dataSource.frontmatter?.tags">
           <template v-if="type !== 'single'">
             <span class="tag" v-for="item in dataSource.frontmatter.tags.slice(0, 2)"><a class="a"
-                :href="withBase(`/?tag=${item.toString()}`)"> {{ 
+                :href="withBase(`/?tag=${item.toString()}`)"> {{
                   '#' + item }}</a></span>
             <span class="tag" v-if="dataSource.frontmatter.tags.length > 2">...</span>
           </template>
           <template v-else>
-            <span class="tag" v-for="item in dataSource.frontmatter.tags"><a class="a" :href="withBase(`/?tag=${item.toString()}`)"> {{ 
+            <span class="tag" v-for="item in dataSource.frontmatter.tags"><a class="a" :href="withBase(`/?tag=${item.toString()}`)"> {{
               '#' + item }}</a></span>
           </template>
         </div>
         <!-- 品牌部分 -->
       <div class="brands" v-if="type === 'single' && (dataSource.frontmatter?.brands || dataSource.frontmatter?.brand)">
-        <span class="brand" v-for="item in (dataSource.frontmatter.brands || (Array.isArray(dataSource.frontmatter.brand) ? dataSource.frontmatter.brand : [dataSource.frontmatter.brand]))"><a class="a" :href="withBase(`/?brand=${item.toString()}`)"> {{ 
+        <span class="brand" v-for="item in (dataSource.frontmatter.brands || (Array.isArray(dataSource.frontmatter.brand) ? dataSource.frontmatter.brand : [dataSource.frontmatter.brand]))"><a class="a" :href="withBase(`/?brand=${item.toString()}`)"> {{
               item }}</a></span>
       </div>
       </div>
@@ -47,7 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { withBase } from 'vitepress'
 import { useStorage } from '@vueuse/core'
 import type { Post } from '../types'
@@ -87,6 +94,65 @@ const readTime = computed(() => {
   return Math.ceil((wordTime.value + imageTime.value) / 60)
 })
 
+// 响应式变量来跟踪浏览次数
+const localViews = ref(0)
+
+// 生成存储键的函数
+function getViewsKey() {
+  if (dataSource.value?.frontmatter?.title) {
+    // 使用文章标题作为存储键，确保首页和详情页使用相同的键
+    return `views_${dataSource.value.frontmatter.title.replace(/\s+/g, '_')}`
+  } else if (dataSource.value?.relativePath) {
+    // 回退到使用相对路径
+    return `views_${dataSource.value.relativePath.replace(/\//g, '_')}`
+  }
+  return 'views_default'
+}
+
+// 从本地存储加载浏览次数
+function loadViews() {
+  const viewsKey = getViewsKey()
+  const storedViews = localStorage.getItem(viewsKey)
+  if (storedViews) {
+    localViews.value = parseInt(storedViews, 10)
+  } else {
+    localViews.value = 0
+  }
+  console.log('加载浏览次数：', viewsKey, '为', localViews.value)
+}
+
+// 浏览次数计算属性
+const viewsCount = computed(() => {
+  // 从 frontmatter 中获取浏览次数
+  if (dataSource.value?.frontmatter?.views) {
+    return dataSource.value.frontmatter.views
+  }
+  // 每次计算时都重新从本地存储加载，确保获取最新值
+  const viewsKey = getViewsKey()
+  const storedViews = localStorage.getItem(viewsKey)
+  if (storedViews) {
+    localViews.value = parseInt(storedViews, 10)
+  } else {
+    localViews.value = 0
+  }
+  console.log('浏览次数计算：', viewsKey, '->', localViews.value)
+  // 返回本地存储的浏览次数
+  return localViews.value
+})
+
+// 增加浏览次数的函数
+function incrementViews() {
+  const viewsKey = getViewsKey()
+  const currentViews = parseInt(localStorage.getItem(viewsKey) || '0', 10)
+  const newViews = currentViews + 1
+  localStorage.setItem(viewsKey, newViews.toString())
+  localViews.value = newViews
+  console.log('浏览次数增加：', viewsKey, '从', currentViews, '到', newViews)
+  // 通知组件更新
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('viewsUpdated'))
+  }
+}
 
 function analyze() {
   document.querySelectorAll('.meta-des').forEach(v => v.remove())
@@ -99,9 +165,41 @@ function analyze() {
   wordCount.value = countWord(words)
 }
 
+// 在组件挂载时检查是否需要增加浏览次数
 onMounted(() => {
   // 初始化时执行一次
   analyze()
+
+  // 加载浏览次数
+  loadViews()
+
+  // 监听浏览次数更新事件
+  if (typeof window !== 'undefined') {
+    window.addEventListener('viewsUpdated', () => {
+      // 重新加载浏览次数
+      loadViews()
+      // 触发计算属性重新计算
+      if (dataSource.value?.relativePath) {
+        dataformat.value = dataformat.value
+      }
+    })
+
+    // 检查是否在详情页
+    if (props.type === 'single' && dataSource.value?.relativePath) {
+      // 直接调用增加浏览次数的函数
+      incrementViews()
+    }
+  }
+})
+
+// 在组件卸载时移除事件监听器
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('viewsUpdated', () => {
+      // 空函数，只是为了移除监听器
+    })
+    window.removeEventListener('load', incrementViews)
+  }
 })
 </script>
 
@@ -124,29 +222,44 @@ onMounted(() => {
     flex-wrap: wrap;
 
     .date {
-      font-size: 13px;
-      line-height: 1.25rem;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-items: center;
-      opacity: .5;
-      margin: 0;
-      margin-right: 10px;
-
-      .svg {
-        width: 14px;
-        height: 14px;
-        margin-right: 5px;
-        flex-shrink: 0;
-        fill: currentColor;
-      }
-
-      .time {
-        flex-shrink: 0;
+        font-size: 13px;
+        line-height: 1.25rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        opacity: .5;
+        margin: 0;
         margin-right: 10px;
+
+        .svg {
+          width: 14px;
+          height: 14px;
+          margin-right: 5px;
+          flex-shrink: 0;
+          fill: currentColor;
+        }
+
+        .time {
+          flex-shrink: 0;
+          margin-right: 10px;
+        }
+
+        .views {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          flex-shrink: 0;
+
+          .svg {
+            width: 14px;
+            height: 14px;
+            margin-right: 5px;
+            flex-shrink: 0;
+            fill: currentColor;
+          }
+        }
       }
-    }
 
     .tag-container {
       display: flex;
@@ -285,11 +398,26 @@ onMounted(() => {
         margin-right: 5px;
         flex-shrink: 0;
         fill: currentColor;
-        display: none;
       }
 
       .time {
         flex-shrink: 0;
+        margin-right: 10px;
+      }
+
+      .views {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-shrink: 0;
+
+        .svg {
+          width: 14px;
+          height: 14px;
+          margin-right: 5px;
+          flex-shrink: 0;
+          fill: currentColor;
+        }
       }
     }
 
