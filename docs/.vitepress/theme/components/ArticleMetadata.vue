@@ -97,6 +97,9 @@ const readTime = computed(() => {
 // 响应式变量来跟踪浏览次数
 const localViews = ref(0)
 
+// 检查是否在客户端环境
+const isClient = typeof window !== 'undefined'
+
 // 生成存储键的函数
 function getViewsKey() {
   if (dataSource.value?.frontmatter?.title) {
@@ -111,6 +114,7 @@ function getViewsKey() {
 
 // 从本地存储加载浏览次数
 function loadViews() {
+  if (!isClient) return
   const viewsKey = getViewsKey()
   const storedViews = localStorage.getItem(viewsKey)
   if (storedViews) {
@@ -127,21 +131,24 @@ const viewsCount = computed(() => {
   if (dataSource.value?.frontmatter?.views) {
     return dataSource.value.frontmatter.views
   }
-  // 每次计算时都重新从本地存储加载，确保获取最新值
-  const viewsKey = getViewsKey()
-  const storedViews = localStorage.getItem(viewsKey)
-  if (storedViews) {
-    localViews.value = parseInt(storedViews, 10)
-  } else {
-    localViews.value = 0
+  // 只在客户端从本地存储加载
+  if (isClient) {
+    const viewsKey = getViewsKey()
+    const storedViews = localStorage.getItem(viewsKey)
+    if (storedViews) {
+      localViews.value = parseInt(storedViews, 10)
+    } else {
+      localViews.value = 0
+    }
+    console.log('浏览次数计算：', viewsKey, '->', localViews.value)
   }
-  console.log('浏览次数计算：', viewsKey, '->', localViews.value)
   // 返回本地存储的浏览次数
   return localViews.value
 })
 
 // 增加浏览次数的函数
 function incrementViews() {
+  if (!isClient) return
   const viewsKey = getViewsKey()
   const currentViews = parseInt(localStorage.getItem(viewsKey) || '0', 10)
   const newViews = currentViews + 1
