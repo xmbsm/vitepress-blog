@@ -1,13 +1,13 @@
 {
-  "name": "@shiheme/appbeebee",
+  "name": "kusheji",
   "version": "1.1.0",
   "description": "基于 vitepress 打造的适合图文资源分享的博客主题",
   "author": "乔同学",
   "license": "MIT",
-  "homepage": "https://free.kusheji.com",
+  "homepage": "https://kusheji.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shiheme/appbeebee"
+    "url": "https://github.com/"
   },
   "main": "index.js",
   "scripts": {
