@@ -100,29 +100,35 @@ const localViews = ref(0)
 // 检查是否在客户端环境
 const isClient = typeof window !== 'undefined'
 
-// 生成存储键的函数
-function getViewsKey() {
+// 生成CountAPI键的函数
+function getCountApiKey() {
   if (dataSource.value?.frontmatter?.title) {
-    // 使用文章标题作为存储键，确保首页和详情页使用相同的键
-    return `views_${dataSource.value.frontmatter.title.replace(/\s+/g, '_')}`
+    // 使用文章标题作为键，确保首页和详情页使用相同的键
+    return `vitepress_blog_${dataSource.value.frontmatter.title.replace(/\s+/g, '_').toLowerCase()}`
   } else if (dataSource.value?.relativePath) {
     // 回退到使用相对路径
-    return `views_${dataSource.value.relativePath.replace(/\//g, '_')}`
+    return `vitepress_blog_${dataSource.value.relativePath.replace(/\//g, '_').toLowerCase()}`
   }
-  return 'views_default'
+  return 'vitepress_blog_default'
 }
 
-// 从本地存储加载浏览次数
-function loadViews() {
+// 从CountAPI加载浏览次数
+async function loadViews() {
   if (!isClient) return
-  const viewsKey = getViewsKey()
-  const storedViews = localStorage.getItem(viewsKey)
-  if (storedViews) {
-    localViews.value = parseInt(storedViews, 10)
-  } else {
+  const countApiKey = getCountApiKey()
+  try {
+    const response = await fetch(`https://api.countapi.xyz/get/${countApiKey}`)
+    if (response.ok) {
+      const data = await response.json()
+      localViews.value = data.value || 0
+    } else {
+      localViews.value = 0
+    }
+  } catch (error) {
+    console.error('加载浏览次数失败：', error)
     localViews.value = 0
   }
-  console.log('加载浏览次数：', viewsKey, '为', localViews.value)
+  console.log('加载浏览次数：', countApiKey, '为', localViews.value)
 }
 
 // 浏览次数计算属性
@@ -131,33 +137,25 @@ const viewsCount = computed(() => {
   if (dataSource.value?.frontmatter?.views) {
     return dataSource.value.frontmatter.views
   }
-  // 只在客户端从本地存储加载
-  if (isClient) {
-    const viewsKey = getViewsKey()
-    const storedViews = localStorage.getItem(viewsKey)
-    if (storedViews) {
-      localViews.value = parseInt(storedViews, 10)
-    } else {
-      localViews.value = 0
-    }
-    console.log('浏览次数计算：', viewsKey, '->', localViews.value)
-  }
   // 返回本地存储的浏览次数
   return localViews.value
 })
 
 // 增加浏览次数的函数
-function incrementViews() {
+async function incrementViews() {
   if (!isClient) return
-  const viewsKey = getViewsKey()
-  const currentViews = parseInt(localStorage.getItem(viewsKey) || '0', 10)
-  const newViews = currentViews + 1
-  localStorage.setItem(viewsKey, newViews.toString())
-  localViews.value = newViews
-  console.log('浏览次数增加：', viewsKey, '从', currentViews, '到', newViews)
-  // 通知组件更新
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(new CustomEvent('viewsUpdated'))
+  const countApiKey = getCountApiKey()
+  try {
+    const response = await fetch(`https://api.countapi.xyz/hit/${countApiKey}`)
+    if (response.ok) {
+      const data = await response.json()
+      localViews.value = data.value
+      console.log('浏览次数增加：', countApiKey, '到', localViews.value)
+      // 通知组件更新
+      window.dispatchEvent(new CustomEvent('viewsUpdated'))
+    }
+  } catch (error) {
+    console.error('增加浏览次数失败：', error)
   }
 }
 
@@ -172,29 +170,32 @@ function analyze() {
   wordCount.value = countWord(words)
 }
 
+// 事件监听器函数
+const handleViewsUpdated = async () => {
+  // 重新加载浏览次数
+  await loadViews()
+  // 触发计算属性重新计算
+  if (dataSource.value?.relativePath) {
+    dataformat.value = dataformat.value
+  }
+}
+
 // 在组件挂载时检查是否需要增加浏览次数
-onMounted(() => {
+onMounted(async () => {
   // 初始化时执行一次
   analyze()
 
   // 加载浏览次数
-  loadViews()
+  await loadViews()
 
   // 监听浏览次数更新事件
   if (typeof window !== 'undefined') {
-    window.addEventListener('viewsUpdated', () => {
-      // 重新加载浏览次数
-      loadViews()
-      // 触发计算属性重新计算
-      if (dataSource.value?.relativePath) {
-        dataformat.value = dataformat.value
-      }
-    })
+    window.addEventListener('viewsUpdated', handleViewsUpdated)
 
     // 检查是否在详情页
     if (props.type === 'single' && dataSource.value?.relativePath) {
       // 直接调用增加浏览次数的函数
-      incrementViews()
+      await incrementViews()
     }
   }
 })
@@ -202,9 +203,7 @@ onMounted(() => {
 // 在组件卸载时移除事件监听器
 onUnmounted(() => {
   if (typeof window !== 'undefined') {
-    window.removeEventListener('viewsUpdated', () => {
-      // 空函数，只是为了移除监听器
-    })
+    window.removeEventListener('viewsUpdated', handleViewsUpdated)
     window.removeEventListener('load', incrementViews)
   }
 })
