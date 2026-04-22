@@ -13,15 +13,13 @@ export const head: HeadConfig[] = [
   [
     'script',
     {},
-    `if (typeof window !== 'undefined') {
-      var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?be0c041df7c9856964d365953f24eaca";
-        var s = document.getElementsByTagName("script")[0]; 
-        s.parentNode.insertBefore(hm, s);
-      })();
-    }`
+    `var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?be0c041df7c9856964d365953f24eaca";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();`
   ],
 
  // 百度统计

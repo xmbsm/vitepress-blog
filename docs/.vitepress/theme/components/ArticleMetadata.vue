@@ -116,17 +116,30 @@ function getCountApiKey() {
 async function loadViews() {
   if (!isClient) return
   const countApiKey = getCountApiKey()
+  console.log('Loading views for key:', countApiKey)
   try {
-    const response = await fetch(`https://api.countapi.xyz/get/${countApiKey}`)
+    const response = await fetch(`https://api.countapi.xyz/get/${countApiKey}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log('CountAPI response status:', response.status)
     if (response.ok) {
       const data = await response.json()
+      console.log('CountAPI response data:', data)
       localViews.value = data.value || 0
     } else {
-      localViews.value = 0
+      console.error('CountAPI error:', response.status, await response.text())
+      // 如果CountAPI失败，使用localStorage作为备用
+      const storedViews = localStorage.getItem(countApiKey)
+      localViews.value = storedViews ? parseInt(storedViews, 10) : 0
     }
   } catch (error) {
     console.error('加载浏览次数失败：', error)
-    localViews.value = 0
+    // 如果CountAPI失败，使用localStorage作为备用
+    const storedViews = localStorage.getItem(countApiKey)
+    localViews.value = storedViews ? parseInt(storedViews, 10) : 0
   }
   console.log('加载浏览次数：', countApiKey, '为', localViews.value)
 }
@@ -145,17 +158,41 @@ const viewsCount = computed(() => {
 async function incrementViews() {
   if (!isClient) return
   const countApiKey = getCountApiKey()
+  console.log('Incrementing views for key:', countApiKey)
   try {
-    const response = await fetch(`https://api.countapi.xyz/hit/${countApiKey}`)
+    const response = await fetch(`https://api.countapi.xyz/hit/${countApiKey}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log('CountAPI hit response status:', response.status)
     if (response.ok) {
       const data = await response.json()
+      console.log('CountAPI hit response data:', data)
       localViews.value = data.value
       console.log('浏览次数增加：', countApiKey, '到', localViews.value)
+      // 同时更新localStorage作为备用
+      localStorage.setItem(countApiKey, localViews.value.toString())
       // 通知组件更新
+      window.dispatchEvent(new CustomEvent('viewsUpdated'))
+    } else {
+      console.error('CountAPI hit error:', response.status, await response.text())
+      // 如果CountAPI失败，使用localStorage作为备用
+      const currentViews = parseInt(localStorage.getItem(countApiKey) || '0', 10)
+      const newViews = currentViews + 1
+      localStorage.setItem(countApiKey, newViews.toString())
+      localViews.value = newViews
       window.dispatchEvent(new CustomEvent('viewsUpdated'))
     }
   } catch (error) {
     console.error('增加浏览次数失败：', error)
+    // 如果CountAPI失败，使用localStorage作为备用
+    const currentViews = parseInt(localStorage.getItem(countApiKey) || '0', 10)
+    const newViews = currentViews + 1
+    localStorage.setItem(countApiKey, newViews.toString())
+    localViews.value = newViews
+    window.dispatchEvent(new CustomEvent('viewsUpdated'))
   }
 }
 
@@ -185,6 +222,14 @@ onMounted(async () => {
   // 初始化时执行一次
   analyze()
 
+  // 调试日志
+  console.log('ArticleMetadata mounted:', {
+    type: props.type,
+    dataSource: dataSource.value,
+    relativePath: dataSource.value?.relativePath,
+    title: dataSource.value?.frontmatter?.title
+  })
+
   // 加载浏览次数
   await loadViews()
 
@@ -195,6 +240,7 @@ onMounted(async () => {
     // 检查是否在详情页
     if (props.type === 'single' && dataSource.value?.relativePath) {
       // 直接调用增加浏览次数的函数
+      console.log('Incrementing views for single article')
       await incrementViews()
     }
   }
