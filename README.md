@@ -47,34 +47,6 @@
 7. pinia状态管理
 8. 时间友好化组件
 
-## 预览
-![](https://fc.sinaimg.cn/large/6364aa43gy1hm0fdq92lmj22c01bq1a2.jpg)
-内页
-
-![](https://fc.sinaimg.cn/large/6364aa43gy1hm0fdqk4umj22c01bqk52.jpg)
-工具导航
-
-![](https://fc.sinaimg.cn/large/6364aa43gy1hm0fdqppztj22c01bqqqb.jpg)
-文章列表简约样式
-
-![](https://fc.sinaimg.cn/large/6364aa43gy1hm0fdqrdlzj22c01bq4hn.jpg)
-Feed订阅
-
-![](https://fc.sinaimg.cn/large/6364aa43gy1hm0fdqyuaij22c01bqkee.jpg)
-文章页内置资源汇总组件，方便点击查看出处
-
-![](https://fc.sinaimg.cn/large/6364aa43gy1hm0fdqzlnrj22c01bq4qp.jpg)
-分页
-
-![](https://fc.sinaimg.cn/large/6364aa43gy1hm0fdr03guj22c01bqb29.jpg)
-播放音乐+存档按年和年/月的形式
-
-![](https://fc.sinaimg.cn/large/6364aa43gy1hm0fdr08pnj22c01bqb29.jpg)
-文章列表九宫格样式
-
-![](https://fc.sinaimg.cn/large/6364aa43gy1hm0fdr2dlbj22c01bqb29.jpg)
-暗黑模式+标签点击切换
-
 ## 开始使用
 
 1. git clone克隆或者直接下载这个仓库到你的本地电脑
@@ -92,25 +64,5 @@ Feed订阅
 13. docs/prepare/目录下放的是临时存放的还不想发布的文章
 14. public和 static目录放一些不会被转义的资源
 15. 其他的自行摸索代码
-
-## 如何部署上线
-我是上传到 github后，使用 vercel进行免费部署的。可以百度如何 vercel部署 github项目。然后买一个域名解析到 vercel就可以了
-
-## 新手如何操作
-可能我的教程没考虑新手，如果你是个完全不懂代码的小白，目前仅仅是爱好搭建玩一下，建议先百度问题。然后关注我的公众号找教程，还不会可免费在公众号找到我的联系方式进群和群友交流学习，最后还是不会可以找我付费解决。
-
-## 别忘了 star这个项目
-只有 star了这个项目，我的更新就能随时提醒你升级。不然错过了就找不到这么好的开源主题了。就在右上角看到那个 star按钮了吗？动动你修长的小手轻轻点一下就 ok了
-
-## 感谢
-这个开源主题，我借鉴了一些大佬的经验，请看这个贴：[https://juejin.cn/post/7322633033227517991](https://juejin.cn/post/7322633033227517991)
-特此感谢。
-
-
-
-
-
-
-
 
 
