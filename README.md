@@ -51,7 +51,7 @@
 8. 时间友好化组件
 
 ## 预览
-![](https://wkphoto.bj.bcebos.com/bd3eb13533fa828b34eaa6b9ed1f4134960a5a9a.jpg)
+![首页](https://wkphoto.bj.bcebos.com/bd3eb13533fa828b34eaa6b9ed1f4134960a5a9a.jpg)
 首页
 
 ## 开始使用
@@ -75,7 +75,7 @@
 
 ## 致谢
 
-- 本项目基于开源项目 [ppbeebee](https://github.com/beebeefish/appbeebee) 二次开发
+- 本项目基于开源项目 [Appbeebee](https://github.com/beebeefish/appbeebee) 二次开发
 
 
 
