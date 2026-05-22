@@ -1,4 +1,5 @@
 import DefaultTheme from 'vitepress/theme'
+import { useRouter } from 'vitepress'
 import Firework from './components/Firework.vue'
 import Lantern from './components/Lantern.vue'
 import NewLayout from './components/NewLayout.vue'
@@ -41,7 +42,16 @@ const pinia = createPinia()
 export default {
     ...DefaultTheme,
     Layout: NewLayout,  //
-    enhanceApp:({app}) => {
+    enhanceApp:({app, router}) => {
+        // 百度统计 - 监听路由变化
+        if (typeof window !== 'undefined') {
+            router.onAfterRouteChanged = (to: string) => {
+                if (typeof _hmt !== 'undefined') {
+                    _hmt.push(['_trackPageview', to])
+                }
+            }
+        }
+
         // 注册全局组件
         app.component('Firework', Firework)
         app.component('Lantern', Lantern)
