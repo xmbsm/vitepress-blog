@@ -180,8 +180,8 @@ export default defineConfig<ThemeConfig>({
             link: 'https://ziti.kusheji.com/'
         },
         logo: {
-            light: '/logo.png',
-            dark: '/logo.png'
+            light: '/logo.svg',
+            dark: '/logo.svg'
         }
     },
     srcExclude: ['README.md'],
