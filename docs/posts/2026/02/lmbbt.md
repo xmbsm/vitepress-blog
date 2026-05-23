@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand:
+ - 乐米字库
 description: 乐米波波体​是一款由杭州乐米网络科技有限公司设计的现代风格字体，总字符量为3646个。该字体以极致圆润、饱满可爱的几何造型为核心视觉特征，笔画粗细均匀，结构紧凑。
 externalLink: https://qtx.lanzoul.com/i9Gr73jb96gf
 externalLinkText: 直接下载

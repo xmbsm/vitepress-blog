@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 创意字体
+brand:
+ - 乐米字库
 description: 拙黑拼贴体​是杭州乐米网络科技有限公司设计的一款免费商用字体。视觉特征表现为笔画粗壮、结构方正，字形带有明显的“拼贴”感，部分笔画端点或转角处有不规则的切角或缺口设计。
 externalLink: https://qtx.lanzoul.com/issDL3kboqrc
 externalLinkText: 直接下载

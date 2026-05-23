@@ -7,6 +7,8 @@ categories:
  - 中文字体
 tags:
  - 宋体
+brand:
+ - 松陵南西 
 description: 南西初夏宋是一款​​在经典宋体骨架中注入清新与灵动气息的免费字体​​。它继承了思源宋体​​结构严谨、横细竖粗、末端带有饰角​​的核心特征，保证了印刷般的清晰可读性。
 externalLink: https://qtx.lanzoul.com/iBntt3774jub
 externalLinkText: 直接下载
