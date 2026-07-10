@@ -80,19 +80,26 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { initCats } from '../functions'
 import { data as themeposts } from '../posts.data'
 import Brands from './Brands.vue'
-let url = window.location.href.split('?')[1]
-let params = new URLSearchParams(url)
 const { page } = useData()
 const data = computed(() => initCats(themeposts))
 const props = defineProps<{
   type?: string
 }>();
 const selected = ref('')
+const params = ref(new URLSearchParams())
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    const url = window.location.href.split('?')[1]
+    params.value = new URLSearchParams(url)
+  }
+})
+
 const choose = (e: string) => {
   selected.value = e
 }

@@ -24,21 +24,21 @@
       </p>
       <div class="tag-container">
         <!-- 标签部分，暂时隐藏 -->
-        <div class="tags" v-if="dataSource.frontmatter?.tags">
+        <div class="tags" v-if="safeTags.length">
           <template v-if="type !== 'single'">
-            <span class="tag" v-for="item in dataSource.frontmatter.tags.slice(0, 2)"><a class="a"
+            <span class="tag" v-for="item in safeTags.slice(0, 2)"><a class="a"
                 :href="withBase(`/?tag=${item.toString()}`)"> {{
                   '#' + item }}</a></span>
-            <span class="tag" v-if="dataSource.frontmatter.tags.length > 2">...</span>
+            <span class="tag" v-if="safeTags.length > 2">...</span>
           </template>
           <template v-else>
-            <span class="tag" v-for="item in dataSource.frontmatter.tags"><a class="a" :href="withBase(`/?tag=${item.toString()}`)"> {{
+            <span class="tag" v-for="item in safeTags"><a class="a" :href="withBase(`/?tag=${item.toString()}`)"> {{
               '#' + item }}</a></span>
           </template>
         </div>
         <!-- 品牌部分 -->
-      <div class="brands" v-if="type === 'single' && (dataSource.frontmatter?.brands || dataSource.frontmatter?.brand)">
-        <span class="brand" v-for="item in (dataSource.frontmatter.brands || (Array.isArray(dataSource.frontmatter.brand) ? dataSource.frontmatter.brand : [dataSource.frontmatter.brand]))"><a class="a" :href="withBase(`/?brand=${item.toString()}`)"> {{
+      <div class="brands" v-if="type === 'single' && safeBrands.length">
+        <span class="brand" v-for="item in safeBrands"><a class="a" :href="withBase(`/?brand=${item.toString()}`)"> {{
               item }}</a></span>
       </div>
       </div>
@@ -66,6 +66,26 @@ const props = defineProps<{
   type?: string
 }>();
 const dataSource = computed(() => (props.article))
+
+const safeTags = computed(() => {
+  const tags = dataSource.value?.frontmatter?.tags
+  if (!Array.isArray(tags)) return []
+  return tags.filter(tag => tag != null)
+})
+
+const safeBrands = computed(() => {
+  const brands = dataSource.value?.frontmatter?.brands
+  const brand = dataSource.value?.frontmatter?.brand
+  let result: any[] = []
+  if (Array.isArray(brands)) {
+    result = brands
+  } else if (Array.isArray(brand)) {
+    result = brand
+  } else if (brand != null) {
+    result = [brand]
+  }
+  return result.filter(b => b != null)
+})
 
 // console.log('dddd',dataSource.value)
 

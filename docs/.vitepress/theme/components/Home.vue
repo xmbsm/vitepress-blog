@@ -18,7 +18,7 @@ import { toast, type ToastOptions } from 'vue3-toastify';
 import Welcome from "../../theme/components/Welcome.vue";
 import Page from "../../theme/components/Page.vue";
 const { theme } = useData();
-const welcomestate = useStorage('weclome', false, sessionStorage)
+const welcomestate = useStorage('weclome', false, typeof window !== 'undefined' ? sessionStorage : undefined)
 const router = useRouter()
 const location = useBrowserLocation()
 const activeTag = ref('')
@@ -81,31 +81,33 @@ const pageChange = (e: any) => {
   )
 }
 
-router.onBeforeRouteChange = (to) => {
-  
-  const url = new URL(to, window.location.origin)
-  const params = formatSearch(url.search)
-  activeTag.value = params?.tag || ''
-  activeCategory.value = params?.category || ''
-  activeYear.value = params?.year || ''
-  activeMonth.value = params?.month || ''
-  activeBrand.value = params?.brand || ''
-  currentpage.value = Number(params?.page) || 1
-  if(params?.tag) {
-    console.log('new')
-    bread.value  = '标签：'+params.tag
-  } else if(params?.category) {
-    bread.value  = '分类：'+params.category
-  } else if(params?.brand) {
-    bread.value  = '品牌：'+params.brand
-  } else if(params?.year&&params?.month) {
-    bread.value  = '存档：'+params.year+'/'+params.month
-  } else if(params?.year) {
-    bread.value  = '存档：'+params.year
-  } else {
-    bread.value  = '全部内容'
+onMounted(() => {
+  router.onBeforeRouteChange = (to) => {
+    if (typeof window === 'undefined') return
+    const url = new URL(to, window.location.origin)
+    const params = formatSearch(url.search)
+    activeTag.value = params?.tag || ''
+    activeCategory.value = params?.category || ''
+    activeYear.value = params?.year || ''
+    activeMonth.value = params?.month || ''
+    activeBrand.value = params?.brand || ''
+    currentpage.value = Number(params?.page) || 1
+    if(params?.tag) {
+      console.log('new')
+      bread.value  = '标签：'+params.tag
+    } else if(params?.category) {
+      bread.value  = '分类：'+params.category
+    } else if(params?.brand) {
+      bread.value  = '品牌：'+params.brand
+    } else if(params?.year&&params?.month) {
+      bread.value  = '存档：'+params.year+'/'+params.month
+    } else if(params?.year) {
+      bread.value  = '存档：'+params.year
+    } else {
+      bread.value  = '全部内容'
+    }
   }
-}
+})
 watch(
   location,
   () => {

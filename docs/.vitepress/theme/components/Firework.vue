@@ -42,7 +42,7 @@ const newyearwords = ref(newyearwordslist[getRandomInt(newyearwordslist.length)]
 const backvoice = ref(false)
 const backvoice2 = computed(() => backvoice.value)
 
-const windowHeight = ref(window.innerHeight)
+const windowHeight = ref(0)
 const changebackvoice = () => {
     if (backvoice2.value) {
         backvoice.value = false
@@ -120,7 +120,7 @@ const MyMath = (function MyMathFactory(Math) {
 
 const soundManager = {
     baseURL: '',
-    ctx: new (window.AudioContext || window.webkitAudioContext),
+    ctx: null as any,
     sources: {
         lift: {
             volume: 1,
@@ -165,6 +165,9 @@ const soundManager = {
     },
 
     preload() {
+        if (!this.ctx && typeof window !== 'undefined') {
+            this.ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+        }
         const allFilePromises = [];
 
         function checkStatus(response) {
@@ -599,6 +602,9 @@ watch(
     }
 )
 onMounted(() => {
+    if (typeof window !== 'undefined') {
+        windowHeight.value = window.innerHeight
+    }
     if(theme.value?.website?.showFirework){
     soundManager.preload()
     startcanvas()

@@ -2,10 +2,10 @@
     <!-- 订阅内容更新 -->
     <div class="feed">
         <div class="main" v-tooltip="'点击复制订阅地址'"
-            @click="handleCopy(`${location.origin}${site?.base ? site.base : '/'}feed.rss`)">
+            @click="handleCopy(`${location.origin || ''}${site?.base ? site.base : '/'}feed.rss`)">
             <div class="label">订阅地址</div>
             <div class="ads">
-                {{ `${location.origin}${site?.base ? site.base : '/'}feed.rss` }}
+                {{ `${location.origin || ''}${site?.base ? site.base : '/'}feed.rss` }}
             </div>
             <div class="copy">点击复制</div>
         </div>

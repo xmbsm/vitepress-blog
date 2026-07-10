@@ -6,7 +6,13 @@ import {getRandomInt} from '../theme/functions'
 import { toast, type ToastOptions } from 'vue3-toastify';
 export const usePlayerStore = defineStore('Player', () => {
     // State
-    const audio = new Audio();   // Audio实例
+    let audio: HTMLAudioElement | null = null;   // Audio实例 - 延迟初始化
+    const getAudio = () => {
+        if (!audio && typeof window !== 'undefined') {
+            audio = new Audio();
+        }
+        return audio;
+    };
     const loopType = ref(0); // 循环模式 0 列表循环 1 单曲循环 2随机播放
     const playList = ref<Song[]>([]); // 播放列表
     const showPlayList = ref(false); // 播放列表显隐
@@ -87,8 +93,11 @@ export const usePlayerStore = defineStore('Player', () => {
         showPlayList.value = false;
         
         try {
-            audio.pause();
-            audio.src = '';
+            const a = getAudio();
+            if (a) {
+                a.pause();
+                a.src = '';
+            }
         } catch (e) {
             console.error('Error stopping audio:', e);
         }
@@ -113,14 +122,17 @@ export const usePlayerStore = defineStore('Player', () => {
             let transTimer: NodeJS.Timeout | null = null;
             if (transTimer) clearTimeout(transTimer);
             transTimer = setTimeout(() => {
-                audio.title = song.value.title;
-                audio.src = songObj.url;
-                audio.play().catch((error) => {
-                    console.error('Error playing audio:', error);
-                });
-                isPlaying.value = true;
-                interval();
-                url.value = song.value.url;
+                const a = getAudio();
+                if (a) {
+                    a.title = song.value.title;
+                    a.src = songObj.url;
+                    a.play().catch((error) => {
+                        console.error('Error playing audio:', error);
+                    });
+                    isPlaying.value = true;
+                    interval();
+                    url.value = song.value.url;
+                }
             }, 500);
         } else {
             deleteSong(id.value);
@@ -153,10 +165,13 @@ export const usePlayerStore = defineStore('Player', () => {
             isPlaying.value = true;
             
             try {
-                audio.currentTime = 0;
-                audio.play().catch((error) => {
-                    console.error('Error replaying audio:', error);
-                });
+                const a = getAudio();
+                if (a) {
+                    a.currentTime = 0;
+                    a.play().catch((error) => {
+                        console.error('Error replaying audio:', error);
+                    });
+                }
             } catch (e) {
                 console.error('Error in rePlay:', e);
             }
@@ -203,12 +218,14 @@ export const usePlayerStore = defineStore('Player', () => {
         }
         
         isPlaying.value = !isPlaying.value;
+        const a = getAudio();
+        if (!a) return;
         
         if (!isPlaying.value) {
-            audio.pause();
+            a.pause();
             isPause.value = true;
         } else {
-            audio.play().catch((error) => {
+            a.play().catch((error) => {
                 console.error('Error toggling play:', error);
             });
             isPause.value = false;
@@ -217,8 +234,10 @@ export const usePlayerStore = defineStore('Player', () => {
 
     function setPlay() {
         if (!song.value.id) return;
+        const a = getAudio();
+        if (!a) return;
         isPlaying.value = true;
-        audio.play().catch((error) => {
+        a.play().catch((error) => {
             console.error('Error setting play:', error);
         });
         isPause.value = false;
@@ -226,8 +245,10 @@ export const usePlayerStore = defineStore('Player', () => {
 
     function setPause() {
         if (!song.value.id) return;
+        const a = getAudio();
+        if (!a) return;
         isPlaying.value = false;
-        audio.pause();
+        a.pause();
         isPause.value = true;
     }
 
@@ -257,13 +278,15 @@ export const usePlayerStore = defineStore('Player', () => {
 
     function interval() {
         if (isPlaying.value && !sliderInput.value) {
-            audio.addEventListener("timeupdate", () => {
-                currentTime.value = audio.currentTime;
+            const a = getAudio();
+            if (!a) return;
+            a.addEventListener("timeupdate", () => {
+                currentTime.value = a.currentTime;
             });
-            audio.addEventListener('canplay', () => {
-                duration.value = audio.duration;
+            a.addEventListener('canplay', () => {
+                duration.value = a.duration;
             });
-            audio.addEventListener(
+            a.addEventListener(
                 "ended",
                 () => {
                     next();
@@ -283,7 +306,6 @@ export const usePlayerStore = defineStore('Player', () => {
 
     return {
         // State
-        audio,
         loopType,
         playList,
         showPlayList,
