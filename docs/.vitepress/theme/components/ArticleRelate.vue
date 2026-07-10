@@ -4,7 +4,7 @@
     <h2 class="h2">相关推荐</h2>
     <div class="postlist"
       :class="{ grid: listview === 'grid', list: listview === 'list', hasaside: frontmatter.aside, hassidebar: frontmatter.sidebar||theme?.sidebar?.length }">
-      <div class="list" v-for="(article, index) in posts.slice(0, 6)" :key="index">
+      <div class="list" v-for="(article, index) in posts.slice(0, 3)" :key="index">
         <ArticleList :article="article" />
       </div>
     </div>

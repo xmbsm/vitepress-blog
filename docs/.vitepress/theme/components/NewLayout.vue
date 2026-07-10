@@ -64,10 +64,11 @@
             
         </template>
         <template #doc-footer-before>
-           
+
                 <ArticleCC v-if="(frontmatter?.post)" />
+                <ArticleNav v-if="(frontmatter?.post)" />
                 <ArticleRelate v-if="(frontmatter?.post)" :key="md5(page.relativePath)" />
-  
+
         </template>
         <template #doc-bottom>
             <Copyright />
@@ -93,6 +94,7 @@ import DefaultTheme from 'vitepress/theme'
 import Copyright from './Copyright.vue'
 import Player from './Player.vue';
 import BackToTop from './BackToTop.vue';
+import ArticleNav from './ArticleNav.vue';
 
 const { isPause } = toRefs(usePlayerStore());
 const { page, theme, frontmatter, isDark } = useData();
