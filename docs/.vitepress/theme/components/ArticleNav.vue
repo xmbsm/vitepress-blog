@@ -49,16 +49,16 @@ const currentIndex = computed(() => {
 
 const prevPost = computed(() => {
   const idx = currentIndex.value
-  if (idx >= 0 && idx < themeposts.length - 1) {
-    return themeposts[idx + 1]
+  if (idx > 0) {
+    return themeposts[idx - 1]
   }
   return null
 })
 
 const nextPost = computed(() => {
   const idx = currentIndex.value
-  if (idx > 0) {
-    return themeposts[idx - 1]
+  if (idx >= 0 && idx < themeposts.length - 1) {
+    return themeposts[idx + 1]
   }
   return null
 })
